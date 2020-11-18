@@ -1,0 +1,12 @@
+{
+    "name": "itot/application",
+    "authors": [
+        {
+            "name": "Jonathan Yombo",
+            "email": "jonathanyombo@gmail.com"
+        }
+    ],
+    "require": {
+        "picqer/php-barcode-generator": "^0.3.0"
+    }
+}
