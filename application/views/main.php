@@ -79,8 +79,8 @@ defined('BASEPATH') OR exit('');
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?= base_url() ?>" style="margin-top:-15px">
-                <img src="<?= base_url() ?>public/images/logo_black.png" alt="logo" class="img-responsive" width="73px">
+            <a class="navbar-brand" href="<?= base_url() ?>" style="margin-top:-25px;">
+                <img src="<?= base_url() ?>public/images/cabanas.png" alt="logo" class="img-responsive" width="73px">
             </a>
         </div>
 

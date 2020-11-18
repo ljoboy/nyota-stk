@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('');
             <!-- Header (add new admin, sort order etc.) -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="col-sm-2 fa fa-user-plus pointer" style="color:#337ab7" data-target='#addNewAdminModal' data-toggle='modal'>
+                    <div class="col-sm-2 fa fa-user-plus pointer" style="color:#f6b618" data-target='#addNewAdminModal' data-toggle='modal'>
                         Nouvel Admin
                     </div>
                     <div class="col-sm-3 form-inline form-group-sm">
