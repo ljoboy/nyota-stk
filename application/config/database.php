@@ -76,11 +76,11 @@ $query_builder = TRUE;
 //details for mysql
 $db['mysql'] = array(
 	'dsn'	=> 'mysql:hostname=localhost; dbname=db_stk',
-	'hostname' => '',
+	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
-	'database' => '',
-	'dbdriver' => 'pdo',
+	'database' => 'db_stk',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
