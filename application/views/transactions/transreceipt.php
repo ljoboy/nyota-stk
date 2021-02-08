@@ -72,11 +72,7 @@ defined('BASEPATH') OR exit('');
     </div>       
     <div class="row">
         <div class="col-xs-12 text-right">
-            <?php if($vatPercentage > 0): ?>
             <b>TVA(<?=$vatPercentage?>%) : USD <?=isset($vatAmount) ? number_format($vatAmount, 2) : ""?></b>
-            <?php else: ?>
-            TVA inclus
-            <?php endif; ?>
         </div>
     </div>      
     <div class="row">
