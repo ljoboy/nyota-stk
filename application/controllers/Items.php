@@ -62,6 +62,7 @@ class Items extends CI_Controller{
         $data['links'] = $this->pagination->create_links();//page links
         $data['sn'] = $start+1;
         $data['cum_total'] = $this->item->getItemsCumTotal();
+        $data['critic_items'] = $this->item->getCriticItem();
         
         $json['itemsListTable'] = $this->load->view('items/itemslisttable', $data, TRUE);//get view with populated items table
 
