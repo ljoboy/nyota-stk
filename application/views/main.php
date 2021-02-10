@@ -131,10 +131,17 @@ defined('BASEPATH') or exit('');
                             </a>
                         </li>-->
 
-                    <li class="<?= $pageTitle == 'Base des données' ? 'active' : ''  ?>">
+                    <li class="<?= $pageTitle == 'Base des données' ? 'active' : '' ?>">
                         <a href="<?= site_url('dbmanagement') ?>">
                             <i class="fa fa-database"></i>
                             Gérer la base de données
+                        </a>
+                    </li>
+
+                    <li class="<?= $pageTitle == 'Couts' ? 'active' : '' ?>">
+                        <a href="<?= site_url('couts') ?>">
+                            <i class="fa fa-money"></i>
+                            Dépenses
                         </a>
                     </li>
 
@@ -229,11 +236,18 @@ defined('BASEPATH') or exit('');
                         </li>-->
 
                     <li class="<?= $pageTitle == 'Base des données' ? 'active' : '' ?>">
-                            <a href="<?= site_url('dbmanagement') ?>">
-                                <i class="fa fa-database"></i>
-                                Base des données
-                            </a>
-                        </li>
+                        <a href="<?= site_url('dbmanagement') ?>">
+                            <i class="fa fa-database"></i>
+                            Base des données
+                        </a>
+                    </li>
+
+                    <li class="<?= $pageTitle == 'Couts' ? 'active' : '' ?>">
+                        <a href="<?= site_url('couts') ?>">
+                            <i class="fa fa-money"></i>
+                            Dépenses
+                        </a>
+                    </li>
 
                     <li class="<?= $pageTitle == 'Administrateurs' ? 'active' : '' ?>">
                         <a href="<?= site_url('administrators') ?>">

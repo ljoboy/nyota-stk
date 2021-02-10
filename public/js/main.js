@@ -269,7 +269,7 @@ function formChanges(form) {
         return null;
     }
 
-    let changed = [], n, c, def, o, ol, opt;
+    let changed = [], n, c, def, o, ol, opt;addCout
 
     for (var e = 0, el = form.elements.length; e < el; e++) {
         n = form.elements[e];
