@@ -218,7 +218,7 @@ class CI_Typography {
 		// Convert quotes, elipsis, em-dashes, non-breaking spaces, and ampersands
 		$str = $this->format_characters($str);
 
-		// restore HTML comments
+		// restores HTML comments
 		for ($i = 0, $total = count($html_comments); $i < $total; $i++)
 		{
 			// remove surrounding paragraph tags, but only if there's an opening paragraph tag

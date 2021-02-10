@@ -83,15 +83,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span id="errMsg"></span>
                     </div>
                     <div class="form-bottom">
-                        <form id="loginForm">
+                        <form id="loginForm" autocomplete="off">
                             <div class="form-group">
                                 <label class="sr-only" for="email">E-mail</label>
-                                <input type="email" autocomplete="username email" placeholder="Email"
+                                <input aria-autocomplete="none" type="email" autocomplete="username email" placeholder="Email"
                                        class="form-control checkField" id="email">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="password">Mot de passe</label>
-                                <input type="password" autocomplete="current-password" placeholder="Mot de passe"
+                                <input aria-autocomplete="none" type="password" autocomplete="current-password" placeholder="Mot de passe"
                                        class="form-control checkField" id="password">
                             </div>
                             <button type="submit" class="btn">Se connecter !</button>

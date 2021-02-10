@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('');
+defined('BASEPATH') or exit('');
 ?>
 
 <!DOCTYPE HTML>
@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('');
 
     <!-- Favicon -->
     <!--[if IE]>
-    <link rel="shortcut icon" href="<?=base_url()?>public/images/icon.png"><![endif]-->
+    <link rel="shortcut icon" href="<?= base_url() ?>public/images/icon.png"><![endif]-->
     <link rel="apple-touch-icon" sizes="57x57" href="<?= base_url() ?>public/images/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<?= base_url() ?>public/images/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?= base_url() ?>public/images/apple-icon-72x72.png">
@@ -131,12 +131,12 @@ defined('BASEPATH') OR exit('');
                             </a>
                         </li>-->
 
-                    <!--<li class="<? /*= $pageTitle == 'Base des données' ? 'active' : '' */ ?>">
-                            <a href="<? /*= site_url('dbmanagement') */ ?>">
-                                <i class="fa fa-database"></i>
-                                Gérer la base de données
-                            </a>
-                        </li>-->
+                    <li class="<?= $pageTitle == 'Base des données' ? 'active' : ''  ?>">
+                        <a href="<?= site_url('dbmanagement') ?>">
+                            <i class="fa fa-database"></i>
+                            Gérer la base de données
+                        </a>
+                    </li>
 
                     <li class="<?= $pageTitle == 'Administrateurs' ? 'active' : '' ?>">
                         <a href="<?= site_url('administrators') ?>">
@@ -160,7 +160,10 @@ defined('BASEPATH') OR exit('');
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-menu-header text-center">
-                            <strong>Compte</strong>
+                            <strong>
+                                <?= $_SESSION['admin_name'] ?>
+                            </strong>
+                            <small><?= $_SESSION['admin_email'] ?></small>
                         </li>
                         <li class="divider"></li>
                         <!---<li>
@@ -225,12 +228,12 @@ defined('BASEPATH') OR exit('');
                             </a>
                         </li>-->
 
-                    <!--<li class="<? /*= $pageTitle == 'Base des données' ? 'active' : '' */ ?>">
-                            <a href="<? /*= site_url('dbmanagement') */ ?>">
+                    <li class="<?= $pageTitle == 'Base des données' ? 'active' : '' ?>">
+                            <a href="<?= site_url('dbmanagement') ?>">
                                 <i class="fa fa-database"></i>
                                 Base des données
                             </a>
-                        </li>-->
+                        </li>
 
                     <li class="<?= $pageTitle == 'Administrateurs' ? 'active' : '' ?>">
                         <a href="<?= site_url('administrators') ?>">
