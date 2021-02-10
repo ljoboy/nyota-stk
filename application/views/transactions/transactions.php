@@ -134,7 +134,10 @@ if (isset($items) && !empty($items)) {
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <button type="button" class="btn btn-info" data-toggle="collapse"
+                                            data-target="#opt_client">Options du client
+                                    </button>
+                                    <div class="row collapse" id="opt_client">
                                         <div class="col-sm-4 form-group-sm">
                                             <label for="custName">Nom du client</label>
                                             <input type="text" id="custName" class="form-control" placeholder="Nom">
