@@ -92,7 +92,7 @@ body{
 }
 
 .navbarIcons{
-    color:#f6b618;
+    color:#337ab7;
     font-size:16px
 }
 
@@ -155,29 +155,4 @@ body{
 
 .custom-active{
     background-color: #333;
-}
-
-/*================================
-    PERSONALIZATION OF APP COLOR
-================================*/
-a{
-    color: #f6b618;
-    text-decoration: none;
-}
-a:hover{
-    color: #432a19;
-}
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
-    color: #fff;
-    background-color: #f6b618;
-}
-
-.btn-primary{
-    background-color: #f6b618;
-}
-text-primary {
-    color: #f6b618;
-}
-text-primary:hover, text-primary:focus {
-    color: white;
 }
