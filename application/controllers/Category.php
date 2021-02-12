@@ -52,4 +52,93 @@ class Category extends CI_Controller
 
         $this->output->set_content_type('application/json')->set_output(json_encode($json));
     }
+
+    /**
+     * To add new Category
+     */
+    public function add()
+    {
+        $this->genlib->ajaxOnly();
+
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_error_delimiters('', '');
+
+        $this->form_validation->set_rules('nom', 'Nom', ['required', 'trim', 'max_length[20]', 'strtolower', 'ucfirst'], ['required' => "Champ obligatoire"]);
+        $this->form_validation->set_rules('description', 'Description', ['required', 'trim', 'strtolower', 'ucfirst'], ['required' => "Champ obligatoire"]);
+
+        if ($this->form_validation->run() !== FALSE) {
+            /**
+             * insert info into db
+             * function header: add($nom, $description)
+             */
+            $inserted = $this->category_model->add(set_value('nom'), set_value('description'));
+
+            $json = $inserted ? ['status' => 1, 'msg' => "Catégorie enregistrée avec succès"] : ['status' => 0, 'msg' => "Oops ! Une erreur inattendue. Veuillez contacter l'administrateur."];
+        } else {
+            $json = $this->form_validation->error_array();//get an array of all errors
+
+            $json['msg'] = "Un ou plusieurs champs obligatoires sont vides ou mal remplis";
+            $json['status'] = 0;
+        }
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($json));
+    }
+
+
+    /**
+     * To update Category
+     */
+    public function update()
+    {
+        $this->genlib->ajaxOnly();
+
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_error_delimiters('', '');
+
+        $this->form_validation->set_rules('nom', 'Nom', ['required', 'trim', 'max_length[20]', 'strtolower', 'ucfirst'], ['required' => "Champ obligatoire"]);
+        $this->form_validation->set_rules('description', 'Description', ['required', 'trim', 'strtolower', 'ucfirst'], ['required' => "Champ obligatoire"]);
+
+        print_r($this->form_validation->run());
+
+        if ($this->form_validation->run() !== FALSE) {
+            /**
+             * update info into db
+             * function header: add($nom, $description)
+             */
+            $category_id = $this->input->post('categoryId', TRUE);
+
+            $updated = $this->couts_model->update($category_id, set_value('nom'), set_value('description'));
+
+            $json = $updated ? ['status' => 1, 'msg' => "Infos mise à jour avec succès"] : ['status' => 0, 'msg' => "Oops ! Erreur inattendue. Contacter l'administrateur svp !"];
+        } else {
+            //return all error messages
+            $json = $this->form_validation->error_array();//get an array of all errors
+
+            $json['msg'] = "Un ou plusieurs champs obligatoires sont vides ou mal remplis";
+            $json['status'] = 0;
+        }
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($json));
+    }
+
+    /**
+     * To delete Category
+     */
+    public function delete()
+    {
+        $this->genlib->ajaxOnly();
+
+        $category_id = $this->input->post('_aId');
+        $new_value = $this->genmod->getTableCol('categories', 'deleted', 'categoryId', $category_id) == 1 ? 0 : 1;
+
+        $done = $this->couts_model->delete($category_id, $new_value);
+
+        $json['status'] = $done ? 1 : 0;
+        $json['_nv'] = $new_value;
+        $json['_aId'] = $category_id;
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($json));
+    }
 }
