@@ -160,7 +160,7 @@ class Misc extends CI_Controller
             $file = $backup->file_url;
             $data = array(
                 "file" => new CURLFile($file),
-                "data" => '{"foldername":"nyota"}'
+                "data" => '{"foldername":"stk"}'
             );
             $handle = curl_init();
             curl_setopt($handle, CURLOPT_URL, 'https://backups.zxconnect.org/');

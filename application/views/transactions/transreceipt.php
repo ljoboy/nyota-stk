@@ -7,10 +7,10 @@ defined('BASEPATH') OR exit('');
     <div class="row">
         <div class="col-xs-12 text-center text-uppercase">
             <div style="margin-bottom:5px;"><img src="<?=base_url()?>public/images/receipt_logo.png" alt="logo" class="img-responsive center-block" width="60px"></div>
-            <h1>Nyota Plus</h1>
-            <b>Guest -  Restaurant</b><br/>
-            <small>05, Av. Cassitérite Q/Makomeno</small>
-            <div>Tél . : +243 820 230 699, +243 850 503 864</div>
+            <h1>Ets STK</h1>
+            <b>ID.NAT.: 441/84/EN/H.KAT 2018 <br/> RCCM: 17 A 5350 </b><br/>
+            <small>4, Av. Nyunzu Q/Makutano</small>
+            <div>Tél . : +243 810 555 142</div>
         </div>
     </div>
     <hr style='margin-top:5px; margin-bottom:0'>
