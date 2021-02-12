@@ -7,9 +7,9 @@ defined('BASEPATH') OR exit('');
     <div class="row">
         <div class="col-xs-12 text-center text-uppercase">
             <div style="margin-bottom:5px;"><img src="<?=base_url()?>public/images/receipt_logo.png" alt="logo" class="img-responsive center-block" width="60px"></div>
-            <h1>Ets LMK</h1>
+            <h1>Ets STK</h1>
             <b>ID.NAT.: 441/84/EN/H.KAT 2018 <br/> RCCM: 17 A 5350 </b><br/>
-            <small>1370, Av. Mama Yemo Q/Makutano</small>
+            <small>4, Av. Nyunzu Q/Makutano</small>
             <div>Tél . : +243 810 555 142</div>
         </div>
     </div>
@@ -72,11 +72,7 @@ defined('BASEPATH') OR exit('');
     </div>       
     <div class="row">
         <div class="col-xs-12 text-right">
-            <?php if($vatPercentage > 0): ?>
             <b>TVA(<?=$vatPercentage?>%) : USD <?=isset($vatAmount) ? number_format($vatAmount, 2) : ""?></b>
-            <?php else: ?>
-            TVA inclus
-            <?php endif; ?>
         </div>
     </div>      
     <div class="row">

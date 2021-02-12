@@ -1,5 +1,5 @@
 {
-    "name": "itot/application",
+    "name": "zxconnect/stk",
     "authors": [
         {
             "name": "Jonathan Yombo",
@@ -7,6 +7,9 @@
         }
     ],
     "require": {
-        "picqer/php-barcode-generator": "^0.3.0"
+        "picqer/php-barcode-generator": "^0.3.0",
+        "rexlabs/hyper-http": "^2.6",
+        "ext-json": "*",
+        "ext-curl": "*"
     }
 }

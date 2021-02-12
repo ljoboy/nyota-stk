@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('');
+defined('BASEPATH') or exit('');
 ?>
 
 <!DOCTYPE HTML>
@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('');
 
     <!-- Favicon -->
     <!--[if IE]>
-    <link rel="shortcut icon" href="<?=base_url()?>public/images/icon.png"><![endif]-->
+    <link rel="shortcut icon" href="<?= base_url() ?>public/images/icon.png"><![endif]-->
     <link rel="apple-touch-icon" sizes="57x57" href="<?= base_url() ?>public/images/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<?= base_url() ?>public/images/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?= base_url() ?>public/images/apple-icon-72x72.png">
@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('');
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?= base_url() ?>" style="margin-top:-15px">
+            <a class="navbar-brand" href="<?= base_url() ?>" style="margin-top:-25px;">
                 <img src="<?= base_url() ?>public/images/logo_black.png" alt="logo" class="img-responsive" width="73px">
             </a>
         </div>
@@ -131,12 +131,19 @@ defined('BASEPATH') OR exit('');
                             </a>
                         </li>-->
 
-                    <!--<li class="<? /*= $pageTitle == 'Base des données' ? 'active' : '' */ ?>">
-                            <a href="<? /*= site_url('dbmanagement') */ ?>">
-                                <i class="fa fa-database"></i>
-                                Gérer la base de données
-                            </a>
-                        </li>-->
+                    <li class="<?= $pageTitle == 'Base des données' ? 'active' : '' ?>">
+                        <a href="<?= site_url('dbmanagement') ?>">
+                            <i class="fa fa-database"></i>
+                            Gérer la base de données
+                        </a>
+                    </li>
+
+                    <li class="<?= $pageTitle == 'Couts' ? 'active' : '' ?>">
+                        <a href="<?= site_url('couts') ?>">
+                            <i class="fa fa-money"></i>
+                            Dépenses
+                        </a>
+                    </li>
 
                     <li class="<?= $pageTitle == 'Administrateurs' ? 'active' : '' ?>">
                         <a href="<?= site_url('administrators') ?>">
@@ -160,7 +167,10 @@ defined('BASEPATH') OR exit('');
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-menu-header text-center">
-                            <strong>Compte</strong>
+                            <strong>
+                                <?= $_SESSION['admin_name'] ?>
+                            </strong>
+                            <small><?= $_SESSION['admin_email'] ?></small>
                         </li>
                         <li class="divider"></li>
                         <!---<li>
@@ -225,12 +235,19 @@ defined('BASEPATH') OR exit('');
                             </a>
                         </li>-->
 
-                    <!--<li class="<? /*= $pageTitle == 'Base des données' ? 'active' : '' */ ?>">
-                            <a href="<? /*= site_url('dbmanagement') */ ?>">
-                                <i class="fa fa-database"></i>
-                                Base des données
-                            </a>
-                        </li>-->
+                    <li class="<?= $pageTitle == 'Base des données' ? 'active' : '' ?>">
+                        <a href="<?= site_url('dbmanagement') ?>">
+                            <i class="fa fa-database"></i>
+                            Base des données
+                        </a>
+                    </li>
+
+                    <li class="<?= $pageTitle == 'Couts' ? 'active' : '' ?>">
+                        <a href="<?= site_url('couts') ?>">
+                            <i class="fa fa-money"></i>
+                            Dépenses
+                        </a>
+                    </li>
 
                     <li class="<?= $pageTitle == 'Administrateurs' ? 'active' : '' ?>">
                         <a href="<?= site_url('administrators') ?>">

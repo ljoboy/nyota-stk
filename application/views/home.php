@@ -71,7 +71,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
                     <div style="font-size:100px">
-                        <h1><img src="<?= base_url() ?>public/images/logo_white.png" alt="stk-logo" height="150px"></h1>
+                        <h1>
+                            <img src="<?= base_url() ?>public/images/logo_white.png" alt="client-logo" height="200px">
+                        </h1>
                     </div>
                 </div>
             </div>
@@ -81,15 +83,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span id="errMsg"></span>
                     </div>
                     <div class="form-bottom">
-                        <form id="loginForm">
+                        <form id="loginForm" autocomplete="off">
                             <div class="form-group">
                                 <label class="sr-only" for="email">E-mail</label>
-                                <input type="email" autocomplete="username email" placeholder="Email"
+                                <input aria-autocomplete="none" type="email" autocomplete="username email" placeholder="Email"
                                        class="form-control checkField" id="email">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="password">Mot de passe</label>
-                                <input type="password" autocomplete="current-password" placeholder="Mot de passe"
+                                <input aria-autocomplete="none" type="password" autocomplete="current-password" placeholder="Mot de passe"
                                        class="form-control checkField" id="password">
                             </div>
                             <button type="submit" class="btn">Se connecter !</button>
@@ -99,9 +101,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
 
             <div class="row">
-                <div class="col-sm-12 text-center" style="color:white">
-                    Designed and Developed by <a href="http://p-breakers.org" target='_blank' class="text-primary">P-Breakers
-                        Corp.</a> (2019)
+                <div class="col-sm-12 text-center" style="color:white; margin-top: 30px;">
+                    Designed and Developed by <a href="https://zxconnect.org/" target='_blank' class="text-primary">ZX
+                        CONNECT sarl</a> (2020)
                 </div>
             </div>
         </div>
