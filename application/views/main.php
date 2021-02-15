@@ -64,6 +64,15 @@ defined('BASEPATH') or exit('');
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
+        <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+        <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>-->
+
     <?php endif; ?>
 </head>
 
@@ -101,14 +110,20 @@ defined('BASEPATH') or exit('');
                     </a>
                 </li>
 
-                <li class="<?= $pageTitle == 'Articles' ? 'active' : '' ?>">
-                    <a href="<?= site_url('items') ?>">
-                        <i class="fa fa-cart-plus"></i>
-                        Articles
-                    </a>
-                </li>
-
                 <?php if ($this->session->admin_role === "Super"): ?>
+                    <li class="<?= $pageTitle == 'Articles' ? 'active' : '' ?>">
+                        <a href="<?= site_url('items') ?>">
+                            <i class="fa fa-cart-plus"></i>
+                            Articles
+                        </a>
+                    </li>
+
+                    <li class="<?= $pageTitle == 'Categories' ? 'active' : '' ?>">
+                        <a href="<?= site_url('category') ?>">
+                            <i class="fa fa-cart-plus"></i>
+                            Catégories
+                        </a>
+                    </li>
 
                     <!--<li class="<? /*= $pageTitle == 'Customers' ? 'active' : '' */ ?>">
                             <a href="<? /*= site_url('employees') */ ?>">
@@ -206,14 +221,21 @@ defined('BASEPATH') or exit('');
                         Transactions
                     </a>
                 </li>
+                <li class="<?= $pageTitle == 'Articles' ? 'active' : '' ?>">
+                    <a href="<?= site_url('items') ?>">
+                        <i class="fa fa-shopping-cart"></i>
+                        Articles
+                    </a>
+                </li>
+
+                <li class="<?= $pageTitle == 'Categories' ? 'active' : '' ?>">
+                    <a href="<?= site_url('category') ?>">
+                        <i class="fa fa-cart-plus"></i>
+                        Catégories
+                    </a>
+                </li>
 
                 <?php if ($this->session->admin_role === "Super"): ?>
-                    <li class="<?= $pageTitle == 'Articles' ? 'active' : '' ?>">
-                        <a href="<?= site_url('items') ?>">
-                            <i class="fa fa-shopping-cart"></i>
-                            Articles
-                        </a>
-                    </li>
 
 
                     <!-- <li class="<? /*= $pageTitle == 'Customers' ? 'active' : '' */ ?>">
