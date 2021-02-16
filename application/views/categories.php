@@ -103,7 +103,7 @@ defined('BASEPATH') or exit('');
         <div class="modal-content">
             <div class='modal-header'>
                 <button class="close" data-dismiss='modal'>&times;</button>
-                <h4 class="text-center">Modifier Dépense</h4>
+                <h4 class="text-center">Modifier Catégorie</h4>
                 <div class="text-center">
                     <i id="fMsgEditIcon"></i>
                     <span id="fMsgEdit"></span>
