@@ -96,6 +96,19 @@ defined('BASEPATH') OR exit('');
                         </div>
 
                         <div class="row">
+                            <div class="form-group-sm col-sm-12">
+                                <label for='role' class="control-label">Catégories</label>
+                                <select class="form-control checkField selectpicker itemCategories" id='itemCategories' name="itemCategories[]" multiple>
+                                    <option value='' selected disabled>Catégories</option>
+                                    <?php foreach ($categories as $categorie): ?>
+                                    <option value='<?= $categorie->id ?>'><?= $categorie->nom ?></option>
+                                    <?php endforeach;?>
+                                </select>
+                                <span class="help-block errMsg" id="itemCategoriesErr"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-sm-12 form-group-sm">
                                 <label for="itemPrice">(USD ) Prix unitaire</label>
                                 <input type="text" id="itemPrice" name="itemPrice" placeholder="(USD ) Prix unitaire" class="form-control"
@@ -239,7 +252,18 @@ defined('BASEPATH') OR exit('');
                             <span class="help-block errMsg" id="itemPriceEditErr"></span>
                         </div>
                     </div>
-                    
+                    <div class="row">
+                        <div class="form-group-sm col-sm-12">
+                            <label for='role' class="control-label">Catégories</label>
+                            <select class="form-control checkField selectpicker itemCategories" id='itemCategoriesEdit' name="itemCategories[]" multiple>
+                                <option value='' selected disabled>Catégories</option>
+                                <?php foreach ($categories as $categorie): ?>
+                                    <option value='<?= $categorie->id ?>'><?= $categorie->nom ?></option>
+                                <?php endforeach;?>
+                            </select>
+                            <span class="help-block errMsg" id="itemCategoriesEditErr"></span>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-12 form-group-sm">
                             <label for="itemDescriptionEdit" class="">Description (Optionel)</label>
