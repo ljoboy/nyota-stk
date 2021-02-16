@@ -189,4 +189,32 @@ class Category_model extends CI_Model
             return FALSE;
         }
     }
+
+    /**
+     * @param $id_category
+     * @return bool
+     */
+    public function deleteItemCategories($id_category)
+    {
+        $this->db->select('*');
+        $this->db->where('id_category', $id_category);
+        $result = $this->db->get('item_category');
+
+        if ($result->num_rows() > 0) {
+            $item_categories = $result->result();
+
+            /**
+             * Here we delete all categories of the item
+             **/
+            foreach ($item_categories as $item_categorie) {
+                $this->db->where('id', $item_categorie->id)->delete('item_category');
+            }
+        }
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
