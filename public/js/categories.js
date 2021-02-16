@@ -224,6 +224,7 @@ $(document).ready(function () {
 
     //When the trash icon in front of an admin account is clicked on the admin list table (i.e. to delete the account)
     $("#allcategories").on('click', '.deletecategory', function () {
+        let catRow = $(this).closest('tr');
         let confirm = window.confirm("Êtes-vous sûre de vouloir effacer cette Catégorie? C'est une action irreversible!");
 
         if (confirm) {
@@ -241,6 +242,7 @@ $(document).ready(function () {
                     data: {_aId: categoryId}
                 }).done(function (returnedData) {
                     if (returnedData.status === 1) {
+                        catRow.remove()
                         changeFlashMsgContent('Catégorie effacée', '', 'green', 1000);
                     } else {
                         alert(returnedData.status);
