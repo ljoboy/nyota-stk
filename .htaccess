@@ -1,7 +1,6 @@
 <IfModule mod_rewrite.c>
 
 RewriteEngine On
-RewriteBase /stk
 
 # Disable Directory Browsing
 Options All -Indexes

@@ -1,7 +1,10 @@
 'use strict';
 
-var appRoot = setAppRoot("stk", "stk");
+var appRoot = setAppRoot("", "");
 var spinnerClass = 'fa fa-spinner faa-spin animated';
+
+// To style only selects with the my-select class
+$('.itemCategories').selectpicker();
 
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
@@ -269,7 +272,7 @@ function formChanges(form) {
         return null;
     }
 
-    let changed = [], n, c, def, o, ol, opt;addCout
+    let changed = [], n, c, def, o, ol, opt;
 
     for (var e = 0, el = form.elements.length; e < el; e++) {
         n = form.elements[e];
@@ -328,7 +331,7 @@ function formChanges(form) {
 
 /**
  * Function to handle the display of messages
- * @param {type} msg
+ * @param {string} msg
  * @param {type} iconClassName
  * @param {type} color
  * @param {type} time
