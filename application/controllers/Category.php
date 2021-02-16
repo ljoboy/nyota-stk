@@ -3,6 +3,9 @@ defined('BASEPATH') or exit('');
 
 class Category extends CI_Controller
 {
+    /**
+     * Category constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -43,7 +46,7 @@ class Category extends CI_Controller
         $this->pagination->initialize($config);//initialize the library class
 
         //get all couts from db
-        $data['allCategories'] = $this->couts_model->getAll($orderBy, $orderFormat, $start, $limit);
+        $data['allCategories'] = $this->category_model->getAll($orderBy, $orderFormat, $start, $limit);
         $data['range'] = ($totalcategories > 0) ? ($start + 1) . "-" . ($start + count($data['allCategories'])) . " sur " . $totalcategories : "";
         $data['links'] = $this->pagination->create_links();//page links
         $data['sn'] = $start + 1;
@@ -64,8 +67,8 @@ class Category extends CI_Controller
 
         $this->form_validation->set_error_delimiters('', '');
 
-        $this->form_validation->set_rules('nom', 'Nom', ['required', 'trim', 'max_length[20]', 'strtolower', 'ucfirst'], ['required' => "Champ obligatoire"]);
-        $this->form_validation->set_rules('description', 'Description', ['required', 'trim', 'strtolower', 'ucfirst'], ['required' => "Champ obligatoire"]);
+        $this->form_validation->set_rules('nom', 'Nom', ['required', 'trim', 'max_length[20]', 'ucfirst'], ['required' => "Champ obligatoire"]);
+        $this->form_validation->set_rules('description', 'Description', ['trim', 'ucfirst'], ['required' => "Champ obligatoire"]);
 
         if ($this->form_validation->run() !== FALSE) {
             /**
@@ -85,7 +88,6 @@ class Category extends CI_Controller
         $this->output->set_content_type('application/json')->set_output(json_encode($json));
     }
 
-
     /**
      * To update Category
      */
@@ -97,19 +99,17 @@ class Category extends CI_Controller
 
         $this->form_validation->set_error_delimiters('', '');
 
-        $this->form_validation->set_rules('nom', 'Nom', ['required', 'trim', 'max_length[20]', 'strtolower', 'ucfirst'], ['required' => "Champ obligatoire"]);
-        $this->form_validation->set_rules('description', 'Description', ['required', 'trim', 'strtolower', 'ucfirst'], ['required' => "Champ obligatoire"]);
-
-        print_r($this->form_validation->run());
+        $this->form_validation->set_rules('nomEdit', 'Nom', ['required', 'trim', 'max_length[20]', 'ucfirst'], ['required' => "Champ obligatoire"]);
+        $this->form_validation->set_rules('descriptionEdit', 'Description', ['trim', 'ucfirst'], ['required' => "Champ obligatoire"]);
 
         if ($this->form_validation->run() !== FALSE) {
             /**
              * update info into db
-             * function header: add($nom, $description)
+             * function header: edit($category_id, $nom, $description)
              */
             $category_id = $this->input->post('categoryId', TRUE);
 
-            $updated = $this->couts_model->update($category_id, set_value('nom'), set_value('description'));
+            $updated = $this->category_model->edit($category_id, set_value('nomEdit'), set_value('descriptionEdit'));
 
             $json = $updated ? ['status' => 1, 'msg' => "Infos mise à jour avec succès"] : ['status' => 0, 'msg' => "Oops ! Erreur inattendue. Contacter l'administrateur svp !"];
         } else {
@@ -131,12 +131,15 @@ class Category extends CI_Controller
         $this->genlib->ajaxOnly();
 
         $category_id = $this->input->post('_aId');
-        $new_value = $this->genmod->getTableCol('categories', 'deleted', 'categoryId', $category_id) == 1 ? 0 : 1;
+        if ($category_id){
+            $done = $this->db->where('id', $category_id)->delete('categories');
+            if ($done){
+                $this->category_model->deleteItemCategories($category_id);
+            }
+        }
 
-        $done = $this->couts_model->delete($category_id, $new_value);
 
         $json['status'] = $done ? 1 : 0;
-        $json['_nv'] = $new_value;
         $json['_aId'] = $category_id;
 
         $this->output->set_content_type('application/json')->set_output(json_encode($json));
