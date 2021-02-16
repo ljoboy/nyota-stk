@@ -7,15 +7,20 @@ class Items extends CI_Controller{
         parent::__construct();
         
         $this->genlib->checkLogin();
+
+        $this->genlib->superOnly();
         
         $this->load->model(['item']);
+
+        $this->load->model(['category_model']);
     }
     
     /**
      * 
      */
     public function index(){
-        $data['pageContent'] = $this->load->view('items/items', '', TRUE);
+        $categories = $this->category_model->getAll();
+        $data['pageContent'] = $this->load->view('items/items', compact('categories'), TRUE);
         $data['pageTitle'] = "Articles";
 
         $this->load->view('main', $data);
@@ -58,12 +63,14 @@ class Items extends CI_Controller{
         
         //get all items from db
         $data['allItems'] = $this->item->getAll($orderBy, $orderFormat, $start, $limit);
+        $data['categories'] = $this->category_model->getAll();
+        $data['itemCategories'] = $this->category_model->getAllItemCategories();
         $data['range'] = $totalItems > 0 ? "Afficher " . ($start+1) . "-" . ($start + count($data['allItems'])) . " sur " . $totalItems : "";
         $data['links'] = $this->pagination->create_links();//page links
         $data['sn'] = $start+1;
         $data['cum_total'] = $this->item->getItemsCumTotal();
         $data['critic_items'] = $this->item->getCriticItem();
-        
+
         $json['itemsListTable'] = $this->load->view('items/itemslisttable', $data, TRUE);//get view with populated items table
 
         $this->output->set_content_type('application/json')->set_output(json_encode($json));
@@ -92,7 +99,7 @@ class Items extends CI_Controller{
         $this->form_validation->set_rules('itemPrice', 'Item Price', ['required', 'trim', 'numeric'], ['required'=>"Champ obligatoire"]);
         $this->form_validation->set_rules('itemCode', 'Code Article', ['required', 'trim', 'max_length[20]', 'is_unique[items.code]'],
                 ['required'=>"Champ obligatoire", 'is_unique'=>"Il existe un article portant ce code"]);
-        
+//        var_dump($this->input->post());die();
         if($this->form_validation->run() !== FALSE){
             $this->db->trans_start();//start transaction
             
@@ -102,6 +109,7 @@ class Items extends CI_Controller{
              */
             $insertedId = $this->item->add(set_value('itemName'), set_value('itemQuantity'), set_value('itemPrice'), 
                     set_value('itemDescription'), set_value('itemCode'));
+            $this->category_model->setItemCategory(set_value('itemCategories'), $insertedId);
             
             $itemName = set_value('itemName');
             $itemQty = set_value('itemQuantity');
@@ -285,10 +293,12 @@ class Items extends CI_Controller{
             $itemPrice = set_value('itemPrice');
             $itemName = set_value('itemName');
             $itemCode = $this->input->post('itemCode', TRUE);
-            
+
+            $itemCategories = set_value('itemCategories');
             //update item in db
             $updated = $this->item->edit($itemId, $itemName, $itemDesc, $itemPrice);
-            
+
+            $this->category_model->updateItemCategory($itemCategories, $itemId);
             $json['status'] = $updated ? 1 : 0;
             
             //add event to log
