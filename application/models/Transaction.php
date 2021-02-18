@@ -1,10 +1,12 @@
 <?php
 
-defined('BASEPATH') OR exit('');
+defined('BASEPATH') or exit('');
 
-class Transaction extends CI_Model {
+class Transaction extends CI_Model
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -18,13 +20,14 @@ class Transaction extends CI_Model {
 
     /**
      * Get all transactions
-     * @param type $orderBy
-     * @param type $orderFormat
-     * @param type $start
-     * @param type $limit
-     * @return boolean
+     * @param string $orderBy
+     * @param string $orderFormat
+     * @param int $start
+     * @param int $limit
+     * @return array|null
      */
-    public function getAll($orderBy, $orderFormat, $start, $limit) {
+    public function getAll($orderBy, $orderFormat, $start, $limit)
+    {
         if ($this->db->platform() == "sqlite3") {
             $q = "SELECT transactions.ref, transactions.totalMoneySpent, transactions.modeOfPayment, transactions.staffId,
                 transactions.transDate, transactions.lastUpdated, transactions.amountTendered, transactions.changeDue,
@@ -37,18 +40,17 @@ class Transaction extends CI_Model {
                 LIMIT {$limit} OFFSET {$start}";
 
             $run_q = $this->db->query($q);
-        }
-        else {
+        } else {
             $this->db->select('transactions.ref, transactions.totalMoneySpent, transactions.modeOfPayment, transactions.staffId,
                 transactions.transDate, transactions.lastUpdated, transactions.amountTendered, transactions.changeDue,
                 CONCAT_WS(" ", admin.first_name, admin.last_name) as "staffName",
                 transactions.cust_name, transactions.cust_phone, transactions.cust_email');
-            
+
             $this->db->select_sum('transactions.quantity');
-            
+
             $this->db->join('admin', 'transactions.staffId = admin.id', 'LEFT');
             $this->db->limit($limit, $start);
-            $this->db->group_by('ref');
+            $this->db->group_by('transactions.ref');
             $this->db->order_by($orderBy, $orderFormat);
 
             $run_q = $this->db->get('transactions');
@@ -56,9 +58,8 @@ class Transaction extends CI_Model {
 
         if ($run_q->num_rows() > 0) {
             return $run_q->result();
-        }
-        else {
-            return FALSE;
+        } else {
+            return null;
         }
     }
 
@@ -71,7 +72,7 @@ class Transaction extends CI_Model {
      */
 
     /**
-     * 
+     *
      * @param type $_iN item Name
      * @param type $_iC item Code
      * @param type $desc Desc
@@ -93,24 +94,18 @@ class Transaction extends CI_Model {
      * @param {string} $ce Customer Email
      * @return boolean
      */
-    public function add($_iN, $_iC, $desc, $q, $_up, $_tp, $_tas, $_at, $_cd, $_mop, $_tt, $ref, $_va, $_vp, $da, $dp, $cn, $cp, $ce) {
-        $data = ['itemName' => $_iN, 'itemCode' => $_iC, 'description' => $desc, 'quantity' => $q, 'unitPrice' => $_up, 'totalPrice' => $_tp,
-            'amountTendered' => $_at, 'changeDue' => $_cd, 'modeOfPayment' => $_mop, 'transType' => $_tt,
-            'staffId' => $this->session->admin_id, 'totalMoneySpent' => $_tas, 'ref' => $ref, 'vatAmount' => $_va,
-            'vatPercentage' => $_vp, 'discount_amount'=>$da, 'discount_percentage'=>$dp, 'cust_name'=>$cn, 'cust_phone'=>$cp,
-            'cust_email'=>$ce];
+    public function add($_iN, $_iC, $desc, $q, $_up, $_tp, $_tas, $_at, $_cd, $_mop, $_tt, $ref, $_va, $_vp, $da, $dp, $cn, $cp, $ce)
+    {
+        $data = ['itemName' => $_iN, 'itemCode' => $_iC, 'description' => $desc, 'quantity' => $q, 'unitPrice' => $_up, 'totalPrice' => $_tp, 'amountTendered' => $_at, 'changeDue' => $_cd, 'modeOfPayment' => $_mop, 'transType' => $_tt, 'staffId' => $this->session->admin_id, 'totalMoneySpent' => $_tas, 'ref' => $ref, 'vatAmount' => $_va, 'vatPercentage' => $_vp, 'discount_amount' => $da, 'discount_percentage' => $dp, 'cust_name' => $cn, 'cust_phone' => $cp, 'cust_email' => $ce];
 
         //set the datetime based on the db driver in use
-        $this->db->platform() == "sqlite3" ?
-            $this->db->set('transDate', "datetime('now')", FALSE) :
-            $this->db->set('transDate', "NOW()", FALSE);
+        $this->db->platform() == "sqlite3" ? $this->db->set('transDate', "datetime('now')", FALSE) : $this->db->set('transDate', "NOW()", FALSE);
 
         $this->db->insert('transactions', $data);
 
         if ($this->db->affected_rows()) {
             return $this->db->insert_id();
-        }
-        else {
+        } else {
             return FALSE;
         }
     }
@@ -128,15 +123,15 @@ class Transaction extends CI_Model {
      * @param type $ref
      * @return boolean
      */
-    public function isRefExist($ref) {
+    public function isRefExist($ref)
+    {
         $q = "SELECT DISTINCT ref FROM transactions WHERE ref = ?";
 
         $run_q = $this->db->query($q, [$ref]);
 
         if ($run_q->num_rows() > 0) {
             return TRUE;
-        }
-        else {
+        } else {
             return FALSE;
         }
     }
@@ -149,7 +144,8 @@ class Transaction extends CI_Model {
      * *******************************************************************************************************************************
      */
 
-    public function transSearch($value) {
+    public function transSearch($value)
+    {
         $this->db->select('transactions.ref, transactions.totalMoneySpent, transactions.modeOfPayment, transactions.staffId,
                 transactions.transDate, transactions.lastUpdated, transactions.amountTendered, transactions.changeDue,
                 CONCAT_WS(" ", admin.first_name, admin.last_name) as "staffName",
@@ -165,8 +161,7 @@ class Transaction extends CI_Model {
 
         if ($run_q->num_rows() > 0) {
             return $run_q->result();
-        }
-        else {
+        } else {
             return FALSE;
         }
     }
@@ -184,15 +179,15 @@ class Transaction extends CI_Model {
      * @param type $ref
      * @return boolean
      */
-    public function gettransinfo($ref) {
+    public function gettransinfo($ref)
+    {
         $q = "SELECT * FROM transactions WHERE ref = ?";
 
         $run_q = $this->db->query($q, [$ref]);
 
         if ($run_q->num_rows() > 0) {
             return $run_q->result_array();
-        }
-        else {
+        } else {
             return FALSE;
         }
     }
@@ -209,7 +204,8 @@ class Transaction extends CI_Model {
      * selects the total number of transactions done so far
      * @return boolean
      */
-    public function totalTransactions() {
+    public function totalTransactions()
+    {
         $q = "SELECT count(DISTINCT REF) as 'totalTrans' FROM transactions";
 
         $run_q = $this->db->query($q);
@@ -218,8 +214,7 @@ class Transaction extends CI_Model {
             foreach ($run_q->result() as $get) {
                 return $get->totalTrans;
             }
-        }
-        else {
+        } else {
             return FALSE;
         }
     }
@@ -236,7 +231,8 @@ class Transaction extends CI_Model {
      * Calculates the total amount earned today
      * @return boolean
      */
-    public function totalEarnedToday() {
+    public function totalEarnedToday()
+    {
         $q = "SELECT totalMoneySpent FROM transactions WHERE DATE(transDate) = CURRENT_DATE";
 
         $run_q = $this->db->query($q);
@@ -263,7 +259,8 @@ class Transaction extends CI_Model {
      */
 
     //Not in use yet
-    public function totalEarnedOnDay($date) {
+    public function totalEarnedOnDay($date)
+    {
         $q = "SELECT SUM(totalPrice) as 'totalEarnedToday' FROM transactions WHERE DATE(transDate) = {$date}";
 
         $run_q = $this->db->query($q);
@@ -272,8 +269,7 @@ class Transaction extends CI_Model {
             foreach ($run_q->result() as $get) {
                 return $get->totalEarnedToday;
             }
-        }
-        else {
+        } else {
             return FALSE;
         }
     }
@@ -285,8 +281,9 @@ class Transaction extends CI_Model {
      * *******************************************************************************************************************************
      * *******************************************************************************************************************************
      */
-    
-    public function getDateRange($from_date, $to_date){
+
+    public function getDateRange($from_date, $to_date)
+    {
         if ($this->db->platform() == "sqlite3") {
             $q = "SELECT transactions.ref, transactions.totalMoneySpent, transactions.modeOfPayment, transactions.staffId,
                 transactions.transDate, transactions.lastUpdated, transactions.amountTendered, transactions.changeDue,
@@ -300,9 +297,7 @@ class Transaction extends CI_Model {
                 ORDER BY transactions.transId DESC";
 
             $run_q = $this->db->query($q);
-        }
-        
-        else {
+        } else {
             $this->db->select('transactions.ref, transactions.totalMoneySpent, transactions.modeOfPayment, transactions.staffId,
                     transactions.transDate, transactions.lastUpdated, transactions.amountTendered, transactions.changeDue,
                     CONCAT_WS(" ", admin.first_name, admin.last_name) AS "staffName",
@@ -321,7 +316,7 @@ class Transaction extends CI_Model {
 
             $run_q = $this->db->get('transactions');
         }
-        
+
         return $run_q->num_rows() ? $run_q->result() : FALSE;
     }
 }
