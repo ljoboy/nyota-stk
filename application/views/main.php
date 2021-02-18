@@ -27,6 +27,7 @@ defined('BASEPATH') or exit('');
     <meta name="msapplication-TileImage" content="<?= base_url() ?>public/images/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <meta name="Description" content="STK Management, for your business management !">
+    <meta name="appname" content="STK Management">
     <!-- favicon ends --->
 
     <!-- LOAD CSS FILES -->
@@ -36,6 +37,7 @@ defined('BASEPATH') or exit('');
         <link rel="stylesheet" href="<?= base_url() ?>public/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>public/font-awesome/css/font-awesome-animation.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>public/ext/select2/select2.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>public/css/bootstrap-select.min.css">
 
     <?php else: ?>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -56,6 +58,7 @@ defined('BASEPATH') or exit('');
         <script src="<?= base_url() ?>public/js/jquery.min.js"></script>
         <script src="<?= base_url() ?>public/bootstrap/js/bootstrap.min.js"></script>
         <script src="<?= base_url() ?>public/ext/select2/select2.min.js"></script>
+        <script src="<?= base_url() ?>public/js/bootstrap-select.min.js"></script>
 
     <?php else: ?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
