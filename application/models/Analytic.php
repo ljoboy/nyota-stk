@@ -19,14 +19,14 @@ class Analytic extends CI_Model{
         $this->db->select('count(DISTINCT(ref)) as "tot_trans", SUM(quantity) as "qty_sold", SUM(totalPrice) as "tot_earned", transDate');
         $this->db->order_by($order_by, $order_format);
         $this->db->limit($limit, $start);
-        $this->db->group_by('DATE(transDate)');
-        
+        $this->db->group_by('transDate');
+
         $run_q = $this->db->get('transactions');
-        
+
         if($run_q->num_rows() > 0){
             return $run_q->result();
         }
-        
+
         else{
             return FALSE;
         }
