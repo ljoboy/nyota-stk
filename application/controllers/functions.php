@@ -337,3 +337,19 @@ function unsubscribeLink($userEmail, $userId, $userCode, $subsciptionType){
 function igcEmail(){
     return "jonathanyombo@gmail.com";
 }
+
+/**
+ * @return bool
+ */
+function server()
+{
+    return (
+        ($_SERVER['HTTP_HOST'] === "localhost")
+        ||
+        (stristr($_SERVER['HTTP_HOST'], "192.168.") !== FALSE)
+        ||
+        (stristr($_SERVER['HTTP_HOST'], "127.0.0.") !== FALSE)
+        ||
+        (stristr($_SERVER['HTTP_HOST'], ".test") === ".test")
+    );
+}
