@@ -94,9 +94,14 @@ class Transaction extends CI_Model
      * @param {string} $ce Customer Email
      * @return boolean
      */
-    public function add($_iN, $_iC, $desc, $q, $_up, $_tp, $_tas, $_at, $_cd, $_mop, $_tt, $ref, $_va, $_vp, $da, $dp, $cn, $cp, $ce)
+    public function add($_iN, $_iC, $desc, $q, $_up, $_tp, $_tas, $_at, $_cd, $_mop, $_tt, $ref, $_va, $_vp, $da, $dp, $cn, $cp, $ce, $ca, $pos)
     {
-        $data = ['itemName' => $_iN, 'itemCode' => $_iC, 'description' => $desc, 'quantity' => $q, 'unitPrice' => $_up, 'totalPrice' => $_tp, 'amountTendered' => $_at, 'changeDue' => $_cd, 'modeOfPayment' => $_mop, 'transType' => $_tt, 'staffId' => $this->session->admin_id, 'totalMoneySpent' => $_tas, 'ref' => $ref, 'vatAmount' => $_va, 'vatPercentage' => $_vp, 'discount_amount' => $da, 'discount_percentage' => $dp, 'cust_name' => $cn, 'cust_phone' => $cp, 'cust_email' => $ce];
+        $data = [
+            'itemName' => $_iN, 'itemCode' => $_iC, 'description' => $desc, 'quantity' => $q, 'unitPrice' => $_up,
+            'totalPrice' => $_tp, 'amountTendered' => $_at, 'changeDue' => $_cd, 'modeOfPayment' => $_mop, 'transType' => $_tt,
+            'staffId' => $this->session->admin_id, 'totalMoneySpent' => $_tas, 'ref' => $ref, 'vatAmount' => $_va,
+            'vatPercentage' => $_vp, 'discount_amount' => $da, 'discount_percentage' => $dp, 'cust_name' => $cn,
+            'cust_phone' => $cp, 'cust_email' => $ce, 'cash' => $ca, 'pos' => $pos];
 
         //set the datetime based on the db driver in use
         $this->db->platform() == "sqlite3" ? $this->db->set('transDate', "datetime('now')", FALSE) : $this->db->set('transDate', "NOW()", FALSE);
