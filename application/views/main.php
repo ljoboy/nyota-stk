@@ -8,8 +8,7 @@ defined('BASEPATH') or exit('');
     <title><?= $pageTitle ?></title>
 
     <!-- Favicon -->
-    <!--[if IE]>
-    <link rel="shortcut icon" href="<?= base_url() ?>public/images/icon.png"><![endif]-->
+    <!--[if IE]><link rel="shortcut icon" href="<?= base_url() ?>public/images/icon.png"><![endif]-->
     <link rel="apple-touch-icon" sizes="57x57" href="<?= base_url() ?>public/images/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<?= base_url() ?>public/images/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?= base_url() ?>public/images/apple-icon-72x72.png">
@@ -27,6 +26,7 @@ defined('BASEPATH') or exit('');
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="<?= base_url() ?>public/images/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <meta name="Description" content="STK Management, for your business management !">
     <!-- favicon ends --->
 
     <!-- LOAD CSS FILES -->
@@ -38,7 +38,6 @@ defined('BASEPATH') or exit('');
         <link rel="stylesheet" href="<?= base_url() ?>public/ext/select2/select2.min.css">
 
     <?php else: ?>
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -59,19 +58,19 @@ defined('BASEPATH') or exit('');
         <script src="<?= base_url() ?>public/ext/select2/select2.min.js"></script>
 
     <?php else: ?>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
         <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
         <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>-->
+        <!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>-->
 
     <?php endif; ?>
 </head>
