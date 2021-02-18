@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- favicon ends --->
 
     <!--- LOAD CSS FILES -->
-    <?php if ($_SERVER['HTTP_HOST'] == "localhost" || (stristr($_SERVER['HTTP_HOST'], "192.168.") !== FALSE) || (stristr($_SERVER['HTTP_HOST'], "127.0.0.") !== FALSE)): ?>
+    <?php if (server()): ?>
         <link rel="stylesheet" href="<?= base_url() ?>public/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>public/font-awesome/css/font-awesome.min.css">
 
@@ -112,7 +112,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <!--- LOAD JS FILES -->
-<?php if ($_SERVER['HTTP_HOST'] == "localhost" || (stristr($_SERVER['HTTP_HOST'], "192.168.") !== FALSE) || (stristr($_SERVER['HTTP_HOST'], "127.0.0.") !== FALSE)): ?>
+<?php if (server()): ?>
 
     <script src="<?= base_url() ?>public/js/jquery.min.js"></script>
     <script src="<?= base_url() ?>public/bootstrap/js/bootstrap.min.js"></script>
