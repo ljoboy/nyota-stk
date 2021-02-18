@@ -237,7 +237,7 @@ class Transaction extends CI_Model {
      * @return boolean
      */
     public function totalEarnedToday() {
-        $q = "SELECT totalMoneySpent FROM transactions WHERE DATE(transDate) = CURRENT_DATE GROUP BY ref";
+        $q = "SELECT totalMoneySpent FROM transactions WHERE DATE(transDate) = CURRENT_DATE";
 
         $run_q = $this->db->query($q);
 
@@ -249,8 +249,7 @@ class Transaction extends CI_Model {
             }
 
             return $totalEarnedToday;
-        }
-        else {
+        } else {
             return FALSE;
         }
     }
