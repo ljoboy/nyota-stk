@@ -328,6 +328,52 @@ if (isset($items) && !empty($items)) {
     </div>
 </div>
 
+<!--modal to payment-->
+<div id="paymentModal" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="text-center">Payer </h4>
+                <div id="editItemFMsg" class="text-center"></div>
+            </div>
+            <div class="modal-body">
+                <form role="form"><div class="row">
+                        <span class="hidden" id="ref"></span>
+                        <div class="col-sm-4 form-group-sm">
+                            <label for="montantApayer">Montant à payer</label>
+                            <span id="montantApayer" class="form-control">0.00</span>
+                            <span class="help-block errMsg" id="montantApayerErr"></span>
+                        </div>
+
+                        <div class="col-sm-4 form-group-sm">
+                            <div id="amountTenderedDiv">
+                                <label for="montantPercu" id="montantPercuLabel">Montant
+                                    percu</label>
+                                <input type="number" class="form-control" id="montantPercu">
+                                <span class="help-block errMsg" id="montantPercuErr"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 form-group-sm">
+                            <label for="monnaieDue">Monnaie due</label>
+                            <span class="form-control" id="monnaieDue"></span>
+                            <span class="help-block errMsg" id="monnaieDueErr"></span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="paymentId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="paymentSubmit">Enregistrer</button>
+                <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of modal-->
+
+
 <!---End of copy of div to clone when adding more items to sales transaction---->
 <script src="<?= base_url() ?>public/js/transactions.js"></script>
 <script src="<?= base_url('public/ext/datetimepicker/bootstrap-datepicker.min.js') ?>"></script>
