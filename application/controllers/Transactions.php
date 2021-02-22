@@ -162,7 +162,6 @@ class Transactions extends CI_Controller
 
 
         if (((float)$ca + (float)$pos) !== (float)$cumAmountFromClient) {
-            var_dump($ca ,$pos, $cumAmountFromClient);die();
             return false;
         }
 
@@ -461,5 +460,41 @@ class Transactions extends CI_Controller
         $data['allTransactions'] = $this->transaction->getDateRange($from_date, $to_date);
 
         $this->load->view('transactions/transReport', $data);
+    }
+
+    public function payment()
+    {
+        $this->genlib->ajaxOnly();
+
+        $ref = $this->input->post('ref');
+        $percu = $this->input->post('montantPercu');
+        $retourne = $this->input->post('monnaieDue');
+
+
+        $verify = $this->verify_payment($ref, $percu, $retourne);
+
+        $data = [];
+        if ($verify) {
+            $this->transaction->payment($ref, $percu, $retourne);
+            $data['message'] = "Paiment effctué avec succès.";
+            $data['status'] = 1;
+        } else {
+            $data['message'] = "Un problème est survenu, veuillez vérifier les informations fournies.";
+            $data['status'] = 0;
+        }
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
+
+    private function verify_payment($ref, $percu, $retourne)
+    {
+        $montant = $this->transaction->getPOS($ref);
+        $montant_paye = ($percu - $retourne);
+
+        if ($montant_paye > $montant->pos || $montant_paye <= 0) {
+            return false;
+        }
+
+        return true;
     }
 }
