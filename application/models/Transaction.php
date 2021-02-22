@@ -32,7 +32,7 @@ class Transaction extends CI_Model
             $q = "SELECT transactions.ref, transactions.totalMoneySpent, transactions.modeOfPayment, transactions.staffId,
                 transactions.transDate, transactions.lastUpdated, transactions.amountTendered, transactions.changeDue,
                 admin.first_name || ' ' || admin.last_name AS 'staffName', SUM(transactions.quantity) AS 'quantity',
-                transactions.cust_name, transactions.cust_phone, transactions.cust_email
+                transactions.cust_name, transactions.cust_phone, transactions.cust_email, transactions.pos, transactions.cash
                 FROM transactions
                 LEFT OUTER JOIN admin ON transactions.staffId = admin.id
                 GROUP BY ref
@@ -44,7 +44,7 @@ class Transaction extends CI_Model
             $this->db->select('transactions.ref, transactions.totalMoneySpent, transactions.modeOfPayment, transactions.staffId,
                 transactions.transDate, transactions.lastUpdated, transactions.amountTendered, transactions.changeDue,
                 CONCAT_WS(" ", admin.first_name, admin.last_name) as "staffName",
-                transactions.cust_name, transactions.cust_phone, transactions.cust_email');
+                transactions.cust_name, transactions.cust_phone, transactions.cust_email, transactions.pos, transactions.cash, ');
 
             $this->db->select_sum('transactions.quantity');
 
@@ -96,12 +96,7 @@ class Transaction extends CI_Model
      */
     public function add($_iN, $_iC, $desc, $q, $_up, $_tp, $_tas, $_at, $_cd, $_mop, $_tt, $ref, $_va, $_vp, $da, $dp, $cn, $cp, $ce, $ca, $pos)
     {
-        $data = [
-            'itemName' => $_iN, 'itemCode' => $_iC, 'description' => $desc, 'quantity' => $q, 'unitPrice' => $_up,
-            'totalPrice' => $_tp, 'amountTendered' => $_at, 'changeDue' => $_cd, 'modeOfPayment' => $_mop, 'transType' => $_tt,
-            'staffId' => $this->session->admin_id, 'totalMoneySpent' => $_tas, 'ref' => $ref, 'vatAmount' => $_va,
-            'vatPercentage' => $_vp, 'discount_amount' => $da, 'discount_percentage' => $dp, 'cust_name' => $cn,
-            'cust_phone' => $cp, 'cust_email' => $ce, 'cash' => $ca, 'pos' => $pos];
+        $data = ['itemName' => $_iN, 'itemCode' => $_iC, 'description' => $desc, 'quantity' => $q, 'unitPrice' => $_up, 'totalPrice' => $_tp, 'amountTendered' => $_at, 'changeDue' => $_cd, 'modeOfPayment' => $_mop, 'transType' => $_tt, 'staffId' => $this->session->admin_id, 'totalMoneySpent' => $_tas, 'ref' => $ref, 'vatAmount' => $_va, 'vatPercentage' => $_vp, 'discount_amount' => $da, 'discount_percentage' => $dp, 'cust_name' => $cn, 'cust_phone' => $cp, 'cust_email' => $ce, 'cash' => $ca, 'pos' => $pos];
 
         //set the datetime based on the db driver in use
         $this->db->platform() == "sqlite3" ? $this->db->set('transDate', "datetime('now')", FALSE) : $this->db->set('transDate', "NOW()", FALSE);
@@ -124,7 +119,7 @@ class Transaction extends CI_Model
      */
 
     /**
-     * Primarily used t check whether a prticular ref exists in db
+     * Primarily used to check whether a particular ref exists in db
      * @param type $ref
      * @return boolean
      */
@@ -181,7 +176,7 @@ class Transaction extends CI_Model
 
     /**
      * Get all transactions with a particular ref
-     * @param type $ref
+     * @param string $ref
      * @return boolean
      */
     public function gettransinfo($ref)
@@ -323,5 +318,68 @@ class Transaction extends CI_Model
         }
 
         return $run_q->num_rows() ? $run_q->result() : FALSE;
+    }
+
+    public function payment($ref, $percu, $retourne)
+    {
+        $paye = $percu - $retourne;
+        $data = ["staff_id" => $this->session->admin_id, "ref" => $ref, "montant_percu" => $percu, "montant_retourne" => $retourne, "montant_paye" => $paye];
+
+        $this->db->trans_start();
+        $this->posPayment($ref, $paye);
+        $this->db->insert('payements', $data);
+        $this->db->trans_complete();
+
+        if ($this->db->affected_rows() ) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+    }
+
+    public function posPayment($ref, $paye)
+    {
+        $trans = $this->getOneTransByRef($ref);
+
+        $this->db->set('pos',  ($trans->pos - $paye));
+        $this->db->set('cash', (float) ($trans->cash + $paye));
+        $this->db->where('ref', $ref);
+        $query = $this->db->update('transactions');
+
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param $ref
+     * @return false
+     */
+    public function getPOS($ref)
+    {
+        $this->db->select("pos");
+        $this->db->where("ref", $ref);
+        $q = $this->db->get("transactions");
+
+        return $q->num_rows() ? $q->row() : false;
+    }
+
+    /**
+     * @param $ref
+     * @return null
+     */
+    public function getOneTransByRef($ref)
+    {
+        $q = "SELECT * FROM transactions WHERE ref = ?";
+
+        $run_q = $this->db->query($q, [$ref]);
+
+        if ($run_q->num_rows() > 0) {
+            return $run_q->row();
+        } else {
+            return null;
+        }
     }
 }
