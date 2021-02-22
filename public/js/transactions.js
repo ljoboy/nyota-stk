@@ -1039,3 +1039,96 @@ function getDiscountAmount(cumAmount) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//triggers when an item's "edit" icon is clicked
+$("#transListTable").on('click', ".makePayment", function (e) {
+    e.preventDefault();
+    //fixme: change me
+    //get item info
+    const itemId = $(this).attr('id').split("-")[1];
+    const montantApayer = parseFloat($("#total-" + itemId).html());
+
+    $("#montantApayer").html(montantApayer);
+    $("#montantPercuErr").html();
+
+    const transref = $(this).attr('id').split("-")[0];
+    $("#ref").html(transref);
+
+    $("#paymentModal").modal('show');
+});
+
+$("#montantPercu").on('change focusout keyup keydown keypress', calculmonnaiedue);
+
+function calculmonnaiedue() {
+    let montantPercu = parseFloat($("#montantPercu").val());
+    let montantApayer = parseFloat($("#montantApayer").html());
+
+    /*if (montantPercu && (montantPercu < montantApayer)) {
+        // $("#montantPercuErr").html("Le montant ne peut être inférieur à USD " + montantApayer);
+        //remove change due if any
+        $("#monnaieDue").html("");
+    } else */
+    if (montantPercu) {
+        if (montantPercu < montantApayer) {
+            $("#monnaieDue").html('0');
+        } else {
+            $("#monnaieDue").html(+(montantPercu - montantApayer).toFixed(2));
+        }
+
+        //remove error msg if any
+        $("#montantPercuErr").html("");
+    }
+}
+
+$("#paymentSubmit").click(function () {
+    let montantApayer = parseFloat($("#montantApayer").html());
+    let montantPercu = parseFloat($("#montantPercu").val());
+    let monnaieDue = parseFloat($("#monnaieDue").html());
+    let ref = $("#ref").html();
+
+    monnaieDue = (monnaieDue) ? monnaieDue : 0;
+
+    if (!montantApayer || !montantPercu) {
+        !montantPercu ? $("#montantPercuErr").html("Vous devez entrer le montant perçu") : "";
+        !montantApayer ? $("#montantApayerErr").html("Le montant à payer ne peut être vide") : "";
+        // !monnaieDue ? $("#monnaieDueErr").html("La monnaie à retourner ne peut être vide") : "";
+        return;
+    }
+
+    $("#editItemFMsg").css('color', 'black').html("<i class='" + spinnerClass + "'></i> Traitement de votre requête....");
+
+    $.ajax({
+        method: "POST",
+        url: appRoot + "transactions/payment",
+        data: {
+            monnaieDue: monnaieDue,
+            // montantApayer: montantApayer,
+            montantPercu: montantPercu,
+            ref: ref
+        }
+    }).done(function (returnedData) {
+        if (returnedData.status === 1) {
+            $("#editItemFMsg").css('color', 'green').html("paiement ajouté avec succès");
+
+            setTimeout(function () {
+                $("#paymentModal").modal('hide');
+            }, 1000);
+
+            $("#montantApayer").html("");
+            $("#montantPercu").val("");
+            $("#monnaieDue").html("");
+            $("#editItemFMsg").html("");
+
+            latr_();
+        } else {
+            $("#editItemFMsg").css('color', 'red').html("Un ou plusieurs champs obligatoires sont vide ou mal remplis");
+
+            // Todo:: add error message
+            // $("#itemNameEditErr").html(returnedData.itemName);
+            // $("#itemCodeEditErr").html(returnedData.itemCode);
+            // $("#itemCategoriesEditErr").html(returnedData.itemCategories);
+            // $("#itemPriceEditErr").html(returnedData.itemPrice);
+        }
+    }).fail(function () {
+        $("#editItemFMsg").css('color', 'red').html("Vous semblez être hors ligne. Reconnectez-vous à internet puis réessayer svp !");
+    });
+});
