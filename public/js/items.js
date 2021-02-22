@@ -1,15 +1,14 @@
 'use strict';
 
-$(document).ready(function(){
+$(document).ready(function () {
     checkDocumentVisibility(checkLogin);//check document visibility in order to confirm user's log in status
 
     //load all items once the page is ready
     lilt();
 
 
-
     //WHEN USE BARCODE SCANNER IS CLICKED
-    $("#useBarcodeScanner").click(function(e){
+    $("#useBarcodeScanner").click(function (e) {
         e.preventDefault();
 
         $("#itemCode").focus();
@@ -25,7 +24,7 @@ $(document).ready(function(){
     /**
      * Toggle the form to add a new item
      */
-    $("#createItem").click(function(){
+    $("#createItem").click(function () {
         $("#itemsListDiv").toggleClass("col-sm-8", "col-sm-12");
         $("#createNewItemDiv").toggleClass('hidden');
         $("#itemName").focus();
@@ -39,7 +38,7 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    $(".cancelAddItem").click(function(){
+    $(".cancelAddItem").click(function () {
         //reset and hide the form
         document.getElementById("addNewItemForm").reset();//reset the form
         $("#createNewItemDiv").addClass('hidden');//hide the form
@@ -54,12 +53,12 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //execute when 'auto-generate' checkbox is clicked while trying to add a new item
-    $("#gen4me").click(function(){
+    $("#gen4me").click(function () {
         //if checked, generate a unique item code for user. Else, clear field
-        if($("#gen4me").prop("checked")){
+        if ($("#gen4me").prop("checked")) {
             var codeExist = false;
 
-            do{
+            do {
                 //generate random string, reduce the length to 10 and convert to uppercase
                 var rand = Math.random().toString(36).slice(2).substring(0, 10).toUpperCase();
                 $("#itemCode").val(rand);//paste the code in input
@@ -68,18 +67,16 @@ $(document).ready(function(){
                 //check whether code exist for another item
                 $.ajax({
                     type: 'get',
-                    url: appRoot+"items/gettablecol/id/code/"+rand,
-                    success: function(returnedData){
+                    url: appRoot + "items/gettablecol/id/code/" + rand,
+                    success: function (returnedData) {
                         codeExist = returnedData.status;//returnedData.status could be either 1 or 0
                     }
                 });
             }
 
-            while(codeExist);
+            while (codeExist);
 
-        }
-
-        else{
+        } else {
             $("#itemCode").val("");
         }
     });
@@ -91,7 +88,7 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //handles the submission of adding new item
-    $("#addNewItem").click(function(e){
+    $("#addNewItem").click(function (e) {
         e.preventDefault();
 
         changeInnerHTML(['itemNameErr', 'itemQuantityErr', 'itemCategoriesErr', 'itemPriceErr', 'itemCodeErr', 'addCustErrMsg'], "");
@@ -103,7 +100,7 @@ $(document).ready(function(){
         var itemCode = $("#itemCode").val();
         var itemDescription = $("#itemDescription").val();
 
-        if(!itemName || !itemQuantity || !itemPrice || !itemCode || !itemCategories){
+        if (!itemName || !itemQuantity || !itemPrice || !itemCode || !itemCategories) {
             !itemName ? $("#itemNameErr").text("Champs obligatoire") : "";
             !itemQuantity ? $("#itemQuantityErr").text("Champs obligatoire") : "";
             !itemCategories ? $("#itemCategoriesErr").text("Champs obligatoire") : "";
@@ -115,15 +112,22 @@ $(document).ready(function(){
             return;
         }
 
-        displayFlashMsg("Ajouter un article '"+itemName+"'", "fa fa-spinner faa-spin animated", '', '');
+        displayFlashMsg("Ajouter un article '" + itemName + "'", "fa fa-spinner faa-spin animated", '', '');
 
         $.ajax({
             type: "post",
-            url: appRoot+"items/add",
-            data:{itemName:itemName, itemQuantity:itemQuantity, itemCategories:itemCategories, itemPrice:itemPrice, itemDescription:itemDescription, itemCode:itemCode},
+            url: appRoot + "items/add",
+            data: {
+                itemName: itemName,
+                itemQuantity: itemQuantity,
+                itemCategories: itemCategories,
+                itemPrice: itemPrice,
+                itemDescription: itemDescription,
+                itemCode: itemCode
+            },
 
-            success: function(returnedData){
-                if(returnedData.status === 1){
+            success: function (returnedData) {
+                if (returnedData.status === 1) {
                     changeFlashMsgContent(returnedData.msg, "text-success", '', 1500);
                     document.getElementById("addNewItemForm").reset();
 
@@ -132,9 +136,7 @@ $(document).ready(function(){
 
                     //return focus to item code input to allow adding item with barcode scanner
                     $("#itemCode").focus();
-                }
-
-                else{
+                } else {
                     hideFlashMsg();
 
                     //display all errors
@@ -147,12 +149,10 @@ $(document).ready(function(){
                 }
             },
 
-            error: function(){
-                if(!navigator.onLine){
+            error: function () {
+                if (!navigator.onLine) {
                     changeFlashMsgContent("Vous semblez ëtre hors ligne. Reconnectez-vous à internet puis réessayer svp !", "", "red", "");
-                }
-
-                else{
+                } else {
                     changeFlashMsgContent("Impossible de répondre à votre requête à cet instant. Réessayez plus tard svp !", "", "red", "");
                 }
             }
@@ -167,7 +167,7 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //reload items list table when events occur
-    $("#itemsListPerPage, #itemsListSortBy").change(function(){
+    $("#itemsListPerPage, #itemsListSortBy").change(function () {
         displayFlashMsg("Patientez svp !", spinnerClass, "", "");
         lilt();
     });
@@ -178,21 +178,19 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    $("#itemSearch").keyup(function(){
+    $("#itemSearch").keyup(function () {
         var value = $(this).val();
 
-        if(value){
+        if (value) {
             $.ajax({
-                url: appRoot+"search/itemsearch",
+                url: appRoot + "search/itemsearch",
                 type: "get",
-                data: {v:value},
-                success: function(returnedData){
+                data: {v: value},
+                success: function (returnedData) {
                     $("#itemsListTable").html(returnedData.itemsListTable);
                 }
             });
-        }
-
-        else{
+        } else {
             //reload the table if all text in search box has been cleared
             displayFlashMsg("Chargement de la page...", spinnerClass, "", "");
             lilt();
@@ -206,15 +204,15 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //triggers when an item's "edit" icon is clicked
-    $("#itemsListTable").on('click', ".editItem", function(e){
+    $("#itemsListTable").on('click', ".editItem", function (e) {
         e.preventDefault();
 
         //get item info
         var itemId = $(this).attr('id').split("-")[1];
-        var itemDesc = $("#itemDesc-"+itemId).attr('title');
-        var itemName = $("#itemName-"+itemId).html();
-        var itemPrice = $("#itemPrice-"+itemId).html().split(".")[0].replace(",", "");
-        var itemCode = $("#itemCode-"+itemId).html();
+        var itemDesc = $("#itemDesc-" + itemId).attr('title');
+        var itemName = $("#itemName-" + itemId).html();
+        var itemPrice = $("#itemPrice-" + itemId).html().split(".")[0].replace(",", "");
+        var itemCode = $("#itemCode-" + itemId).html();
 
         //prefill form with info
         $("#itemIdEdit").val(itemId);
@@ -239,7 +237,7 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    $("#editItemSubmit").click(function(){
+    $("#editItemSubmit").click(function () {
         var itemName = $("#itemNameEdit").val();
         var itemPrice = $("#itemPriceEdit").val();
         var itemCategories = $("#itemCategoriesEdit").val();
@@ -247,7 +245,7 @@ $(document).ready(function(){
         var itemId = $("#itemIdEdit").val();
         var itemCode = $("#itemCodeEdit").val();
 
-        if(!itemName || !itemPrice || !itemId || !itemCategories){
+        if (!itemName || !itemPrice || !itemId || !itemCategories) {
             !itemName ? $("#itemNameEditErr").html("Le nom de l'article ne peut être vide") : "";
             !itemPrice ? $("#itemPriceEditErr").html("L'article doit avoir un prix") : "";
             !itemCategories ? $("#itemCategoriesEditErr").html("L'article doit avoir au moins une categorie") : "";
@@ -255,14 +253,21 @@ $(document).ready(function(){
             return;
         }
 
-        $("#editItemFMsg").css('color', 'black').html("<i class='"+spinnerClass+"'></i> Traitement de votre requête....");
+        $("#editItemFMsg").css('color', 'black').html("<i class='" + spinnerClass + "'></i> Traitement de votre requête....");
 
         $.ajax({
             method: "POST",
-            url: appRoot+"items/edit",
-            data: {itemName:itemName, itemPrice:itemPrice, itemCategories: itemCategories, itemDesc:itemDesc, _iId:itemId, itemCode:itemCode}
-        }).done(function(returnedData){
-            if(returnedData.status === 1){
+            url: appRoot + "items/edit",
+            data: {
+                itemName: itemName,
+                itemPrice: itemPrice,
+                itemCategories: itemCategories,
+                itemDesc: itemDesc,
+                _iId: itemId,
+                itemCode: itemCode
+            }
+        }).done(function (returnedData) {
+            if (returnedData.status === 1) {
                 $("#editItemFMsg").css('color', 'green').html("Article modifié avec succès");
 
                 setTimeout(function(){
@@ -280,7 +285,7 @@ $(document).ready(function(){
                 $("#itemCategoriesEditErr").html(returnedData.itemCategories);
                 $("#itemPriceEditErr").html(returnedData.itemPrice);
             }
-        }).fail(function(){
+        }).fail(function () {
             $("#editItemFMsg").css('color', 'red').html("Vous semblez ëtre hors ligne. Reconnectez-vous à internet puis réessayer svp !");
         });
     });
@@ -293,12 +298,12 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //trigers the modal to update stock
-    $("#itemsListTable").on('click', '.updateStock', function(){
+    $("#itemsListTable").on('click', '.updateStock', function () {
         //get item info and fill the form with them
         var itemId = $(this).attr('id').split("-")[1];
-        var itemName = $("#itemName-"+itemId).html();
-        var itemCurQuantity = $("#itemQuantity-"+itemId).html();
-        var itemCode = $("#itemCode-"+itemId).html();
+        var itemName = $("#itemName-" + itemId).html();
+        var itemCurQuantity = $("#itemQuantity-" + itemId).html();
+        var itemCode = $("#itemCode-" + itemId).html();
 
         $("#stockUpdateItemId").val(itemId);
         $("#stockUpdateItemName").val(itemName);
@@ -317,14 +322,12 @@ $(document).ready(function(){
 
     //runs when the update type is changed while trying to update stock
     //sets a default description if update type is "newStock"
-    $("#stockUpdateType").on('change', function(){
+    $("#stockUpdateType").on('change', function () {
         var updateType = $("#stockUpdateType").val();
 
-        if(updateType && (updateType === 'newStock')){
+        if (updateType && (updateType === 'newStock')) {
             $("#stockUpdateDescription").val("De nouveaux articles ont été achetés");
-        }
-
-        else{
+        } else {
             $("#stockUpdateDescription").val("");
         }
     });
@@ -336,13 +339,13 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //handles the updating of item's quantity in stock
-    $("#stockUpdateSubmit").click(function(){
+    $("#stockUpdateSubmit").click(function () {
         var updateType = $("#stockUpdateType").val();
         var stockUpdateQuantity = $("#stockUpdateQuantity").val();
         var stockUpdateDescription = $("#stockUpdateDescription").val();
         var itemId = $("#stockUpdateItemId").val();
 
-        if(!updateType || !stockUpdateQuantity || !stockUpdateDescription || !itemId){
+        if (!updateType || !stockUpdateQuantity || !stockUpdateDescription || !itemId) {
             !updateType ? $("#stockUpdateTypeErr").html("Champs obligatoire") : "";
             !stockUpdateQuantity ? $("#stockUpdateQuantityErr").html("Champs obligatoire") : "";
             !stockUpdateDescription ? $("#stockUpdateDescriptionErr").html("Champs obligatoire") : "";
@@ -351,14 +354,14 @@ $(document).ready(function(){
             return;
         }
 
-        $("#stockUpdateFMsg").html("<i class='"+spinnerClass+"'></i> Mise à jour du Stock.....");
+        $("#stockUpdateFMsg").html("<i class='" + spinnerClass + "'></i> Mise à jour du Stock.....");
 
         $.ajax({
             method: "POST",
-            url: appRoot+"items/updatestock",
-            data: {_iId:itemId, _upType:updateType, qty:stockUpdateQuantity, desc:stockUpdateDescription}
-        }).done(function(returnedData){
-            if(returnedData.status === 1){
+            url: appRoot + "items/updatestock",
+            data: {_iId: itemId, _upType: updateType, qty: stockUpdateQuantity, desc: stockUpdateDescription}
+        }).done(function (returnedData) {
+            if (returnedData.status === 1) {
                 $("#stockUpdateFMsg").html(returnedData.msg);
 
                 //refresh items' list
@@ -368,20 +371,18 @@ $(document).ready(function(){
                 document.getElementById("updateStockForm").reset();
 
                 //dismiss modal after some secs
-                setTimeout(function(){
+                setTimeout(function () {
                     $("#updateStockModal").modal('hide');//hide modal
                     $("#stockUpdateFMsg").html("");//remove msg
                 }, 1000);
-            }
-
-            else{
+            } else {
                 $("#stockUpdateFMsg").html(returnedData.msg);
 
                 $("#stockUpdateTypeErr").html(returnedData._upType);
                 $("#stockUpdateQuantityErr").html(returnedData.qty);
                 $("#stockUpdateDescriptionErr").html(returnedData.desc);
             }
-        }).fail(function(){
+        }).fail(function () {
             $("#stockUpdateFMsg").html("Vous semblez ëtre hors ligne. Reconnectez-vous à internet puis réessayer svp !");
         });
     });
@@ -393,8 +394,8 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //PREVENT AUTO-SUBMISSION BY THE BARCODE SCANNER
-    $("#itemCode").keypress(function(e){
-        if(e.which === 13){
+    $("#itemCode").keypress(function (e) {
+        if (e.which === 13) {
             e.preventDefault();
 
             //change to next input by triggering the tab keyboard
@@ -403,27 +404,26 @@ $(document).ready(function(){
     });
 
 
-
     //TO DELETE AN ITEM (The item will be marked as "deleted" instead of removing it totally from the db)
-    $("#itemsListTable").on('click', '.delItem', function(e){
+    $("#itemsListTable").on('click', '.delItem', function (e) {
         e.preventDefault();
 
         //get the item id
         var itemId = $(this).parents('tr').find('.curItemId').val();
         var itemRow = $(this).closest('tr');//to be used in removing the currently deleted row
 
-        if(itemId){
+        if (itemId) {
             var confirm = window.confirm("Êtes-vous sûre de vouloir effacer ? C'est une action irreversible");
 
-            if(confirm){
+            if (confirm) {
                 displayFlashMsg('Patienter svp ...', spinnerClass, 'black');
 
                 $.ajax({
-                    url: appRoot+"items/delete",
+                    url: appRoot + "items/delete",
                     method: "POST",
-                    data: {i:itemId}
-                }).done(function(rd){
-                    if(rd.status === 1){
+                    data: {i: itemId}
+                }).done(function (rd) {
+                    if (rd.status === 1) {
                         //remove item from list, update items' SN, display success msg
                         $(itemRow).remove();
 
@@ -432,12 +432,10 @@ $(document).ready(function(){
 
                         //display success message
                         changeFlashMsgContent('Article effacé', '', 'green', 1000);
-                    }
-
-                    else{
+                    } else {
 
                     }
-                }).fail(function(){
+                }).fail(function () {
                     console.log('Requete échoué');
                 });
             }
@@ -446,29 +444,28 @@ $(document).ready(function(){
 });
 
 
-
 /**
  * "lilt" = "load Items List Table"
  * @param {type} url
  * @returns {undefined}
  */
-function lilt(url){
+function lilt(url) {
     var orderBy = $("#itemsListSortBy").val().split("-")[0];
     var orderFormat = $("#itemsListSortBy").val().split("-")[1];
     var limit = $("#itemsListPerPage").val();
 
 
     $.ajax({
-        type:'get',
-        url: url ? url : appRoot+"items/lilt/",
-        data: {orderBy:orderBy, orderFormat:orderFormat, limit:limit},
+        type: 'get',
+        url: url ? url : appRoot + "items/lilt/",
+        data: {orderBy: orderBy, orderFormat: orderFormat, limit: limit},
 
-        success: function(returnedData){
+        success: function (returnedData) {
             hideFlashMsg();
             $("#itemsListTable").html(returnedData.itemsListTable);
         },
 
-        error: function(){
+        error: function () {
 
         }
     });
@@ -483,8 +480,8 @@ function lilt(url){
  * @param {type} itemId
  * @returns {Boolean}
  */
-function vittrhist(itemId){
-    if(itemId){
+function vittrhist(itemId) {
+    if (itemId) {
 
     }
 
@@ -492,9 +489,8 @@ function vittrhist(itemId){
 }
 
 
-
-function resetItemSN(){
-    $(".itemSN").each(function(i){
-        $(this).html(parseInt(i)+1);
+function resetItemSN() {
+    $(".itemSN").each(function (i) {
+        $(this).html(parseInt(i) + 1);
     });
 }
