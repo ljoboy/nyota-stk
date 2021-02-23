@@ -72,7 +72,7 @@ class Misc extends CI_Controller
         $prefs = array(
             'ignore' => array('backups'), // List of tables to omit from the backup
             'format' => 'txt',                       // gzip, zip, txt
-            'filename' => 'nyota_' . date('Y-M-d_') . time() . '.sql', // File name - NEEDED ONLY WITH ZIP FILES
+            'filename' => 'stk_' . date('Y-M-d_') . time() . '.sql', // File name - NEEDED ONLY WITH ZIP FILES
             'add_drop' => TRUE, // Whether to add DROP TABLE statements to backup file
             'add_insert' => TRUE, // Whether to add INSERT data to backup file
             'newline' => "\n"  // Newline character used in backup file
@@ -160,7 +160,7 @@ class Misc extends CI_Controller
             $file = $backup->file_url;
             $data = array(
                 "file" => new CURLFile($file),
-                "data" => '{"foldername":"nyota"}'
+                "data" => '{"foldername":"stk"}'
             );
             $handle = curl_init();
             curl_setopt($handle, CURLOPT_URL, 'https://backups.zxconnect.org/');
