@@ -10,7 +10,7 @@ class Backup extends CI_Controller
         $prefs = array(
             'ignore' => array('backups'),                     // List of tables to omit from the backup
             'format' => 'txt',                       // gzip, zip, txt
-            'filename' => 'nyota' . date('Y-M-d'). '.sql',              // File name - NEEDED ONLY WITH ZIP FILES
+            'filename' => 'stk' . date('Y-M-d'). '.sql',              // File name - NEEDED ONLY WITH ZIP FILES
             'add_drop' => TRUE,                        // Whether to add DROP TABLE statements to backup file
             'add_insert' => TRUE,                        // Whether to add INSERT data to backup file
             'newline' => "\n"                         // Newline character used in backup file
