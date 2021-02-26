@@ -223,22 +223,22 @@ defined('BASEPATH') or exit('');
                         Transactions
                     </a>
                 </li>
-                <li class="<?= $pageTitle == 'Articles' ? 'active' : '' ?>">
-                    <a href="<?= site_url('items') ?>">
-                        <i class="fa fa-shopping-cart"></i>
-                        Articles
-                    </a>
-                </li>
-
-                <li class="<?= $pageTitle == 'Categories' ? 'active' : '' ?>">
-                    <a href="<?= site_url('category') ?>">
-                        <i class="fa fa-cart-plus"></i>
-                        Catégories
-                    </a>
-                </li>
 
                 <?php if ($this->session->admin_role === "Super"): ?>
 
+                    <li class="<?= $pageTitle == 'Articles' ? 'active' : '' ?>">
+                        <a href="<?= site_url('items') ?>">
+                            <i class="fa fa-shopping-cart"></i>
+                            Articles
+                        </a>
+                    </li>
+
+                    <li class="<?= $pageTitle == 'Categories' ? 'active' : '' ?>">
+                        <a href="<?= site_url('category') ?>">
+                            <i class="fa fa-cart-plus"></i>
+                            Catégories
+                        </a>
+                    </li>
 
                     <!-- <li class="<? /*= $pageTitle == 'Customers' ? 'active' : '' */ ?>">
                             <a href="<? /*= site_url('employees') */ ?>">
