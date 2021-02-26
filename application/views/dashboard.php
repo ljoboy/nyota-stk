@@ -15,7 +15,8 @@ defined('BASEPATH') OR exit('');
             <div class="panel-footer text-center" style="color:#5cb85c">Nombre d'articles vendus aujourd'hui</div>
         </div>
     </div>
-    <div class="col-sm-4">
+    <?php if ($this->session->admin_role === "Super"): ?>
+        <div class="col-sm-4">
         <div class="panel panel-info">
             <div class="panel-body latestStuffsBody" style="background-color: #f0ad4e">
                 <div class="pull-left"><i class="fa fa-tasks"></i></div>
@@ -27,6 +28,7 @@ defined('BASEPATH') OR exit('');
             <div class="panel-footer text-center" style="color:#f0ad4e">Total des transactions de tous les temps</div>
         </div>
     </div>
+    <?php endif;?>
     <div class="col-sm-4">
         <div class="panel panel-info">
             <div class="panel-body latestStuffsBody" style="background-color: #337ab7">
@@ -41,7 +43,7 @@ defined('BASEPATH') OR exit('');
     </div>
 </div>
 
-
+<?php if ($this->session->admin_role === "Super"): ?>
 <!-- ROW OF GRAPH/CHART OF EARNINGS PER MONTH/YEAR-->
 <div class="row margin-top-5">
     <div class="col-sm-9">
@@ -67,7 +69,7 @@ defined('BASEPATH') OR exit('');
             </select>
             <span id="yearAccountLoading"></span>
         </section>
-        
+
         <section class="panel">
           <center>
               <canvas id="paymentMethodChart" width="200" height="200"/></canvas><br>Méthodes de payement(%)<span id="paymentMethodYear"></span>
@@ -104,7 +106,7 @@ defined('BASEPATH') OR exit('');
             <?php endif; ?>
         </div>
     </div>
-    
+
     <div class="col-sm-3">
         <div class="panel panel-hash">
             <div class="panel-heading"><i class="fa fa-cart-arrow-down"></i> LES MOINS DEMANDE</div>
@@ -130,7 +132,7 @@ defined('BASEPATH') OR exit('');
             <?php endif; ?>
         </div>
     </div>
-    
+
     <div class="col-sm-3">
         <div class="panel panel-hash">
             <div class="panel-heading"><i class="fa fa-money"></i> MEILLEUR GAIN</div>
@@ -153,10 +155,10 @@ defined('BASEPATH') OR exit('');
             </table>
             <?php else: ?>
             Aucune Transaction
-            <?php endif; ?> 
+            <?php endif; ?>
         </div>
     </div>
-    
+
     <div class="col-sm-3">
         <div class="panel panel-hash">
             <div class="panel-heading"><i class="fa fa-money"></i> GAIN LE PLUS FAIBLE</div>
@@ -179,7 +181,7 @@ defined('BASEPATH') OR exit('');
             </table>
             <?php else: ?>
            Aucune transaction
-            <?php endif; ?> 
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -206,9 +208,9 @@ defined('BASEPATH') OR exit('');
                         <tr>
                             <td><?=
                                     date('d-m-Y', strtotime($get->transDate)) === date('d-m-Y', time())
-                                    ? 
+                                    ?
                                     "Aujourd'hui"
-                                    : 
+                                    :
                                     date('d-m-Y', strtotime($get->transDate));
                                 ?>
                             </td>
@@ -225,8 +227,8 @@ defined('BASEPATH') OR exit('');
             </div>
         </div>
     </div>
-    
-    
+
+
     <div class="col-sm-6">
         <div class="panel panel-hash">
             <div class="panel-heading">Transactions par jours</div>
@@ -358,8 +360,8 @@ defined('BASEPATH') OR exit('');
             </div>
         </div>
     </div>
-    
-    
+
+
     <div class="col-sm-6">
         <div class="panel panel-hash">
             <div class="panel-heading">Transactions annuelle</div>
@@ -393,6 +395,7 @@ defined('BASEPATH') OR exit('');
         </div>
     </div>
 </div>
+<?php endif;?>
 
 <script src="<?=base_url('public/js/chart.js'); ?>"></script>
 <script src="<?=base_url('public/js/dashboard.js')?>"></script>
