@@ -367,7 +367,7 @@ function hideFlashMsg() {
 /**
  * Change message being displayed and hide the modal if time is set
  * @param {type} msg
- * @param {type} iconClassName
+ * @param {string} iconClassName
  * @param {type} color
  * @param {type} time
  * @returns {undefined}
