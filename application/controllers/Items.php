@@ -93,13 +93,14 @@ class Items extends CI_Controller{
 
         $this->form_validation->set_error_delimiters('', '');
         
-        $this->form_validation->set_rules('itemName', 'Item name', ['required', 'trim', 'max_length[80]', 'is_unique[items.name]'],
+        $this->form_validation->set_rules('itemName', 'Item name', ['required', 'trim', 'max_length[80]', 'is_unique[items.name]',],
                 ['required'=>"Champ obligatoire"]);
         $this->form_validation->set_rules('itemQuantity', 'Item quantity', ['required', 'trim', 'numeric'], ['required'=>"Champ obligatoire"]);
         $this->form_validation->set_rules('itemPrice', 'Item Price', ['required', 'trim', 'numeric'], ['required'=>"Champ obligatoire"]);
         $this->form_validation->set_rules('itemCode', 'Code Article', ['required', 'trim', 'max_length[20]', 'is_unique[items.code]'],
                 ['required'=>"Champ obligatoire", 'is_unique'=>"Il existe un article portant ce code"]);
-//        var_dump($this->input->post());die();
+        $this->form_validation->set_rules('stockMin', 'Stock Minimum', ['required', 'trim', 'numeric'], ['required'=>"Champ obligatoire"]);
+
         if($this->form_validation->run() !== FALSE){
             $this->db->trans_start();//start transaction
             
@@ -108,12 +109,13 @@ class Items extends CI_Controller{
              * function header: add($itemName, $itemQuantity, $itemPrice, $itemDescription, $itemCode)
              */
             $insertedId = $this->item->add(set_value('itemName'), set_value('itemQuantity'), set_value('itemPrice'), 
-                    set_value('itemDescription'), set_value('itemCode'));
+                    set_value('itemDescription'), set_value('itemCode'), set_value('stockMin'));
             $this->category_model->setItemCategory(set_value('itemCategories'), $insertedId);
             
             $itemName = set_value('itemName');
             $itemQty = set_value('itemQuantity');
             $itemPrice = "USD ".number_format(set_value('itemPrice'), 2);
+//            $stockMin = set_value('stockMin');
             
             //insert into eventlog
             //function header: addevent($event, $eventRowId, $eventDesc, $eventTable, $staffId)
@@ -217,6 +219,7 @@ class Items extends CI_Controller{
         $this->form_validation->set_rules('_iId', 'Item ID', ['required', 'trim', 'numeric'], ['required'=>"Champ obligatoire"]);
         $this->form_validation->set_rules('_upType', 'Update type', ['required', 'trim', 'in_list[newStock,deficit]'], ['required'=>"Champ obligatoire"]);
         $this->form_validation->set_rules('qty', 'Quantity', ['required', 'trim', 'numeric'], ['required'=>"Champ obligatoire"]);
+        $this->form_validation->set_rules('min', 'Stock Minimum', ['trim', 'numeric']);
         $this->form_validation->set_rules('desc', 'Update Description', ['required', 'trim'], ['required'=>"Champ obligatoire"]);
         
         if($this->form_validation->run() !== FALSE){
@@ -225,6 +228,7 @@ class Items extends CI_Controller{
             $itemId = set_value('_iId');
             $qty = set_value('qty');
             $desc = set_value('desc');
+//            $min = set_value('min');
             
             $this->db->trans_start();
             
@@ -285,6 +289,7 @@ class Items extends CI_Controller{
         $this->form_validation->set_rules('itemCode', 'Code Article', ['required', 'trim',
             'callback_crosscheckCode['.$this->input->post('_iId', TRUE).']'], ['required'=>'Champ obligatoire']);
         $this->form_validation->set_rules('itemPrice', 'Item Prix Unitaire', ['required', 'trim', 'numeric']);
+        $this->form_validation->set_rules('minStock', 'Stock Minimum', ['trim', 'numeric']);
         $this->form_validation->set_rules('itemDesc', 'Item Description', ['trim']);
         
         if($this->form_validation->run() !== FALSE){
@@ -293,10 +298,11 @@ class Items extends CI_Controller{
             $itemPrice = set_value('itemPrice');
             $itemName = set_value('itemName');
             $itemCode = $this->input->post('itemCode', TRUE);
-
             $itemCategories = set_value('itemCategories');
+            $stockMin = set_value('stockMin');
+
             //update item in db
-            $updated = $this->item->edit($itemId, $itemName, $itemDesc, $itemPrice);
+            $updated = $this->item->edit($itemId, $itemName, $itemDesc, $itemPrice, $stockMin);
 
             $this->category_model->updateItemCategory($itemCategories, $itemId);
             $json['status'] = $updated ? 1 : 0;
