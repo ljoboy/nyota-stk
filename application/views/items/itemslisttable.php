@@ -28,6 +28,7 @@
                         <th>CATEGORIES</th>
                         <th>QTE EN STOCK</th>
                         <th>PRIX UNITAIRE</th>
+                        <th>STOCK MINIMUM</th>
                         <th>SOLDE TOTAL</th>
                         <th>GAIN TOTAL PAR ARTICLE</th>
                         <th>MODIFIER QUANTITE</th>
@@ -53,11 +54,14 @@
                                     <span><?= ($get->id == $itemCategorie->id_item) ? $itemCategorie->nom : '' ?></span>
                                 <?php endforeach; ?>
                             </td>
-                            <td class="<?= $get->quantity <= 10 ? 'bg-danger' : ($get->quantity <= 25 ? 'bg-warning' : '') ?>">
+                            <td class="<?= $get->quantity <= $get->min ? 'bg-danger' : ($get->quantity <= ($get->min * 2.5) ? 'bg-warning' : '') ?>">
                                 <span id="itemQuantity-<?= $get->id ?>"><?= $get->quantity ?></span>
                             </td>
                             <td>USD <span id="itemPrice-<?= $get->id ?>"><?= number_format($get->unitPrice, 2) ?></span>
                             </td>
+                            <th>
+                                <span><?= $get->min ?></span>
+                            </th>
                             <td><?= $this->genmod->gettablecol('transactions', 'SUM(quantity)', 'itemCode', $get->code) ?></td>
                             <td>
                                 USD <?= number_format($this->genmod->gettablecol('transactions', 'SUM(totalPrice)', 'itemCode', $get->code), 2) ?>
@@ -89,7 +93,7 @@
         <div class="panel-heading">Articles</div>
         <?php if ($allItems): ?>
             <div class="table table-responsive">
-                <table class="table table-bordered table-striped" id="item-table" style="background-color: #f5f5f5">
+                <table class="table table-bordered table-hover" id="item-table" style="background-color: #f5f5f5">
                     <thead>
                     <tr>
                         <th>N°</th>
@@ -99,6 +103,7 @@
                         <th>CATEGORIES</th>
                         <th>QTE EN STOCK</th>
                         <th>PRIX UNITAIRE</th>
+                        <th>STOCK MINIMUM</th>
                         <th>SOLDE TOTAL</th>
                         <th>GAIN TOTAL PAR ARTICLE</th>
                         <th>MODIFIER QUANTITE</th>
@@ -108,7 +113,7 @@
                     </thead>
                     <tbody>
                     <?php foreach ($allItems as $get): ?>
-                        <tr>
+                        <tr  class="<?= $get->quantity <= $get->min ? 'danger' : ($get->quantity <= ($get->min * 2.5) ? 'warning' : '') ?>">
                             <input type="hidden" value="<?= $get->id ?>" class="curItemId">
                             <th class="itemSN"><?= $sn ?>.</th>
                             <td><span id="itemName-<?= $get->id ?>"><?= $get->name ?></span></td>
@@ -124,11 +129,14 @@
                                     <span><?= ($get->id == $itemCategorie->id_item) ? $itemCategorie->nom : '' ?></span>
                                 <?php endforeach; ?>
                             </td>
-                            <td class="<?= $get->quantity <= 10 ? 'bg-danger' : ($get->quantity <= 25 ? 'bg-warning' : '') ?>">
+                            <td class="">
                                 <span id="itemQuantity-<?= $get->id ?>"><?= $get->quantity ?></span>
                             </td>
                             <td>USD <span id="itemPrice-<?= $get->id ?>"><?= number_format($get->unitPrice, 2) ?></span>
                             </td>
+                            <th>
+                                <span id="itemStockMin-<?= $get->id ?>"><?= $get->min ?></span>
+                            </th>
                             <td><?= $this->genmod->gettablecol('transactions', 'SUM(quantity)', 'itemCode', $get->code) ?></td>
                             <td>
                                 USD <?= number_format($this->genmod->gettablecol('transactions', 'SUM(totalPrice)', 'itemCode', $get->code), 2) ?>
