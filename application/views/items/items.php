@@ -119,6 +119,14 @@ defined('BASEPATH') OR exit('');
 
                         <div class="row">
                             <div class="col-sm-12 form-group-sm">
+                                <label for="itemStockMin">Stock minimum</label>
+                                <input placeholder="Quantité minimum en stock" type="number" id="itemStockMin" class="form-control" onchange="checkField(this.value, 'stockMinErr')"/>
+                                <span class="help-block errMsg" id="stockMinErr"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 form-group-sm">
                                 <label for="itemDescription" class="">Description (Optionel)</label>
                                 <textarea class="form-control" id="itemDescription" name="itemDescription" rows='4'
                                     placeholder="Description Article (Optionel)"></textarea>
@@ -199,6 +207,14 @@ defined('BASEPATH') OR exit('');
                             <span class="help-block errMsg" id="stockUpdateQuantityErr"></span>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group-sm">
+                            <label for="stockUpdateMin">Stock minimum</label>
+                            <input placeholder="Modifier la quanntité minimum en stock" type="number" id="stockUpdateMin" class="form-control" min="0" "/>
+                            <span class="help-block errMsg" id="stockUpdateMinErr"></span>
+                        </div>
+                    </div>
                     
                     <div class="row">
                         <div class="col-sm-12 form-group-sm">
@@ -262,6 +278,13 @@ defined('BASEPATH') OR exit('');
                                 <?php endforeach;?>
                             </select>
                             <span class="help-block errMsg" id="itemCategoriesEditErr"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group-sm">
+                            <label for="stockMinEdit">Stock minimum</label>
+                            <input placeholder="Modifier la quantité minimum en stock" type="number" id="stockMinEdit" class="form-control" min="0" "/>
+                            <span class="help-block errMsg" id="stockUpdateMinErr"></span>
                         </div>
                     </div>
                     <div class="row">
