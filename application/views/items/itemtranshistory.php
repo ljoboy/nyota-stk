@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-sm-12 form-group-sm form-inline">
             <div class="col-sm-4">
-                Qfficher
+                Afficher
                 <select id="itemPerPage" class="form-control">
                     <option value="5">5</option>
                     <option value="10" selected>10</option>
