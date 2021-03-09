@@ -343,8 +343,8 @@ defined('BASEPATH') or exit('');
                 <form name="logInModalForm">
                     <div class="row">
                         <div class="col-sm-12 form-group">
-                            <label for='logInModalEmail' class="control-label">E-mail</label>
-                            <input type="email" id='logInModalEmail' class="form-control checkField"
+                            <label for='logInModalEmail' class="control-label">E-mail ou Phone</label>
+                            <input type="text" id='logInModalEmail' class="form-control checkField"
                                    autocomplete="username email" placeholder="E-mail" autofocus>
                             <span class="help-block errMsg" id="logInModalEmailErr"></span>
                         </div>
