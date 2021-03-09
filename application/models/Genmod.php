@@ -112,7 +112,7 @@ class Genmod extends CI_Model
 
     /**
      *
-     * @param type $admin_id
+     * @param int $admin_id
      * @return boolean
      */
     public function get_admin_name($admin_id)
