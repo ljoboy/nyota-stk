@@ -96,13 +96,13 @@ class Admin extends CI_Model{
      * @return boolean
      */
     public function get_admin_info($email){
-        $this->db->select('id, first_name, last_name, role');
+        $this->db->select('*');
         $this->db->where('email', $email);
 
         $run_q = $this->db->get('admin');
 
         if($run_q->num_rows() > 0){
-            return $run_q->result();
+            return $run_q->row();
         }
 
         else{
