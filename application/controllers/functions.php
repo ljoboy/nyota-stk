@@ -353,3 +353,12 @@ function server()
         (stristr($_SERVER['HTTP_HOST'], ".test") === ".test")
     );
 }
+
+/**
+ * @param string $phone_number
+ * @return string
+ */
+function i18nPhoneNumber(string $phone_number): string {
+    //TODO::I18n phone number and return in good format
+    return $phone_number;
+}
