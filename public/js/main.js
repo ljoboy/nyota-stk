@@ -93,15 +93,37 @@ $(document).ready(function () {
     //Save the db locally and remotely
     $("#savedb").click(function (e) {
         e.preventDefault();
-        let msg;
-        $.get(`${appRoot}/misc/dldb`, function (data, status) {
-            if (status === 'success') {
+        $("#saveDbMsg").css('color', 'black').html("<i class='" + spinnerClass + "'></i> Traitement de votre requête...");
+        $.ajax({
+            /*if (status === 'success') {
                 msg = "Sauvegarde de la Base de Donnée réussie"
                 $("#saveDbMsg").css('color', 'green').text(msg);
             } else {
                 msg = "Sauvegarde de la Base de Donnée echouée"
                 $("#saveDbMsg").css('color', 'red').text(msg);
+            }*/
+            url: `${appRoot}/misc/dldb`,
+            method: "POST",
+            cache: false,
+            processData: false,
+            contentType: false
+        }).done(function (rd) {
+            if (rd.status === 1) {
+                $("#saveDbMsg").css('color', 'green').html(rd.msg);
+                setTimeout(function () {
+                    $("#saveDbMsg").html("");
+                }, 3000);
+            } else {
+                $("#saveDbMsg").css('color', 'red').html(rd.msg);
+                setTimeout(function () {
+                    $("#saveDbMsg").html("");
+                }, 3000);
             }
+        }).fail(function () {
+            $("#saveDbMsg").css('color', 'red').html("Vous semblez ëtre hors ligne. Reconnectez-vous à internet puis réessayer svp !");
+            setTimeout(function () {
+                $("#saveDbMsg").html("");
+            }, 5000);
         });
 
     });
