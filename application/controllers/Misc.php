@@ -61,10 +61,10 @@ class Misc extends CI_Controller
     /**
      * Save locally and remotely the database
      *
-     * @return false|string
      */
     public function dldb()
     {
+        $data = [];
         $this->genlib->checkLogin();
 
         $this->genlib->superOnly();
@@ -78,7 +78,12 @@ class Misc extends CI_Controller
             'newline' => "\n"  // Newline character used in backup file
         );
 
-        $fichier = __DIR__ . '/../../backups/' . $prefs['filename'];
+        $dir = __DIR__ . '/../../backups/';
+        if (!is_dir($dir)) {
+            mkdir($dir,0755, true);
+        }
+
+        $fichier = $dir . $prefs['filename'];
 
         $this->load->dbutil();
 
@@ -91,16 +96,29 @@ class Misc extends CI_Controller
 
 // Load the file helper and write the file to your server
         $this->load->helper('file');
-        write_file($fichier, $backup);
+        $write = write_file($fichier, $backup);
 
         $result = $this->backupModel->create($prefs['filename'], realpath($fichier));
 
         $online_res = false;
         if ($result === true) {
             $online_res = $this->save_online();
+            $data['online_msg'] = $online_res ? "Base des données sauvegardée en ligne" : "La base des données n'a pas été sauvegardé en ligne";
         }
 
-        return json_encode(['success' => $online_res]);
+        if (is_dir($dir) && file_exists($fichier) && $write && $result) {
+            $data['msg'] = "Base des données sauvegardée avec succès";
+            $data['status'] = 1;
+        } else {
+            $msg = "Un problème est survénu lors ";
+            $data['msg'] .= !is_dir($dir) ? "$msg de la création du dossier <br/>" : "";
+            $data['msg'] .= !file_exists($fichier) ? "$msg de la crétaion du projet <br/> " : "";
+            $data['msg'] .= !$write ? "$msg de l'écriture dans le fichier <br/>" : "";
+            $data['msg'] .= !$result ? "$msg lors de l'enregistrement dans la base des données" : "";
+            $data['status'] = 0;
+        }
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
     }
 
 
