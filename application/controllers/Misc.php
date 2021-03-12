@@ -69,8 +69,7 @@ class Misc extends CI_Controller
 
         $this->genlib->superOnly();
 
-        $prefs = array(
-            'ignore' => array('backups'), // List of tables to omit from the backup
+        $prefs = array('ignore' => array('backups'), // List of tables to omit from the backup
             'format' => 'txt',                       // gzip, zip, txt
             'filename' => 'nyota_' . date('Y-M-d_') . time() . '.sql', // File name - NEEDED ONLY WITH ZIP FILES
             'add_drop' => TRUE, // Whether to add DROP TABLE statements to backup file
@@ -80,7 +79,7 @@ class Misc extends CI_Controller
 
         $dir = __DIR__ . '/../../backups/';
         if (!is_dir($dir)) {
-            mkdir($dir,0755, true);
+            mkdir($dir, 0755, true);
         }
 
         $fichier = $dir . $prefs['filename'];
@@ -140,7 +139,7 @@ class Misc extends CI_Controller
         $config['overwrite'] = TRUE;//overwrite the previous file
 
         if (!is_dir($dir)) {
-            mkdir($dir,0755, true);
+            mkdir($dir, 0755, true);
         }
 
         $this->load->library('upload', $config);//load CI's 'upload' library
@@ -166,10 +165,25 @@ class Misc extends CI_Controller
 
     private function dbup($file_path)
     {
+        //increase execution time
+        if (function_exists("set_time_limit") === true && @ini_get("safe_mode") == 0) {
+            @set_time_limit(60*10);
+        }
+
         $isi_file = file_get_contents(BASEPATH . "../backups/restores/" . $file_path);
         $queries = explode(";", rtrim($isi_file, "\n;"));
+        $isComment = false;
+
         foreach ($queries as $query) {
-            $this->db->query($query);
+            $start = substr(trim($query), 0, 2);
+
+            if ($start === '/*') {
+                $isComment = true;
+            } else if ($start === '*/') {
+                $isComment = false;
+            } else if ($start !== '--' && $start !== '//' && $query !== '' && $query[0] !== '#' && $isComment === false)  {
+                $this->db->query($query);
+            }
         }
     }
 
@@ -183,22 +197,17 @@ class Misc extends CI_Controller
         foreach ($backups as $backup) {
             $res = false;
             $file = $backup->file_url;
-            $data = array(
-                "file" => new CURLFile($file),
-                "data" => '{"foldername":"nyota"}'
-            );
+            $data = array("file" => new CURLFile($file), "data" => '{"foldername":"nyota"}');
             $handle = curl_init();
             curl_setopt($handle, CURLOPT_URL, 'https://backups.zxconnect.org/');
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($handle, CURLOPT_HTTPHEADER, array(
-                'Content-type: multipart/form-data;',
-            ));
+            curl_setopt($handle, CURLOPT_HTTPHEADER, array('Content-type: multipart/form-data;',));
             curl_setopt($handle, CURLOPT_POSTFIELDS, $data);
             $final = curl_exec($handle);
             $result = json_decode($final);
-            if ($result->success === 1){
+            if ($result->success === 1) {
                 $this->backupModel->updateOnlineStatus($backup->id);
                 $res = true;
             }
