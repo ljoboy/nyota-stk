@@ -112,12 +112,12 @@ $(document).ready(function () {
                 $("#saveDbMsg").css('color', 'green').html(rd.msg);
                 setTimeout(function () {
                     $("#saveDbMsg").html("");
-                }, 3000);
+                }, 5000);
             } else {
                 $("#saveDbMsg").css('color', 'red').html(rd.msg);
                 setTimeout(function () {
                     $("#saveDbMsg").html("");
-                }, 3000);
+                }, 5000);
             }
         }).fail(function () {
             $("#saveDbMsg").css('color', 'red').html("Vous semblez ëtre hors ligne. Reconnectez-vous à internet puis réessayer svp !");
@@ -139,7 +139,7 @@ $(document).ready(function () {
 
             formData.append('dbfile', file);
 
-            $("#dbFileMsg").css('color', 'black').html("Importation de base de données");
+            $("#dbFileMsg").css('color', 'black').html("<i class='" + spinnerClass + "'></i> Importation de base de données");
 
             $.ajax({
                 url: appRoot + "misc/importdb",
@@ -159,13 +159,19 @@ $(document).ready(function () {
                     //clear the success msg after a while
                     setTimeout(function () {
                         $("#dbFileMsg").html("");
-                    }, 3000);
+                    }, 5000);
                 } else {
                     //display error message
                     $("#dbFileMsg").css('color', 'red').html(rd.msg);
+                    setTimeout(function () {
+                        $("#dbFileMsg").html("");
+                    }, 5000);
                 }
             }).fail(function () {
-
+                $("#dbFileMsg").css('color', 'red').html("Vous semblez ëtre hors ligne. Reconnectez-vous à internet puis réessayer svp !");
+                setTimeout(function () {
+                    $("#dbFileMsg").html("");
+                }, 5000);
             });
         }
     });
