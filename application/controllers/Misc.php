@@ -131,11 +131,17 @@ class Misc extends CI_Controller
 
         $this->genlib->superOnly();
 
-        $config['upload_path'] = BASEPATH . "../backups/restores";//db files are stored in the basepath
+        $dir = __DIR__ . '/../../backups/restores/';
+
+        $config['upload_path'] = $dir;//db files are stored in the basepath
         $config['allowed_types'] = 'sql';
         $config['file_ext_tolower'] = TRUE;
         $config['max_size'] = 200000;//in kb
         $config['overwrite'] = TRUE;//overwrite the previous file
+
+        if (!is_dir($dir)) {
+            mkdir($dir,0755, true);
+        }
 
         $this->load->library('upload', $config);//load CI's 'upload' library
 
@@ -145,6 +151,7 @@ class Misc extends CI_Controller
             $json['msg'] = $this->upload->display_errors();
             $json['status'] = 0;
         } else {
+            $json['msg'] = "Base des données récupérée avec succès";
             $json['status'] = 1;
         }
 
