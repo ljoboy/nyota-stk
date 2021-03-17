@@ -254,8 +254,14 @@ class Admin extends CI_Model{
         $this->db->where('id', $admin_id);
         
         $this->db->update('admin', $data);
-        
-        return TRUE;
+
+        if(!$this->db->error()){
+            return TRUE;
+        }
+
+        else{
+            return FALSE;
+        }
     }
     
     
@@ -272,9 +278,17 @@ class Admin extends CI_Model{
         $data = ['password' => $new_password];
 
         $this->db->where('id', $admin_id);
+
+
         $this->db->update('admin', $data);
 
-        return true;
+        if(!$this->db->error()){
+            return TRUE;
+        }
+
+        else{
+            return FALSE;
+        }
     }
    
 }
