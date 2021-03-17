@@ -238,7 +238,12 @@ class Administrators extends CI_Controller
     */
 
 
-    public function crosscheckMobile($mobile_number, $admin_id)
+    /**
+     * @param $mobile_number
+     * @param $admin_id
+     * @return bool
+     */
+    public function crosscheckMobile($mobile_number, $admin_id): bool
     {
         //check db to ensure number was previously used for admin with $admin_id i.e. the same admin we're updating his details
         $adminWithNum = $this->genmod->getTableCol('admin', 'id', 'mobile1', $mobile_number);
@@ -282,6 +287,44 @@ class Administrators extends CI_Controller
         }
     }
 
+    public function password_update()
+    {
+        $this->genlib->ajaxOnly();
 
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_error_delimiters('', '');
+
+        $this->form_validation->set_rules('adminId', 'Admin ID', ['required', 'numeric'], ['required' => "Erreur inconnue !"]);
+        $this->form_validation->set_rules('password', 'Password', ['required', 'min_length[8]'], ['required' => "Entrez un mot de passe"]);
+        $this->form_validation->set_rules('passwordDup', 'Password Confirmation', ['required', 'matches[password]'], ['required' => "Retapez le mot de passe svp !"]);
+
+        $msg = [];
+
+        if ($this->form_validation->run() !== FALSE) {
+            $admin_id = $this->input->post('adminId');
+            $password = $this->input->post('password');
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+            $result = $this->admin->password_update($admin_id, $hashedPassword);
+
+            if ($result === true) {
+                $msg['status'] = 1;
+                $msg['msg'] = 'Mot de passe changé avec succès';
+            } else {
+                $msg['status'] = 0;
+                $msg['msg'] = 'Un problème est survenu lors du changement du mot de passe';
+            }
+
+        } else {
+            //return all error messages
+            $msg['errors'] = $this->form_validation->error_array();//get an array of all errors
+
+            $msg['msg'] = "Un ou plusieurs champs obligatoires sont vides ou mal remplis";
+            $msg['status'] = 0;
+        }
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($msg));
+    }
 
 }
