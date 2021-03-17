@@ -246,7 +246,17 @@ class Admin extends CI_Model{
     ********************************************************************************************************************************
     ********************************************************************************************************************************
     */
-    
+
+    /**
+     * @param $admin_id
+     * @param $first_name
+     * @param $last_name
+     * @param $email
+     * @param $mobile1
+     * @param $mobile2
+     * @param $role
+     * @return bool
+     */
     public function update($admin_id, $first_name, $last_name, $email, $mobile1, $mobile2, $role){
         $data = ['first_name'=>$first_name, 'last_name'=>$last_name, 'mobile1'=>$mobile1, 'mobile2'=>$mobile2, 'email'=>$email, 
             'role'=>$role];
@@ -273,7 +283,12 @@ class Admin extends CI_Model{
     ********************************************************************************************************************************
     */
 
-    public function password_update($admin_id, $new_password)
+    /**
+     * @param int $admin_id
+     * @param string $new_password
+     * @return bool
+     */
+    public function password_update(int $admin_id, string $new_password): bool
     {
         $data = ['password' => $new_password];
 
