@@ -263,11 +263,11 @@ class Administrators extends CI_Controller
 
     /**
      * Used as a callback while updating admin info to ensure 'email' field does not contain an email already used by another admin
-     * @param type $email
-     * @param type $admin_id
+     * @param string $email
+     * @param int $admin_id
      * @return bool
      */
-    public function crosscheckEmail($email, $admin_id)
+    public function crosscheckEmail(string $email, int $admin_id): bool
     {
         //check db to ensure email was previously used for admin with $admin_id i.e. the same admin we're updating his details
         $adminWithEmail = $this->genmod->getTableCol('admin', 'id', 'email', $email);
@@ -281,5 +281,7 @@ class Administrators extends CI_Controller
             return FALSE;
         }
     }
+
+
 
 }
