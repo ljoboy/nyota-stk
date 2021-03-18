@@ -461,10 +461,10 @@ $("#editPassSubmit").click(function (e) {
             passwordDup: passwordDup
         }
     }).done(function (returnedData) {
-        $("#fMsgPassIcon").attr('class', spinnerClass);
 
         if (returnedData.status === 1) {
             $("#fPassEdit").css('color', 'green').text(returnedData.msg);
+            $("#fMsgEditIcon").removeClass();
 
             setTimeout(function () {
                 $("#fPassEdit").text("");
