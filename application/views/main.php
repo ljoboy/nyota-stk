@@ -91,7 +91,7 @@ defined('BASEPATH') or exit('');
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="<?= base_url() ?>" style="margin-top:-25px;">
-                <img src="<?= base_url() ?>public/images/logo_black.png" alt="logo" class="img-responsive" width="73px">
+                <img src="<?= base_url() ?>public/images/nyotass.png" alt="logo" class="img-responsive" width="73px">
             </a>
         </div>
 
@@ -225,6 +225,7 @@ defined('BASEPATH') or exit('');
                 </li>
 
                 <?php if ($this->session->admin_role === "Super"): ?>
+
                     <li class="<?= $pageTitle == 'Articles' ? 'active' : '' ?>">
                         <a href="<?= site_url('items') ?>">
                             <i class="fa fa-shopping-cart"></i>
@@ -342,8 +343,8 @@ defined('BASEPATH') or exit('');
                 <form name="logInModalForm">
                     <div class="row">
                         <div class="col-sm-12 form-group">
-                            <label for='logInModalEmail' class="control-label">E-mail</label>
-                            <input type="email" id='logInModalEmail' class="form-control checkField"
+                            <label for='logInModalEmail' class="control-label">E-mail ou Phone</label>
+                            <input type="text" id='logInModalEmail' class="form-control checkField"
                                    autocomplete="username email" placeholder="E-mail" autofocus>
                             <span class="help-block errMsg" id="logInModalEmailErr"></span>
                         </div>

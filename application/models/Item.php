@@ -39,16 +39,17 @@ class Item extends CI_Model
 
     /**
      *
-     * @param type $itemName
-     * @param type $itemQuantity
-     * @param type $itemPrice
-     * @param type $itemDescription
-     * @param type $itemCode
+     * @param string $itemName
+     * @param float $itemQuantity
+     * @param float $itemPrice
+     * @param string $itemDescription
+     * @param int $itemCode
+     * @param int $stockMin
      * @return boolean
      */
-    public function add($itemName, $itemQuantity, $itemPrice, $itemDescription, $itemCode)
+    public function add($itemName, $itemQuantity, $itemPrice, $itemDescription, $itemCode, $stockMin)
     {
-        $data = ['name' => $itemName, 'quantity' => $itemQuantity, 'unitPrice' => $itemPrice, 'description' => $itemDescription, 'code' => $itemCode];
+        $data = ['name' => $itemName, 'quantity' => $itemQuantity, 'unitPrice' => $itemPrice, 'description' => $itemDescription, 'code' => $itemCode, 'min' => $stockMin];
 
         //set the datetime based on the db driver in use
         $this->db->platform() == "sqlite3"
@@ -200,14 +201,15 @@ class Item extends CI_Model
 
     /**
      *
-     * @param type $itemId
-     * @param type $itemName
-     * @param type $itemDesc
-     * @param type $itemPrice
+     * @param int $itemId
+     * @param string $itemName
+     * @param string $itemDesc
+     * @param float $itemPrice
+     * @param int $stockMin
      */
-    public function edit($itemId, $itemName, $itemDesc, $itemPrice)
+    public function edit($itemId, $itemName, $itemDesc, $itemPrice, $stockMin)
     {
-        $data = ['name' => $itemName, 'unitPrice' => $itemPrice, 'description' => $itemDesc];
+        $data = ['name' => $itemName, 'unitPrice' => $itemPrice, 'description' => $itemDesc, 'min' => $stockMin];
 
         $this->db->where('id', $itemId);
         $this->db->update('items', $data);
@@ -285,7 +287,7 @@ class Item extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->where('quantity <= 25');
+        $this->db->where('quantity <= min');
 
         $run_q = $this->db->get('items');
 

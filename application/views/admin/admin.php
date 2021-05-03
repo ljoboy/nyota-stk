@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('');
+defined('BASEPATH') or exit('');
 ?>
 
 <div class="row hidden-print">
@@ -8,7 +8,8 @@ defined('BASEPATH') OR exit('');
             <!-- Header (add new admin, sort order etc.) -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="col-sm-2 fa fa-user-plus pointer" style="color:#f6b618" data-target='#addNewAdminModal' data-toggle='modal'>
+                    <div class="col-sm-2 fa fa-user-plus pointer" style="color:#f6b618" data-target='#addNewAdminModal'
+                         data-toggle='modal'>
                         Nouvel Admin
                     </div>
                     <div class="col-sm-3 form-inline form-group-sm">
@@ -42,10 +43,10 @@ defined('BASEPATH') OR exit('');
                     </div>
                 </div>
             </div>
-            
+
             <hr>
             <!-- Header (sort order etc.) ends -->
-            
+
             <!-- Admin list -->
             <div class="row">
                 <div class="col-sm-12" id="allAdmin"></div>
@@ -77,12 +78,13 @@ defined('BASEPATH') OR exit('');
                         </div>
                         <div class="form-group-sm col-sm-6">
                             <label for='lastName' class="control-label">Nom et Postnom</label>
-                            <input type="text" id='lastName' class="form-control checkField" placeholder="Nom et Postnom">
+                            <input type="text" id='lastName' class="form-control checkField"
+                                   placeholder="Nom et Postnom">
                             <span class="help-block errMsg" id="lastNameErr"></span>
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="row">
                         <div class="form-group-sm col-sm-6">
                             <label for='email' class="control-label">Email</label>
@@ -99,11 +101,12 @@ defined('BASEPATH') OR exit('');
                             <span class="help-block errMsg" id="roleErr"></span>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="form-group-sm col-sm-6">
                             <label for='mobile1' class="control-label">Numéro de téléphone</label>
-                            <input type="tel" id='mobile1' class="form-control checkField" placeholder="Numéro de téléphone">
+                            <input type="tel" id='mobile1' class="form-control checkField"
+                                   placeholder="Numéro de téléphone">
                             <span class="help-block errMsg" id="mobile1Err"></span>
                         </div>
                         <div class="form-group-sm col-sm-6">
@@ -112,16 +115,18 @@ defined('BASEPATH') OR exit('');
                             <span class="help-block errMsg" id="mobile2Err"></span>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="form-group-sm col-sm-6">
                             <label for="passwordOrig" class="control-label">Mot de passe :</label>
-                            <input type="password" class="form-control checkField" id="passwordOrig" placeholder="Mot de passe">
+                            <input type="password" class="form-control checkField" id="passwordOrig"
+                                   placeholder="Mot de passe">
                             <span class="help-block errMsg" id="passwordOrigErr"></span>
                         </div>
                         <div class="form-group-sm col-sm-6">
                             <label for="passwordDup" class="control-label">Retapez le mot de passe :</label>
-                            <input type="password" class="form-control checkField" id="passwordDup" placeholder="Retapez le mot de passe">
+                            <input type="password" class="form-control checkField" id="passwordDup"
+                                   placeholder="Retapez le mot de passe">
                             <span class="help-block errMsg" id="passwordDupErr"></span>
                         </div>
                     </div>
@@ -137,6 +142,44 @@ defined('BASEPATH') OR exit('');
 </div>
 <!--- end of modal to add new admin --->
 
+<div class="modal fade" id="editPassModal" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss='modal'>&times;</button>
+                <h4 class="text-center">Modifier le mot de passe</h4>
+                <div class="text-center">
+                    <i id="fMsgPassIcon"></i>
+                    <span id="fPassEdit"></span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form  id='editPassForm' name='editPassForm' role='form'>
+                    <input type="hidden" id="adminPassId" />
+                    <div class="row">
+                        <div class="form-group-sm col-sm-6">
+                            <label for="passwordChng" class="control-label">Mot de passe :</label>
+                            <input type="password" class="form-control checkField" id="passwordChng"
+                                   placeholder="Mot de passe">
+                            <span class="help-block errMsg" id="passwordChngErr"></span>
+                        </div>
+                        <div class="form-group-sm col-sm-6">
+                            <label for="passwordChngDup" class="control-label">Retapez le mot de passe :</label>
+                            <input type="password" class="form-control checkField" id="passwordChngDup"
+                                   placeholder="Retapez le mot de passe">
+                            <span class="help-block errMsg" id="passwordChngDupErr"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" form="editPassForm" class="btn btn-warning pull-left">Réinitialiser</button>
+                <button type='button' id='editPassSubmit' class="btn btn-primary">Modifier</button>
+                <button type='button' class="btn btn-danger" data-dismiss='modal'>fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--- Modal for editing admin details --->
 <div class='modal fade' id='editAdminModal' role="dialog" data-backdrop="static">
@@ -160,11 +203,12 @@ defined('BASEPATH') OR exit('');
                         </div>
                         <div class="form-group-sm col-sm-6">
                             <label for='lastNameEdit' class="control-label">Nom et Postnom</label>
-                            <input type="text" id='lastNameEdit' class="form-control checkField" placeholder="Nom et Postnom">
+                            <input type="text" id='lastNameEdit' class="form-control checkField"
+                                   placeholder="Nom et Postnom">
                             <span class="help-block errMsg" id="lastNameEditErr"></span>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="form-group-sm col-sm-6">
                             <label for='emailEdit' class="control-label">Email</label>
@@ -181,7 +225,7 @@ defined('BASEPATH') OR exit('');
                             <span class="help-block errMsg" id="roleEditErr"></span>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="form-group-sm col-sm-6">
                             <label for='mobile1Edit' class="control-label">Téléphone</label>
@@ -190,11 +234,12 @@ defined('BASEPATH') OR exit('');
                         </div>
                         <div class="form-group-sm col-sm-6">
                             <label for='mobile2Edit' class="control-label">Autres numéro</label>
-                            <input type="tel" id='mobile2Edit' class="form-control" placeholder="Autres numéro (optionel)">
+                            <input type="tel" id='mobile2Edit' class="form-control"
+                                   placeholder="Autres numéro (optionel)">
                             <span class="help-block errMsg" id="mobile2EditErr"></span>
                         </div>
                     </div>
-                    
+
                     <input type="hidden" id="adminId">
                 </form>
             </div>
@@ -207,4 +252,4 @@ defined('BASEPATH') OR exit('');
     </div>
 </div>
 <!--- end of modal to edit admin details --->
-<script src="<?=base_url()?>public/js/admin.js"></script>
+<script src="<?= base_url() ?>public/js/admin.js"></script>

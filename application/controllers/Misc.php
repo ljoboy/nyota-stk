@@ -61,24 +61,28 @@ class Misc extends CI_Controller
     /**
      * Save locally and remotely the database
      *
-     * @return false|string
      */
     public function dldb()
     {
+        $data = [];
         $this->genlib->checkLogin();
 
         $this->genlib->superOnly();
 
-        $prefs = array(
-            'ignore' => array('backups'), // List of tables to omit from the backup
+        $prefs = array('ignore' => array('backups'), // List of tables to omit from the backup
             'format' => 'txt',                       // gzip, zip, txt
-            'filename' => 'stk_' . date('Y-M-d_') . time() . '.sql', // File name - NEEDED ONLY WITH ZIP FILES
+            'filename' => 'nyota_' . date('Y-M-d_') . time() . '.sql', // File name - NEEDED ONLY WITH ZIP FILES
             'add_drop' => TRUE, // Whether to add DROP TABLE statements to backup file
             'add_insert' => TRUE, // Whether to add INSERT data to backup file
             'newline' => "\n"  // Newline character used in backup file
         );
 
-        $fichier = __DIR__ . '/../../backups/' . $prefs['filename'];
+        $dir = __DIR__ . '/../../backups/';
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $fichier = $dir . $prefs['filename'];
 
         $this->load->dbutil();
 
@@ -91,16 +95,29 @@ class Misc extends CI_Controller
 
 // Load the file helper and write the file to your server
         $this->load->helper('file');
-        write_file($fichier, $backup);
+        $write = write_file($fichier, $backup);
 
         $result = $this->backupModel->create($prefs['filename'], realpath($fichier));
 
         $online_res = false;
         if ($result === true) {
             $online_res = $this->save_online();
+            $data['online_msg'] = $online_res ? "Base des données sauvegardée en ligne" : "La base des données n'a pas été sauvegardé en ligne";
         }
 
-        return json_encode(['success' => $online_res]);
+        if (is_dir($dir) && file_exists($fichier) && $write && $result) {
+            $data['msg'] = "Base des données sauvegardée avec succès";
+            $data['status'] = 1;
+        } else {
+            $msg = "Un problème est survénu lors ";
+            $data['msg'] .= !is_dir($dir) ? "$msg de la création du dossier <br/>" : "";
+            $data['msg'] .= !file_exists($fichier) ? "$msg de la crétaion du projet <br/> " : "";
+            $data['msg'] .= !$write ? "$msg de l'écriture dans le fichier <br/>" : "";
+            $data['msg'] .= !$result ? "$msg lors de l'enregistrement dans la base des données" : "";
+            $data['status'] = 0;
+        }
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
     }
 
 
@@ -113,11 +130,17 @@ class Misc extends CI_Controller
 
         $this->genlib->superOnly();
 
-        $config['upload_path'] = BASEPATH . "../backups/restores";//db files are stored in the basepath
+        $dir = __DIR__ . '/../../backups/restores/';
+
+        $config['upload_path'] = $dir;//db files are stored in the basepath
         $config['allowed_types'] = 'sql';
         $config['file_ext_tolower'] = TRUE;
         $config['max_size'] = 200000;//in kb
         $config['overwrite'] = TRUE;//overwrite the previous file
+
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
 
         $this->load->library('upload', $config);//load CI's 'upload' library
 
@@ -127,6 +150,7 @@ class Misc extends CI_Controller
             $json['msg'] = $this->upload->display_errors();
             $json['status'] = 0;
         } else {
+            $json['msg'] = "Base des données récupérée avec succès";
             $json['status'] = 1;
         }
 
@@ -141,10 +165,25 @@ class Misc extends CI_Controller
 
     private function dbup($file_path)
     {
+        //increase execution time
+        if (function_exists("set_time_limit") === true && @ini_get("safe_mode") == 0) {
+            @set_time_limit(60*10);
+        }
+
         $isi_file = file_get_contents(BASEPATH . "../backups/restores/" . $file_path);
         $queries = explode(";", rtrim($isi_file, "\n;"));
+        $isComment = false;
+
         foreach ($queries as $query) {
-            $this->db->query($query);
+            $start = substr(trim($query), 0, 2);
+
+            if ($start === '/*') {
+                $isComment = true;
+            } else if ($start === '*/') {
+                $isComment = false;
+            } else if ($start !== '--' && $start !== '//' && $query !== '' && $query[0] !== '#' && $isComment === false)  {
+                $this->db->query($query);
+            }
         }
     }
 
@@ -158,22 +197,17 @@ class Misc extends CI_Controller
         foreach ($backups as $backup) {
             $res = false;
             $file = $backup->file_url;
-            $data = array(
-                "file" => new CURLFile($file),
-                "data" => '{"foldername":"stk"}'
-            );
+            $data = array("file" => new CURLFile($file), "data" => '{"foldername":"nyota"}');
             $handle = curl_init();
             curl_setopt($handle, CURLOPT_URL, 'https://backups.zxconnect.org/');
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($handle, CURLOPT_HTTPHEADER, array(
-                'Content-type: multipart/form-data;',
-            ));
+            curl_setopt($handle, CURLOPT_HTTPHEADER, array('Content-type: multipart/form-data;',));
             curl_setopt($handle, CURLOPT_POSTFIELDS, $data);
             $final = curl_exec($handle);
             $result = json_decode($final);
-            if ($result->success === 1){
+            if ($result->success === 1) {
                 $this->backupModel->updateOnlineStatus($backup->id);
                 $res = true;
             }

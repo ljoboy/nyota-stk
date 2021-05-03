@@ -85,8 +85,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="form-bottom">
                         <form id="loginForm" autocomplete="off">
                             <div class="form-group">
-                                <label class="sr-only" for="email">E-mail</label>
-                                <input aria-autocomplete="none" type="email" autocomplete="username email" placeholder="Email"
+                                <label class="sr-only" for="email">E-mail ou Phone</label>
+                                <input aria-autocomplete="none" type="text" autocomplete="username email" placeholder="Email"
                                        class="form-control checkField" id="email">
                             </div>
                             <div class="form-group">

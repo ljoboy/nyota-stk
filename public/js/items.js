@@ -91,7 +91,7 @@ $(document).ready(function () {
     $("#addNewItem").click(function (e) {
         e.preventDefault();
 
-        changeInnerHTML(['itemNameErr', 'itemQuantityErr', 'itemCategoriesErr', 'itemPriceErr', 'itemCodeErr', 'addCustErrMsg'], "");
+        changeInnerHTML(['itemNameErr', 'itemQuantityErr', 'itemCategoriesErr', 'itemPriceErr', 'itemCodeErr', 'addCustErrMsg', 'stockMinErr'], "");
 
         var itemName = $("#itemName").val();
         var itemQuantity = $("#itemQuantity").val();
@@ -99,15 +99,17 @@ $(document).ready(function () {
         var itemPrice = $("#itemPrice").val().replace(",", "");
         var itemCode = $("#itemCode").val();
         var itemDescription = $("#itemDescription").val();
+        var stockMin = $("#itemStockMin").val();
 
-        if (!itemName || !itemQuantity || !itemPrice || !itemCode || !itemCategories) {
+        if (!itemName || !itemQuantity || !itemPrice || !itemCode || !itemCategories || !stockMin) {
             !itemName ? $("#itemNameErr").text("Champs obligatoire") : "";
             !itemQuantity ? $("#itemQuantityErr").text("Champs obligatoire") : "";
             !itemCategories ? $("#itemCategoriesErr").text("Champs obligatoire") : "";
             !itemPrice ? $("#itemPriceErr").text("Champs obligatoire") : "";
             !itemCode ? $("#itemCodeErr").text("Champs obligatoire") : "";
+            !stockMin ? $("#stockMinErr").text("Champs obligatoire") : "";
 
-            $("#addCustErrMsg").text("Une ou plusieurs champs obligatoires sont vide");
+            $("#addCustErrMsg").text("Un ou plusieurs champs obligatoires sont vides");
 
             return;
         }
@@ -123,7 +125,8 @@ $(document).ready(function () {
                 itemCategories: itemCategories,
                 itemPrice: itemPrice,
                 itemDescription: itemDescription,
-                itemCode: itemCode
+                itemCode: itemCode,
+                stockMin: stockMin
             },
 
             success: function (returnedData) {
@@ -145,13 +148,14 @@ $(document).ready(function () {
                     $("#itemCategoriesErr").text(returnedData.itemCategories);
                     $("#itemCodeErr").text(returnedData.itemCode);
                     $("#itemQuantityErr").text(returnedData.itemQuantity);
+                    $("#stockMinErr").text(returnedData.min);
                     $("#addCustErrMsg").text(returnedData.msg);
                 }
             },
 
             error: function () {
                 if (!navigator.onLine) {
-                    changeFlashMsgContent("Vous semblez ëtre hors ligne. Reconnectez-vous à internet puis réessayer svp !", "", "red", "");
+                    changeFlashMsgContent("Vous semblez être hors ligne. Reconnectez-vous à internet puis réessayer svp !", "", "red", "");
                 } else {
                     changeFlashMsgContent("Impossible de répondre à votre requête à cet instant. Réessayez plus tard svp !", "", "red", "");
                 }
@@ -213,6 +217,7 @@ $(document).ready(function () {
         var itemName = $("#itemName-" + itemId).html();
         var itemPrice = $("#itemPrice-" + itemId).html().split(".")[0].replace(",", "");
         var itemCode = $("#itemCode-" + itemId).html();
+        var stockMin = $("#itemStockMin-" + itemId).html();
 
         //prefill form with info
         $("#itemIdEdit").val(itemId);
@@ -220,12 +225,14 @@ $(document).ready(function () {
         $("#itemCodeEdit").val(itemCode);
         $("#itemPriceEdit").val(itemPrice);
         $("#itemDescriptionEdit").val(itemDesc);
+        $("#stockMinEdit").val(stockMin);
 
         //remove all error messages that might exist
         $("#editItemFMsg").html("");
         $("#itemNameEditErr").html("");
         $("#itemCodeEditErr").html("");
         $("#itemPriceEditErr").html("");
+        $("#stockMinErr").html("");
 
         //launch modal
         $("#editItemModal").modal('show');
@@ -244,6 +251,7 @@ $(document).ready(function () {
         var itemDesc = $("#itemDescriptionEdit").val();
         var itemId = $("#itemIdEdit").val();
         var itemCode = $("#itemCodeEdit").val();
+        var stockMin = $("#stockMinEdit").val();
 
         if (!itemName || !itemPrice || !itemId || !itemCategories) {
             !itemName ? $("#itemNameEditErr").html("Le nom de l'article ne peut être vide") : "";
@@ -264,7 +272,8 @@ $(document).ready(function () {
                 itemCategories: itemCategories,
                 itemDesc: itemDesc,
                 _iId: itemId,
-                itemCode: itemCode
+                itemCode: itemCode,
+                stockMin: stockMin
             }
         }).done(function (returnedData) {
             if (returnedData.status === 1) {
@@ -278,12 +287,13 @@ $(document).ready(function () {
             }
 
             else{
-                $("#editItemFMsg").css('color', 'red').html("Une ou plusieurs champs obligatoires sont vide ou mal remplis");
+                $("#editItemFMsg").css('color', 'red').html("Un ou plusieurs champs obligatoires sont vide ou mal remplis");
 
                 $("#itemNameEditErr").html(returnedData.itemName);
                 $("#itemCodeEditErr").html(returnedData.itemCode);
                 $("#itemCategoriesEditErr").html(returnedData.itemCategories);
                 $("#itemPriceEditErr").html(returnedData.itemPrice);
+                $("#stockUpdateMinErr").html(returnedData.min);
             }
         }).fail(function () {
             $("#editItemFMsg").css('color', 'red').html("Vous semblez ëtre hors ligne. Reconnectez-vous à internet puis réessayer svp !");
@@ -304,11 +314,13 @@ $(document).ready(function () {
         var itemName = $("#itemName-" + itemId).html();
         var itemCurQuantity = $("#itemQuantity-" + itemId).html();
         var itemCode = $("#itemCode-" + itemId).html();
+        var itemStockMin = $("stockMin" + itemId).html();
 
         $("#stockUpdateItemId").val(itemId);
         $("#stockUpdateItemName").val(itemName);
         $("#stockUpdateItemCode").val(itemCode);
         $("#stockUpdateItemQInStock").val(itemCurQuantity);
+        $("#stockUpdateMin").val(itemStockMin);
 
         $("#updateStockModal").modal('show');
     });
