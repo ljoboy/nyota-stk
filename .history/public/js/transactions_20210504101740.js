@@ -1020,7 +1020,7 @@ function getVatAmount(cumAmount) {
 function getDiscountAmount(cumAmount) {
     //update cumAmount by subtracting discount amount from it
     let discountPercentage = $("#discount").val();//get discount percentage
-    discountPercentage = discountPercentage ?? 0;
+
     //calculate the discount amount
     let discountAmount = parseFloat((discountPercentage / 100) * cumAmount);
 

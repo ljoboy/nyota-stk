@@ -764,6 +764,8 @@ function ceipacp() {
             //add current item's total price to the cumulative amount
             cumulativePrice += itemTotalPrice;
 
+            console.log(cumulativePrice);
+
             //set the total amount before any addition or dedcution
             cumTotalWithoutVATAndDiscount = cumulativePrice;
         }
