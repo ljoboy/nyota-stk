@@ -7,8 +7,6 @@ class Items extends CI_Controller{
         parent::__construct();
         
         $this->genlib->checkLogin();
-
-        $this->genlib->superOnly();
         
         $this->load->model(['item']);
 
@@ -88,6 +86,8 @@ class Items extends CI_Controller{
     
     public function add(){
         $this->genlib->ajaxOnly();
+        
+        $this->genlib->superOnly();
         
         $this->load->library('form_validation');
 
@@ -211,6 +211,8 @@ class Items extends CI_Controller{
     
     public function updatestock(){
         $this->genlib->ajaxOnly();
+
+        $this->genlib->superOnly();
         
         $this->load->library('form_validation');
 
@@ -278,6 +280,8 @@ class Items extends CI_Controller{
    
     public function edit(){
         $this->genlib->ajaxOnly();
+
+        $this->genlib->superOnly();
         
         $this->load->library('form_validation');
 
@@ -391,6 +395,8 @@ class Items extends CI_Controller{
     
     public function delete(){
         $this->genlib->ajaxOnly();
+
+        $this->genlib->superOnly();
         
         $json['status'] = 0;
         $item_id = $this->input->post('i', TRUE);

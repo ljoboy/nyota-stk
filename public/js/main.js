@@ -1,6 +1,6 @@
 'use strict';
 
-var appRoot = setAppRoot("", "");
+var appRoot = setAppRoot("stk", "stk");
 var spinnerClass = 'fa fa-spinner faa-spin animated';
 
 // To style only selects with the my-select class
