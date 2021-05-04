@@ -8,10 +8,10 @@ defined('BASEPATH') or exit('');
             <div class="col-xs-12 text-center text-uppercase">
                 <div style="margin-bottom:5px;"><img src="<?= base_url() ?>public/images/receipt_logo.png" alt="logo"
                                                      class="img-responsive center-block" width="60px"></div>
-                <h1>STK Management</h1>
-                <b>ID.NAT.: 441/84/EN/H.KAT 2018 <br/> RCCM: 17 A 0000 </b><br/>
-                <small>4, Av. Nyunzu Q/Roi Baudoin</small>
-                <div>Tél . : +243 000 000 000</div>
+                <h1>ETS NYOTA PLUS</h1>
+                <b>ID-NAT PROV: 441/128/EN/H-KAT/2020 <br/> RCCM: 17-A-5957</b><br/>
+                <small>05, Av. Cassitérite Q/MAKUTANO</small>
+                <div>Tél . : +243 820 230 699, +243 850 503 864</div>
             </div>
         </div>
         <hr style='margin-top:5px; margin-bottom:0'>
