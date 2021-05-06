@@ -322,7 +322,7 @@ defined('BASEPATH') or exit('');
                 <button class="close" data-dismiss='modal'>&times;</button>
                 <h4 class="text-center">Reçu de transaction</h4>
             </div>
-            <div class="modal-body" id='transReceipt'></div>
+            <div class="modal-body" id='transReceipt' style="height: 80vh; overflow-y:auto;"></div>
         </div>
     </div>
 </div>
