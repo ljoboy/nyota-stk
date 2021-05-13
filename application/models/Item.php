@@ -77,16 +77,20 @@ class Item extends CI_Model
 
     /**
      *
-     * @param type $value
+     * @param string $value
      * @return boolean
      */
-    public function itemsearch($value)
+    public function itemsearch(string $value)
     {
-        $q = "SELECT * FROM items 
+        $q = "SELECT it.*, c.* FROM items it
+            join item_category ic on it.id = ic.id_item
+            join categories c on c.id = ic.id_category
             WHERE 
-            name LIKE '%" . $this->db->escape_like_str($value) . "%'
+            it.name LIKE '%" . $this->db->escape_like_str($value) . "%'
             || 
-            code LIKE '%" . $this->db->escape_like_str($value) . "%'";
+            it.code LIKE '%" . $this->db->escape_like_str($value) . "%'
+            || 
+            c.nom LIKE '%" . $this->db->escape_like_str($value) . "%'";
 
         $run_q = $this->db->query($q, [$value, $value]);
 
