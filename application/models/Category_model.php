@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') or exit('');
 
 class Category_model extends CI_Model
@@ -17,14 +18,14 @@ class Category_model extends CI_Model
     {
         $data = ['nom' => $name, 'description' => $description];
 
-        $this->db->set('created_on', "NOW()", FALSE);
+        $this->db->set('created_on', "NOW()", false);
 
         $this->db->insert('categories', $data);
 
         if ($this->db->affected_rows() > 0) {
             return $this->db->insert_id();
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -50,7 +51,7 @@ class Category_model extends CI_Model
         if ($this->db->affected_rows() > 0) {
             return $this->db->insert_id();
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -116,7 +117,7 @@ class Category_model extends CI_Model
         $this->db->where('id', $categoryId);
         $this->db->update('categories', $data);
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -137,7 +138,7 @@ class Category_model extends CI_Model
         if ($run_q->num_rows() > 0) {
             return $run_q->result();
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -145,10 +146,10 @@ class Category_model extends CI_Model
      * @param string $orderBy
      * @param string $orderFormat
      * @param int $start
-     * @param null $limit
-     * @return false
+     * @param string|null $limit
+     * @return mixed
      */
-    public function getAllItemCategories($orderBy = "created_on", $orderFormat = "ASC", $start = 0, $limit = null)
+    public function getAllItemCategories(string $orderBy = "created_on", string $orderFormat = "ASC", int $start = 0, string $limit = null)
     {
         $this->db->select('*');
         $this->db->limit($limit, $start);
@@ -161,7 +162,7 @@ class Category_model extends CI_Model
         if ($run_q->num_rows() > 0) {
             return $run_q->result();
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -186,7 +187,7 @@ class Category_model extends CI_Model
         if ($run_q->num_rows() > 0) {
             return $run_q->result();
         } else {
-            return FALSE;
+            return false;
         }
     }
 
