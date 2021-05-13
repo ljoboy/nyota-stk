@@ -67,7 +67,7 @@ class Genmod extends CI_Model
                 return $get->$selColName;
             }
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -82,14 +82,14 @@ class Genmod extends CI_Model
 
     /**
      *
-     * @param type $event
-     * @param type $eventRowIdOrRef
-     * @param type $eventDesc
-     * @param type $eventTable
-     * @param type $staffId
+     * @param string $event
+     * @param string $eventRowIdOrRef
+     * @param string $eventDesc
+     * @param string $eventTable
+     * @param int $staffId
      * @return boolean
      */
-    public function addevent($event, $eventRowIdOrRef, $eventDesc, $eventTable, $staffId)
+    public function addevent(string $event, string $eventRowIdOrRef, string $eventDesc, string $eventTable, int $staffId): bool
     {
         $data = ['event' => $event, 'eventRowIdOrRef' => $eventRowIdOrRef, 'eventDesc' => $eventDesc, 'eventTable' => $eventTable, 'staffInCharge' => $staffId];
 
@@ -115,7 +115,7 @@ class Genmod extends CI_Model
      * @param int $admin_id
      * @return boolean
      */
-    public function get_admin_name($admin_id)
+    public function get_admin_name(int $admin_id)
     {
         $q = "SELECT CONCAT_WS(' ', first_name, last_name) as 'name' FROM admin WHERE id = ?";
 
