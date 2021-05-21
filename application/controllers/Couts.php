@@ -199,6 +199,8 @@ class Couts extends CI_Controller
      */
     public function excel()
     {
+
+//        var_dump($this->couts_model->get_all());die;
         $this->load->helper('exportexcel');
         $namaFile = "couts.xls";
         $judul = "couts";
@@ -212,7 +214,7 @@ class Couts extends CI_Controller
         header("Content-Type: application/force-download");
         header("Content-Type: application/octet-stream");
         header("Content-Type: application/download");
-        header("Content-Disposition: attachment;filename=" . $namaFile . "");
+        header("Content-Disposition: attachment;filename=" . $namaFile);
         header("Content-Transfer-Encoding: binary ");
 
         xlsBOF();
@@ -225,22 +227,22 @@ class Couts extends CI_Controller
         xlsWriteLabel($tablehead, $kolomhead++, "Date Sortie");
         xlsWriteLabel($tablehead, $kolomhead++, "Staff");
         xlsWriteLabel($tablehead, $kolomhead++, "Creer le");
-        xlsWriteLabel($tablehead, $kolomhead++, "Modifié le");
+        xlsWriteLabel($tablehead, $kolomhead++, "Modifie le");
         xlsWriteLabel($tablehead, $kolomhead++, "Effacer ?");
 
-        foreach ($this->couts_model->get_all() as $data) {
+        foreach ($this->couts_model->getAll() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-            xlsWriteLabel($tablebody, $kolombody++, $data->montant);
+            xlsWriteLabel($tablebody, $kolombody++, (string) $data->montant);
             xlsWriteLabel($tablebody, $kolombody++, $data->motif);
             xlsWriteLabel($tablebody, $kolombody++, $data->author);
             xlsWriteLabel($tablebody, $kolombody++, $data->date_sortie);
-            xlsWriteLabel($tablebody, $kolombody++, $data->staffId);
+            xlsWriteLabel($tablebody, $kolombody++, $data->staffName);
             xlsWriteLabel($tablebody, $kolombody++, $data->created_on);
             xlsWriteLabel($tablebody, $kolombody++, $data->lastUpdate);
-            xlsWriteNumber($tablebody, $kolombody++, ($data->deleted == 1) ? 'oui' : 'non');
+            xlsWriteLabel($tablebody, $kolombody++, ($data->deleted == 1) ? 'oui' : 'non');
 
             $tablebody++;
             $nourut++;
