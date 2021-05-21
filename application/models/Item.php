@@ -80,9 +80,9 @@ class Item extends CI_Model
      * @param string $value
      * @return boolean
      */
-    public function itemsearch(string $value)
+    public function itemsearch(string $value, $orderBy, $orderFormat, $start = 0, $limit = '')
     {
-        $q = "SELECT it.*, c.* FROM items it
+        $q = "SELECT it.* FROM items it
             join item_category ic on it.id = ic.id_item
             join categories c on c.id = ic.id_category
             WHERE 
@@ -90,11 +90,13 @@ class Item extends CI_Model
             || 
             it.code LIKE '%" . $this->db->escape_like_str($value) . "%'
             || 
-            c.nom LIKE '%" . $this->db->escape_like_str($value) . "%'";
+            c.nom LIKE '%" . $this->db->escape_like_str($value) . "%'
+            GROUP BY it.name";
 
         $run_q = $this->db->query($q, [$value, $value]);
 
         if ($run_q->num_rows() > 0) {
+//            var_dump($run_q->result());die;
             return $run_q->result();
         } else {
             return FALSE;
