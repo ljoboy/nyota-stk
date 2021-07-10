@@ -458,6 +458,10 @@ $(document).ready(function () {
                             //refresh the transaction list table
                             latr_();
 
+                            setTimeout(function () {
+                                $("#transReceiptModal").modal('hide');
+                            }, 5000);
+
                             //update total earned today
                             $("#totalEarnedToday").html(returnedData.totalEarnedToday);
 

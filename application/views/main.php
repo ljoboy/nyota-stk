@@ -155,6 +155,13 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
+                    <li class="<?= $pageTitle == 'Approvisionnements' ? 'active' : '' ?>">
+                        <a href="<?= site_url('eventlog/approvisionnement') ?>">
+                            <i class="fa fa-refresh"></i>
+                            Approvisionnements
+                        </a>
+                    </li>
+
                     <li class="<?= $pageTitle == 'Administrateurs' ? 'active' : '' ?>">
                         <a href="<?= site_url('administrators') ?>">
                             <i class="fa fa-user"></i>
@@ -263,6 +270,13 @@ defined('BASEPATH') or exit('');
                         <a href="<?= site_url('couts') ?>">
                             <i class="fa fa-money"></i>
                             Dépenses
+                        </a>
+                    </li>
+
+                    <li class="<?= $pageTitle == 'Approvisionnements' ? 'active' : '' ?>">
+                        <a href="<?= site_url('eventlog/approvisionnement') ?>">
+                            <i class="fa fa-refresh"></i>
+                            Approvisionnements
                         </a>
                     </li>
 

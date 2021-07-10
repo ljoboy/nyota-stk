@@ -81,7 +81,7 @@ class Home extends CI_Controller
                 $admin_info = $this->admin->get_admin_info($givenEmail);
 
                 if ($admin_info) {
-                    $admin_id = $get->id;
+//                    $admin_id = $get->id;
 
                     $_SESSION['admin_id'] = $admin_info->id;
                     $_SESSION['admin_email'] = $admin_info->email;

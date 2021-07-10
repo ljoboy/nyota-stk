@@ -327,7 +327,7 @@ $(document).ready(function(){
 function laad_(url){
     var orderBy = $("#coutsListSortBy").val().split("-")[0];
     var orderFormat = $("#coutsListSortBy").val().split("-")[1];
-    var limit = $("#coutsListPerPages").val();
+    var limit = $("#coutsListPerPage").val();
     
     $.ajax({
         type:'get',

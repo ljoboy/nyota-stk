@@ -6,6 +6,7 @@ body {
     color: #888;
     line-height: 30px;
     text-align: center;
+    padding-right: 0 !important;
 }
 
 strong { font-weight: 500; }

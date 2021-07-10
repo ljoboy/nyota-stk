@@ -29,12 +29,12 @@ class Eventlog_Model extends CI_Model
 
     public function approvisionnement($orderBy, $orderFormat, $start = 0, $limit = ''): ?array
     {
-        $this->db->select('eventlog.event, eventlog.eventDesc, eventlog.eventTime, CONCAT("", admin.first_name, admin.last_name, admin.mobile1) as author, items.name, items.code, items.description');
+        $this->db->join('items', 'eventlog.eventRowIdOrRef = items.id', 'LEFT');
+        $this->db->join('admin', 'eventlog.staffInCharge = admin.id', 'LEFT');
+        $this->db->select('eventlog.event, eventlog.eventDesc, eventlog.eventTime, CONCAT_WS(" ", admin.first_name, admin.last_name, admin.mobile1) as author, items.name, items.code, items.description');
 
         $this->db->limit($limit, $start);
         $this->db->order_by('eventlog.' . $orderBy, $orderFormat);
-        $this->db->join('items', 'eventlog.eventRowIdOrRef = items.id', 'LEFT');
-        $this->db->join('admin', 'eventlog.staffInCharge = admin.id', 'LEFT');
 
         $this->db->like('event', 'Mise à jour du stock');
         $run_q = $this->db->get('eventlog');
@@ -48,7 +48,7 @@ class Eventlog_Model extends CI_Model
 
     public function count_approvisionnement(): int
     {
-        $this->db->select('eventlog.event, eventlog.eventDesc, eventlog.eventTime, admin.first_name, admin.last_name, admin.mobile1, items.name, items.code, items.description');
+        $this->db->select('*');
 
         $this->db->like('event', 'Mise à jour du stock');
         $run_q = $this->db->get('eventlog');
