@@ -78,7 +78,7 @@ $db['mysql'] = array(
 	'dsn'	=> 'mysql:hostname=localhost; dbname=db_stk',
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => '',
+	'password' => 'toor',
 	'database' => 'db_stk',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

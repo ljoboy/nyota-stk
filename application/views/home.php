@@ -87,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="form-group">
                                 <label class="sr-only" for="email">E-mail ou Phone</label>
                                 <input aria-autocomplete="none" type="text" autocomplete="username email" placeholder="Email"
-                                       class="form-control checkField" id="email">
+                                       class="form-control checkField login" id="email">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="password">Mot de passe</label>
@@ -102,8 +102,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <div class="row">
                 <div class="col-sm-12 text-center" style="color:white; margin-top: 30px;">
-                    Designed and Developed by <a href="https://zxconnect.org/" target='_blank' class="text-primary">ZX
-                        CONNECT sarl</a> (2020)
+                    Designed and Developed by <a href="https://novictech.com/" target='_blank' class="text-primary">Novic Tech sarl</a> (2022)
                 </div>
             </div>
         </div>

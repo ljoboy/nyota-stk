@@ -199,7 +199,7 @@ class Misc extends CI_Controller
             $file = $backup->file_url;
             $data = array("file" => new CURLFile($file), "data" => '{"foldername":"nyota"}');
             $handle = curl_init();
-            curl_setopt($handle, CURLOPT_URL, 'https://backups.zxconnect.org/');
+            curl_setopt($handle, CURLOPT_URL, 'https://backups.novictech.com/');
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);

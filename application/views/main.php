@@ -311,7 +311,7 @@ defined('BASEPATH') or exit('');
 <footer class="container-fluid text-center hidden-print">
     <p>
         <i class="fa fa-copyright"></i>
-        Copyright <a href="https://zxconnect.org/" target='_blank' class="text-primary">ZX CONNECT sarl.</a> (2020)
+        Copyright <a href="https://novictech.com/" target='_blank' class="text-primary">Novic Tech sarl.</a> (2022)
     </p>
 </footer>
 
