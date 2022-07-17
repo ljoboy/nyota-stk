@@ -154,9 +154,11 @@ class Transactions extends CI_Controller
      * @param $amountTendered
      * @param $vatPercentage
      * @param $discount_percentage
+     * @param $ca
+     * @param $pos
      * @return bool
      */
-    private function validateItemsDet($arrOfItemsInfo, $cumAmountFromClient, $amountTendered, $vatPercentage, $discount_percentage, $ca, $pos)
+    private function validateItemsDet($arrOfItemsInfo, $cumAmountFromClient, $amountTendered, $vatPercentage, $discount_percentage, $ca, $pos): bool
     {
         $error = 0;
 
