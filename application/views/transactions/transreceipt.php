@@ -6,12 +6,12 @@ defined('BASEPATH') or exit('');
     <div id="transReceiptToPrint">
         <div class="row">
             <div class="col-xs-12 text-center text-uppercase">
-            <div style="margin-bottom:5px;"><img src="<?= base_url() ?>public/images/nyota.png" alt="logo"
+            <div style="margin-bottom:5px;"><img src="<?= base_url() ?>public/images/receipt_logo.png" alt="logo"
                                                      class="img-responsive center-block" width="60px"></div>
-                <h1>ETS NYOTA PLUS</h1>
-                <b>ID-NAT PROV: 441/128/EN/H-KAT/2020 <br/> RCCM: 17-A-5957</b><br/>
-                <small>05, Av. Cassitérite Q/MAKUTANO</small>
-                <div>Tél . : +243 820 230 699, +243 850 503 864, +243978664614</div>
+                <h1>RESTO-BAR</h1>
+                <b>ID-NAT PROV: XXX/XXX/XX/XXX/XXXX <br/> RCCM: XX-X-XXXX</b><br/>
+                <small>ab, Av. xyz Q/wpq C/klm</small>
+                <div>Tél . : +243 123 456 789 - +243 012 345 678</div>
             </div>
         </div>
         <hr style='margin-top:5px; margin-bottom:0'>
