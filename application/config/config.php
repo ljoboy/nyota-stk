@@ -38,7 +38,7 @@ else if(stristr($host, "localhost") !== FALSE || (stristr($host, "192.168.") !==
 else{
     $allowed = [];
 
-    $config['base_url'] = in_array($host, $allowed) ? $protocol.$host."/stk/" : "http://".$_SERVER['HTTP_HOST']."/";
+    $config['base_url'] = in_array($host, $allowed) ? $protocol.$host."/stk/" : $protocol.$_SERVER['HTTP_HOST']."/";
 }
 
 /*
