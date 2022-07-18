@@ -94,8 +94,8 @@ if (isset($items) && !empty($items)) {
                                             <select class="form-control checkField" id="modeOfPayment">
                                                 <option value="">---</option>
                                                 <option value="Cash">Cash</option>
-                                                <option value="POS">POS</option>
-                                                <option value="Cash and POS">Cash et POS</option>
+                                                <option value="POS">Crédit</option>
+                                                <option value="Cash and POS">Payez une partie</option>
                                             </select>
                                             <span class="help-block errMsg" id="modeOfPaymentErr"></span>
                                         </div>
@@ -115,7 +115,7 @@ if (isset($items) && !empty($items)) {
                                             </div>
 
                                             <div class="cashAndPos hidden">
-                                                <label for="posAmount">POS</label>
+                                                <label for="posAmount">Crédit</label>
                                                 <input type="text" class="form-control" id="posAmount">
                                                 <span class="help-block errMsg"></span>
                                             </div>

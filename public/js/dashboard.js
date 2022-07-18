@@ -135,12 +135,12 @@ function loadPaymentMethodChart(year){
                     value: pos,
                     color: "#557f7c",
                     highlight: "#556f7c",
-                    label: "POS uniquement"
+                    label: "Crédit uniquement"
                   }, {
                     value: cashAndPos,
                     color: "#333",
                     highlight: "pink",
-                    label: "CASH et POS"
+                    label: "CASH et Crédit"
                   }];
                 }
             } 

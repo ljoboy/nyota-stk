@@ -488,10 +488,6 @@ $("#editPassSubmit").click(function (e) {
         }
     });
 
-}).fail(function () {
-    if (!navigator.onLine) {
-        $("#fPassEdit").css('color', 'red').html("Network error! Pls check your network connection");
-    }
 });
 
 
