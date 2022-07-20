@@ -169,3 +169,6 @@
         <?= isset($links) ? $links : "" ?>
     </ul>
 </div>
+<div class="pull-right">
+    <a href="<?= site_url('items/excel') ?>" class="btn btn-primary">Exporter (Télécharger)</a>
+</div>

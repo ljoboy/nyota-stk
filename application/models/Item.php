@@ -14,7 +14,7 @@ class Item extends CI_Model
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public function getAll($orderBy, $orderFormat, $start = 0, $limit = '')
+    public function getAll($orderBy = 'name', $orderFormat = 'ASC', $start = 0, $limit = null)
     {
         $this->db->limit($limit, $start);
         $this->db->order_by($orderBy, $orderFormat);
@@ -45,7 +45,7 @@ class Item extends CI_Model
      * @param string $itemDescription
      * @param int $itemCode
      * @param int $stockMin
-     * @return boolean
+     * @return mixed
      */
     public function add($itemName, $itemQuantity, $itemPrice, $itemDescription, $itemCode, $stockMin)
     {

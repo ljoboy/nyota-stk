@@ -158,7 +158,10 @@ class Items extends CI_Controller
                 set_value('itemCode'),
                 set_value('stockMin')
             );
-            $this->category_model->setItemCategory(set_value('itemCategories'), $insertedId);
+            if (set_value('itemCategories')) {
+                $this->category_model->setItemCategory(set_value('itemCategories'), $insertedId);
+            }
+
 
             $itemName = set_value('itemName');
             $itemQty = set_value('itemQuantity');
@@ -528,7 +531,9 @@ class Items extends CI_Controller
         xlsWriteLabel($tablehead, $kolomhead++, "Date ajout");
         xlsWriteLabel($tablehead, $kolomhead++, "Modifie le");
 
-        foreach ($this->item->get_all() as $data) {
+        $items = $this->item->getAll();
+
+        foreach ($items as $data) {
             $kolombody = 0;
 
             //changer xlsWriteLabel en xlsWriteNumber pour les colonnes numériques

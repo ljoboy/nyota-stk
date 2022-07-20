@@ -15,9 +15,10 @@ class Eventlog extends CI_Controller{
     
     
     public function index(){
-        $data['pageContent'] = $this->load->view('eventlog', '', TRUE);
         $data['pageTitle'] = "Journal d'erreur";
-        $data['allevents'] = $this->eventlog_Model->getAll('id', 'DESC');
+        $data['allevents'] = $this->eventlog_Model->approvisionnement('id', 'DESC');
+
+        $data['pageContent'] = $this->load->view('eventlog', '', TRUE);
 
         $this->load->view('main', $data);
     }
@@ -26,7 +27,7 @@ class Eventlog extends CI_Controller{
     {
         $data['allevents'] = $this->eventlog_Model->approvisionnement('id', 'DESC');
         $data['pageContent'] = $this->load->view('admin/eventloglist', $data, TRUE);
-        $data['pageTitle'] = "journal d'approvisionnement";
+        $data['pageTitle'] = "Journal d'approvisionnement";
 
         $this->load->view('main', $data);
     }
@@ -46,7 +47,6 @@ class Eventlog extends CI_Controller{
 
         //count the total number of items approvisionnement in db
         $totalEvents = isset($filter) ? $this->eventlog_Model->count_all() : $this->eventlog_Model->count_approvisionnement() ;
-        var_dump('=============', $totalEvents);
 
         $this->load->library('pagination');
 

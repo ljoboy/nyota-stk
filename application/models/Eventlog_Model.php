@@ -30,6 +30,7 @@ class Eventlog_Model extends CI_Model
     public function approvisionnement($orderBy, $orderFormat, $start = 0, $limit = ''): ?array
     {
         $this->db->join('items', 'eventlog.eventRowIdOrRef = items.id', 'LEFT');
+        $this->db->join('transactions', 'eventlog.eventRowIdOrRef = transactions.ref', 'LEFT');
         $this->db->join('admin', 'eventlog.staffInCharge = admin.id', 'LEFT');
         $this->db->select('eventlog.event, eventlog.eventDesc, eventlog.eventTime, CONCAT_WS(" ", admin.first_name, admin.last_name, admin.mobile1) as author, items.name, items.code, items.description');
 

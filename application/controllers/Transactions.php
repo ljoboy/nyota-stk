@@ -499,4 +499,61 @@ class Transactions extends CI_Controller
 
         return true;
     }
+
+    /**
+     * Genere un xlsx
+     */
+    public function excel()
+    {
+        $this->load->helper('exportexcel');
+        $namaFile = "transactions.xls";
+        $judul = "Transactions";
+        $tablehead = 0;
+        $tablebody = 1;
+        $nourut = 1;
+        //penulisan header
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+        header("Content-Disposition: attachment;filename=" . $namaFile . "");
+        header("Content-Transfer-Encoding: binary ");
+
+        xlsBOF();
+
+        $kolomhead = 0;
+        xlsWriteLabel($tablehead, $kolomhead++, "No");
+        xlsWriteLabel($tablehead, $kolomhead++, "Ref");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nom");
+        xlsWriteLabel($tablehead, $kolomhead++, "Code");
+        xlsWriteLabel($tablehead, $kolomhead++, "Description");
+        xlsWriteLabel($tablehead, $kolomhead++, "Quantité");
+        xlsWriteLabel($tablehead, $kolomhead++, "Prix unitaire");
+        xlsWriteLabel($tablehead, $kolomhead++, "Prix total");
+        xlsWriteLabel($tablehead, $kolomhead++, "");
+
+        $items = $this->item->getAll();
+
+        foreach ($items as $data) {
+            $kolombody = 0;
+
+            //changer xlsWriteLabel en xlsWriteNumber pour les colonnes numériques
+            xlsWriteNumber($tablebody, $kolombody++, $nourut);
+            xlsWriteLabel($tablebody, $kolombody++, $data->name);
+            xlsWriteLabel($tablebody, $kolombody++, $data->code);
+            xlsWriteLabel($tablebody, $kolombody++, $data->description);
+            xlsWriteNumber($tablebody, $kolombody++, $data->unitPrice);
+            xlsWriteNumber($tablebody, $kolombody++, $data->quantity);
+            xlsWriteLabel($tablebody, $kolombody++, $data->dateAdded);
+            xlsWriteLabel($tablebody, $kolombody++, $data->lastUpdated);
+
+            $tablebody++;
+            $nourut++;
+        }
+
+        xlsEOF();
+        exit();
+    }
 }
