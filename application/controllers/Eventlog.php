@@ -15,7 +15,7 @@ class Eventlog extends CI_Controller{
     
     
     public function index(){
-        $data['pageTitle'] = "Journal d'erreur";
+        $data['pageTitle'] = "Journal d'événement";
         $data['allevents'] = $this->eventlog_Model->getAll();
 
         $data['pageContent'] = $this->load->view('eventlog/eventlog', $data, TRUE);

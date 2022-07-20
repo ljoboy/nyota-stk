@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit(':D');
         <div class="col-sm-12">
             <div class="col-sm-4">
                 <div class="panel panel-primary">
-                    <div class="panel-body topAnalyticsBody" style="background-color: #f6b618">
+                    <div class="panel-body topAnalyticsBody" style="background-color: #337ab7">
                         <div class="pull-left"><i class="fa fa-calendar-minus-o"></i></div>
                         <div class="pull-right">
                             <div><?=isset($totalVisitsToday) && $totalVisitsToday ? $totalVisitsToday : '0'?></div>

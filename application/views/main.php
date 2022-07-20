@@ -273,10 +273,10 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
-                    <li class="<?= $pageTitle == 'Approvisionnements' ? 'active' : '' ?>">
-                        <a href="<?= site_url('eventlog/approvisionnement') ?>">
+                    <li class="<?= $pageTitle == "Journal d'événement" ? 'active' : '' ?>">
+                        <a href="<?= site_url('eventlog') ?>">
                             <i class="fa fa-refresh"></i>
-                            Approvisionnements
+                            Journal d'événements
                         </a>
                     </li>
 
