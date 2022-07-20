@@ -211,12 +211,13 @@ INSERT INTO `eventlog` (`id`, `event`, `eventRowIdOrRef`, `eventDesc`, `eventTab
 -- Dumping structure for table db_stk.items
 DROP TABLE IF EXISTS `items`;
 CREATE TABLE IF NOT EXISTS `items` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `code` varchar(50) NOT NULL,
   `description` text,
   `unitPrice` decimal(10,2) NOT NULL,
   `quantity` int(6) NOT NULL,
+  `min` int(11) DEFAULT 10 NOT NULL ,
   `dateAdded` datetime NOT NULL,
   `lastUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
