@@ -13,10 +13,16 @@ class Eventlog_Model extends CI_Model
         parent::__construct();
     }
 
-    public function getAll($orderBy, $orderFormat, $start = 0, $limit = ''): ?array
+    public function getAll($orderBy = 'id', $orderFormat = 'DESC', $start = 0, $limit = null): ?array
     {
+        $this->db->join('items', 'eventlog.eventRowIdOrRef = items.id', 'LEFT');
+        $this->db->join('transactions', 'eventlog.eventRowIdOrRef = transactions.ref', 'LEFT');
+
+        $this->db->join('admin', 'eventlog.staffInCharge = admin.id', 'LEFT');
+        $this->db->select('eventlog.event, eventlog.eventDesc, eventlog.eventTime, CONCAT_WS(" ", admin.first_name, admin.last_name, admin.mobile1) as author, items.name, items.code, items.description');
+
         $this->db->limit($limit, $start);
-        $this->db->order_by($orderBy, $orderFormat);
+        $this->db->order_by('eventlog.' . $orderBy, $orderFormat);
 
         $run_q = $this->db->get('eventlog');
 
@@ -27,7 +33,7 @@ class Eventlog_Model extends CI_Model
         }
     }
 
-    public function approvisionnement($orderBy, $orderFormat, $start = 0, $limit = ''): ?array
+    public function approvisionnement($orderBy = 'id', $orderFormat = 'DESC', $start = 0, $limit = null): ?array
     {
         $this->db->join('items', 'eventlog.eventRowIdOrRef = items.id', 'LEFT');
         $this->db->join('transactions', 'eventlog.eventRowIdOrRef = transactions.ref', 'LEFT');
@@ -60,12 +66,14 @@ class Eventlog_Model extends CI_Model
 
     public function count_all(): int
     {
-        $this->db->select('eventlog.event, eventlog.eventDesc, eventlog.eventTime, admin.first_name, admin.last_name, admin.mobile1, items.name, items.code, items.description');
+        $this->db->join('items', 'eventlog.eventRowIdOrRef = items.id', 'LEFT');
+        $this->db->join('transactions', 'eventlog.eventRowIdOrRef = transactions.ref', 'LEFT');
+        $this->db->join('admin', 'eventlog.staffInCharge = admin.id', 'LEFT');
+        $this->db->select('eventlog.event, eventlog.eventDesc, eventlog.eventTime, CONCAT_WS(" ", admin.first_name, admin.last_name, admin.mobile1) as author, items.name, items.code, items.description');
 
 //        $this->db->like('event', 'Mise à jour du stock');
-        $run_q = $this->db->get('eventlog');
 
-        return $run_q->num_rows();
+        return $this->db->count_all_results('eventlog');
 
     }
 }

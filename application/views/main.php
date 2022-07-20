@@ -169,12 +169,12 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
-                    <li class="<?= $pageTitle == 'Base des données' ? 'active' : '' ?>">
-                        <a href="<?= site_url('dbmanagement') ?>">
-                            <i class="fa fa-database"></i>
-                            Gérer la base de données
-                        </a>
-                    </li>
+<!--                    <li class="--><?//= $pageTitle == 'Base des données' ? 'active' : '' ?><!--">-->
+<!--                        <a href="--><?//= site_url('dbmanagement') ?><!--">-->
+<!--                            <i class="fa fa-database"></i>-->
+<!--                            Gérer la base de données-->
+<!--                        </a>-->
+<!--                    </li>-->
                 <?php endif; ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -287,12 +287,12 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
-                    <li class="<?= $pageTitle == 'Base des données' ? 'active' : '' ?>">
-                        <a href="<?= site_url('dbmanagement') ?>">
-                            <i class="fa fa-database"></i>
-                            Base des données
-                        </a>
-                    </li>
+<!--                    <li class="--><?//= $pageTitle == 'Base des données' ? 'active' : '' ?><!--">-->
+<!--                        <a href="--><?//= site_url('dbmanagement') ?><!--">-->
+<!--                            <i class="fa fa-database"></i>-->
+<!--                            Base des données-->
+<!--                        </a>-->
+<!--                    </li>-->
                 <?php endif; ?>
             </ul>
             <br>

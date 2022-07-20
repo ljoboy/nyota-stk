@@ -32,8 +32,8 @@ defined('BASEPATH') OR exit('');
                             <option value="event-DESC">Event (Z à A)</option>
                             <option value="items-ASC">Article (A à Z)</option>
                             <option value="items-DESC">Article (Z à A)</option>
-                            <option value="eventTime-ASC" selected>Date de création (le plus ancien en premier)</option>
-                            <option value="eventTime-DESC">Date de création (dernier en premier)</option>
+                            <option value="eventTime-ASC">Date de création (le plus ancien en premier)</option>
+                            <option value="eventTime-DESC" selected>Date de création (dernier en premier)</option>
                         </select>
                     </div>
                     <div class="col-sm-2 col-xs-12 pull-right">
@@ -53,11 +53,4 @@ defined('BASEPATH') OR exit('');
                 </div>
             </div>
             <!-- Event list ends -->
-        </div>
-    </div>
-</div>
-
-<!--- end of modal to edit cout details --->
-
-
 <script src="<?= base_url() ?>public/js/eventlog.js"></script>

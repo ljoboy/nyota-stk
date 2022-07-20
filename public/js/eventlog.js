@@ -16,6 +16,7 @@ $(document).ready(function(){
 
     //reload the list of couts when fields are changed
     $("#eventsLogListSortBy, #eventsListPerPage").change(function(){
+        console.log('Okat...');
         displayFlashMsg("Patientez svp ...", spinnerClass, "", "");
         lilt();
     });
@@ -158,9 +159,10 @@ $(document).ready(function(){
  * @returns {undefined}
  */
 function lilt(url){
-    var orderBy = $("#eventsLogListSortBy").val().split("-")[0];
-    var orderFormat = $("#eventsLogListSortBy").val().split("-")[1];
-    var limit = $("#eventsListPerPage").val();
+    var order = $("#eventsLogListSortBy").val();
+    var orderBy = order?.split("-")[0] ?? 'id';
+    var orderFormat = order?.split("-")[1] ?? 'DESC';
+    var limit = $("#eventsListPerPage").val() ?? 10;
 
     $.ajax({
         type:'get',
