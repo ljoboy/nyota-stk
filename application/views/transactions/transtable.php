@@ -29,7 +29,7 @@
                         <td id="ref-<?= $sn ?>"><a class="pointer vtr"
                                                    title="Click to view receipt"><?= $get->ref ?></a></td>
                         <td><?= $get->quantity ?></td>
-                        <span class="hidden" id="total-<?= $sn ?>"><?= $get->pos ?></span>
+                        <td class="hidden" id="total-<?= $sn ?>"><?= $get->pos ?></td>
                         <td>USD <?= number_format($get->totalMoneySpent, 2) ?></td>
                         <td>
                             USD <?= (($get->cash !== null) && ($get->modeOfPayment !== 'Cash')) ? number_format($get->cash, 2) : number_format($get->amountTendered, 2) ?></td>

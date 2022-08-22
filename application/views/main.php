@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') or exit('');
 ?>
 
@@ -31,7 +32,8 @@ defined('BASEPATH') or exit('');
     <!-- favicon ends --->
 
     <!-- LOAD CSS FILES -->
-    <?php if (server()): ?>
+    <?php
+    if (server()): ?>
         <link rel="stylesheet" href="<?= base_url() ?>public/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>public/bootstrap/css/bootstrap-theme.min.css" media="screen">
         <link rel="stylesheet" href="<?= base_url() ?>public/font-awesome/css/font-awesome.min.css">
@@ -39,7 +41,8 @@ defined('BASEPATH') or exit('');
         <link rel="stylesheet" href="<?= base_url() ?>public/ext/select2/select2.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>public/css/bootstrap-select.min.css">
 
-    <?php else: ?>
+    <?php
+    else: ?>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -47,20 +50,23 @@ defined('BASEPATH') or exit('');
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.8/font-awesome-animation.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
-    <?php endif; ?>
+    <?php
+    endif; ?>
 
     <!-- custom CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>public/css/main.css">
 
     <!--  LOAD JS FILES  -->
-    <?php if (server()): ?>
+    <?php
+    if (server()): ?>
 
         <script src="<?= base_url() ?>public/js/jquery.min.js"></script>
         <script src="<?= base_url() ?>public/bootstrap/js/bootstrap.min.js"></script>
         <script src="<?= base_url() ?>public/ext/select2/select2.min.js"></script>
         <script src="<?= base_url() ?>public/js/bootstrap-select.min.js"></script>
 
-    <?php else: ?>
+    <?php
+    else: ?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
@@ -75,7 +81,8 @@ defined('BASEPATH') or exit('');
         <!-- (Optional) Latest compiled and minified JavaScript translation files -->
         <!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>-->
 
-    <?php endif; ?>
+    <?php
+    endif; ?>
 </head>
 
 <body>
@@ -105,6 +112,14 @@ defined('BASEPATH') or exit('');
                     </a>
                 </li>
 
+
+                <li class="<?= $pageTitle == 'Dettes' ? 'active' : '' ?>">
+                    <a href="<?= site_url('transactions/dettes') ?>">
+                        <i class="fa fa-anchor"></i>
+                        Voir dettes
+                    </a>
+                </li>
+
                 <li class="<?= $pageTitle == 'Transactions' ? 'active' : '' ?>">
                     <a href="<?= site_url('transactions') ?>">
                         <i class="fa fa-exchange"></i>
@@ -112,7 +127,8 @@ defined('BASEPATH') or exit('');
                     </a>
                 </li>
 
-                <?php if ($this->session->admin_role === "Super"): ?>
+                <?php
+                if ($this->session->admin_role === "Super"): ?>
                     <li class="<?= $pageTitle == 'Articles' ? 'active' : '' ?>">
                         <a href="<?= site_url('items') ?>">
                             <i class="fa fa-cart-plus"></i>
@@ -127,22 +143,28 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
-                    <!--<li class="<? /*= $pageTitle == 'Customers' ? 'active' : '' */ ?>">
-                            <a href="<? /*= site_url('employees') */ ?>">
+                    <!--<li class="<?
+                    /*= $pageTitle == 'Customers' ? 'active' : '' */ ?>">
+                            <a href="<?
+                    /*= site_url('employees') */ ?>">
                                 <i class="fa fa-users"></i>
                                 Employés
                             </a>
                         </li>
 
-                        <li class="<? /*= $pageTitle == 'Reports' ? 'active' : '' */ ?>">
-                            <a href="<? /*= site_url('reports') */ ?>">
+                        <li class="<?
+                    /*= $pageTitle == 'Reports' ? 'active' : '' */ ?>">
+                            <a href="<?
+                    /*= site_url('reports') */ ?>">
                                 <i class="fa fa-newspaper-o"></i>
                                 Rapports
                             </a>
                         </li>
 
-                        <li class="<? /*= $pageTitle == 'Eventlog' ? 'active' : '' */ ?>">
-                            <a href="<? /*= site_url('Eventlog') */ ?>">
+                        <li class="<?
+                    /*= $pageTitle == 'Eventlog' ? 'active' : '' */ ?>">
+                            <a href="<?
+                    /*= site_url('Eventlog') */ ?>">
                                 <i class="fa fa-tasks"></i>
                                 Journal des événements
                             </a>
@@ -169,13 +191,16 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
-<!--                    <li class="--><?//= $pageTitle == 'Base des données' ? 'active' : '' ?><!--">-->
-<!--                        <a href="--><?//= site_url('dbmanagement') ?><!--">-->
-<!--                            <i class="fa fa-database"></i>-->
-<!--                            Gérer la base de données-->
-<!--                        </a>-->
-<!--                    </li>-->
-                <?php endif; ?>
+                    <!--                    <li class="--><?
+                    //= $pageTitle == 'Base des données' ? 'active' : '' ?><!--">-->
+                    <!--                        <a href="--><?
+                    //= site_url('dbmanagement') ?><!--">-->
+                    <!--                            <i class="fa fa-database"></i>-->
+                    <!--                            Gérer la base de données-->
+                    <!--                        </a>-->
+                    <!--                    </li>-->
+                <?php
+                endif; ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -224,6 +249,16 @@ defined('BASEPATH') or exit('');
                         Tableau de bord
                     </a>
                 </li>
+
+
+                <li class="<?= $pageTitle == 'Dettes' ? 'active' : '' ?>">
+                    <a href="<?= site_url('transactions/dettes') ?>">
+                        <i class="fa fa-anchor"></i>
+                        Voir dettes
+                    </a>
+                </li>
+
+
                 <li class="<?= $pageTitle == 'Transactions' ? 'active' : '' ?>">
                     <a href="<?= site_url('transactions') ?>">
                         <i class="fa fa-exchange"></i>
@@ -231,7 +266,8 @@ defined('BASEPATH') or exit('');
                     </a>
                 </li>
 
-                <?php if ($this->session->admin_role === "Super"): ?>
+                <?php
+                if ($this->session->admin_role === "Super"): ?>
 
                     <li class="<?= $pageTitle == 'Articles' ? 'active' : '' ?>">
                         <a href="<?= site_url('items') ?>">
@@ -247,20 +283,26 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
-                    <!-- <li class="<? /*= $pageTitle == 'Customers' ? 'active' : '' */ ?>">
-                            <a href="<? /*= site_url('employees') */ ?>">
+                    <!-- <li class="<?
+                    /*= $pageTitle == 'Customers' ? 'active' : '' */ ?>">
+                            <a href="<?
+                    /*= site_url('employees') */ ?>">
                                 <i class="fa fa-users"></i>
                                 Employés
                             </a>
                         </li>
-                        <li class="<? /*= $pageTitle == 'Reports' ? 'active' : '' */ ?>">
-                            <a href="<? /*= site_url('reports') */ ?>">
+                        <li class="<?
+                    /*= $pageTitle == 'Reports' ? 'active' : '' */ ?>">
+                            <a href="<?
+                    /*= site_url('reports') */ ?>">
                                 <i class="fa fa-newspaper-o"></i>
                                 Rapports
                             </a>
                         </li>
-                        <li class="<? /*= $pageTitle == 'Eventlog' ? 'active' : '' */ ?>">
-                            <a href="<? /*= site_url('Eventlog') */ ?>">
+                        <li class="<?
+                    /*= $pageTitle == 'Eventlog' ? 'active' : '' */ ?>">
+                            <a href="<?
+                    /*= site_url('Eventlog') */ ?>">
                                 <i class="fa fa-tasks"></i>
                                 Journal des événements
                             </a>
@@ -287,13 +329,16 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
-<!--                    <li class="--><?//= $pageTitle == 'Base des données' ? 'active' : '' ?><!--">-->
-<!--                        <a href="--><?//= site_url('dbmanagement') ?><!--">-->
-<!--                            <i class="fa fa-database"></i>-->
-<!--                            Base des données-->
-<!--                        </a>-->
-<!--                    </li>-->
-                <?php endif; ?>
+                    <!--                    <li class="--><?
+                    //= $pageTitle == 'Base des données' ? 'active' : '' ?><!--">-->
+                    <!--                        <a href="--><?
+                    //= site_url('dbmanagement') ?><!--">-->
+                    <!--                            <i class="fa fa-database"></i>-->
+                    <!--                            Base des données-->
+                    <!--                        </a>-->
+                    <!--                    </li>-->
+                <?php
+                endif; ?>
             </ul>
             <br>
         </div>

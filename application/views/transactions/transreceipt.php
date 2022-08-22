@@ -8,7 +8,7 @@ defined('BASEPATH') or exit('');
             <div class="col-xs-12 text-center text-uppercase">
             <div style="margin-bottom:5px;"><img src="<?= base_url() ?>public/images/receipt_logo.png" alt="logo"
                                                      class="img-responsive center-block" width="60px"></div>
-                <h1>RESTO-BAR</h1>
+                <h1>ONE STOP SHOP</h1>
                 <b>ID-NAT PROV: XXX/XXX/XX/XXX/XXXX <br/> RCCM: XX-X-XXXX</b><br/>
                 <small>ab, Av. xyz Q/wpq C/klm</small>
                 <div>Tél . : +243 123 456 789 - +243 012 345 678</div>

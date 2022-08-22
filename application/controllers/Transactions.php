@@ -46,19 +46,24 @@ class Transactions extends CI_Controller
      */
     public function latr_()
     {
+        $this->load->library('pagination');
         //set the sort order
         $orderBy = $this->input->get('orderBy', TRUE) ? $this->input->get('orderBy', TRUE) : "transId";
         $orderFormat = $this->input->get('orderFormat', TRUE) ? $this->input->get('orderFormat', TRUE) : "DESC";
-
-        //count the total number of transaction group (grouping by the ref) in db
-        $totalTransactions = $this->transaction->totalTransactions();
-
-        $this->load->library('pagination');
+        $dette = $this->input->get('dette', TRUE) ? $this->input->get('dette', TRUE) : false;
 
         $pageNumber = $this->uri->segment(3, 0);//set page number to zero if the page number is not set in the third segment of uri
 
         $limit = $this->input->get('limit', TRUE) ? $this->input->get('limit', TRUE) : 10;//show $limit per page
         $start = $pageNumber == 0 ? 0 : ($pageNumber - 1) * $limit;//start from 0 if pageNumber is 0, else start from the next iteration
+
+        if (!$dette) {
+            $totalTransactions = $this->transaction->totalTransactions();
+            $data['allTransactions'] = $this->transaction->getAll($orderBy, $orderFormat, $start, $limit);
+        } else {
+            $totalTransactions = $this->transaction->totalTransactions($dette);
+            $data['allTransactions'] = $this->transaction->getAll($orderBy, $orderFormat, $start, $limit, $dette);
+        }
 
         //call setPaginationConfig($totalRows, $urlToCall, $limit, $attributes) in genlib to configure pagination
         $config = $this->genlib->setPaginationConfig($totalTransactions, "transactions/latr_", $limit, ['onclick' => 'return latr_(this.href);']);
@@ -66,7 +71,6 @@ class Transactions extends CI_Controller
         $this->pagination->initialize($config);//initialize the library class
 
         //get all transactions from db
-        $data['allTransactions'] = $this->transaction->getAll($orderBy, $orderFormat, $start, $limit);
         $data['range'] = $totalTransactions > 0 ? ($start + 1) . "-" . ($start + count($data['allTransactions'])) . " sur " . $totalTransactions : "";
         $data['links'] = $this->pagination->create_links();//page links
         $data['sn'] = $start + 1;
@@ -247,7 +251,9 @@ class Transactions extends CI_Controller
      * @param $cust_name
      * @param $cust_phone
      * @param $cust_email
-     * @return array|bool
+     * @param $ca
+     * @param $pos
+     * @return array|false
      */
     private function insertTrToDb($arrOfItemsDetails, $_mop, $_at, $cumAmount, $_cd, $vatAmount, $vatPercentage, $discount_amount, $discount_percentage, $cust_name, $cust_phone, $cust_email, $ca, $pos)
     {
@@ -327,7 +333,9 @@ class Transactions extends CI_Controller
      * @param $cust_name
      * @param $cust_phone
      * @param $cust_email
-     * @return mixed
+     * @param $cash
+     * @param $pos
+     * @return object|string
      */
     private function genTransReceipt($allTransInfo, $cumAmount, $_at, $_cd, $ref, $transDate, $_mop, $vatAmount, $vatPercentage, $discount_amount, $discount_percentage, $cust_name, $cust_phone, $cust_email, $cash, $pos)
     {
@@ -498,6 +506,16 @@ class Transactions extends CI_Controller
         }
 
         return true;
+    }
+
+    public function dettes()
+    {
+        $transData['items'] = $this->item->getActiveItems('name', 'DESC');//get items with at least one qty left, to be used when doing a new transaction
+
+        $data['pageContent'] = $this->load->view('transactions/dettes', $transData, TRUE);
+        $data['pageTitle'] = "Dettes";
+
+        $this->load->view('main', $data);
     }
 
     /**

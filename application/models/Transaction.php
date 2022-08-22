@@ -26,7 +26,7 @@ class Transaction extends CI_Model
      * @param int $limit
      * @return array|null
      */
-    public function getAll($orderBy, $orderFormat, $start, $limit)
+    public function getAll($orderBy, $orderFormat, $start, $limit, $dette = false)
     {
         if ($this->db->platform() == "sqlite3") {
             $q = "SELECT transactions.ref, transactions.totalMoneySpent, transactions.modeOfPayment, transactions.staffId,
@@ -47,6 +47,11 @@ class Transaction extends CI_Model
                 transactions.cust_name, transactions.cust_phone, transactions.cust_email, transactions.pos, transactions.cash, ');
 
             $this->db->select_sum('transactions.quantity');
+
+            if ($dette) {
+                $this->db->where('transactions.pos >', '0');
+                $this->db->where('transactions.modeOfPayment !=', 'Cash');
+            }
 
             $this->db->join('admin', 'transactions.staffId = admin.id', 'LEFT');
             $this->db->limit($limit, $start);
@@ -204,9 +209,13 @@ class Transaction extends CI_Model
      * selects the total number of transactions done so far
      * @return boolean
      */
-    public function totalTransactions()
+    public function totalTransactions($dette = false)
     {
         $q = "SELECT count(DISTINCT REF) as 'totalTrans' FROM transactions";
+
+        if ($dette) {
+            $q .= " WHERE (modeOfPayment != 'Cash') AND (pos > 0)";
+        }
 
         $run_q = $this->db->query($q);
 

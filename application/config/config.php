@@ -385,10 +385,10 @@ $config['encryption_key'] = hex2bin('4a7573746520756e20656e6372797074696f6e206b6
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = '_stkmgmnt__';
-$config['sess_expiration'] = 900;
+$config['sess_expiration'] = 120;
 $config['sess_save_path'] = BASEPATH.'sessions';
 $config['sess_match_ip'] = FALSE;
-$config['sess_time_to_update'] = 300;
+$config['sess_time_to_update'] = 60;
 $config['sess_regenerate_destroy'] = FALSE;
 
 /*
