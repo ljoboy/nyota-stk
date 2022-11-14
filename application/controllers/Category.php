@@ -77,7 +77,7 @@ class Category extends CI_Controller
              */
             $inserted = $this->category_model->add(set_value('nom'), set_value('description'));
 
-            $json = $inserted ? ['status' => 1, 'msg' => "Catégorie enregistrée avec succès"] : ['status' => 0, 'msg' => "Oops ! Une erreur inattendue. Veuillez contacter l'administrateur."];
+            $json = $inserted ? ['status' => 1, 'msg' => "Catégorie enregistrée avec succès"] : ['status' => 0, 'msg' => "Oops ! Une erreur inattendue. Veuillez contacter l'Utilisateur."];
         } else {
             $json = $this->form_validation->error_array();//get an array of all errors
 
@@ -111,7 +111,7 @@ class Category extends CI_Controller
 
             $updated = $this->category_model->edit($category_id, set_value('nomEdit'), set_value('descriptionEdit'));
 
-            $json = $updated ? ['status' => 1, 'msg' => "Infos mise à jour avec succès"] : ['status' => 0, 'msg' => "Oops ! Erreur inattendue. Contacter l'administrateur svp !"];
+            $json = $updated ? ['status' => 1, 'msg' => "Infos mise à jour avec succès"] : ['status' => 0, 'msg' => "Oops ! Erreur inattendue. Contacter l'Utilisateur svp !"];
         } else {
             //return all error messages
             $json = $this->form_validation->error_array();//get an array of all errors

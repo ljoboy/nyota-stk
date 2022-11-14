@@ -143,6 +143,20 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
+                    <li class="<?= $pageTitle == 'Fournisseurs' ? 'active' : '' ?>">
+                        <a href="<?= site_url('supplier') ?>">
+                            <i class="fa fa-cart-plus"></i>
+                            Fournisseurs
+                        </a>
+                    </li>
+
+                    <li class="<?= $pageTitle == 'Commandes' ? 'active' : '' ?>">
+                        <a href="<?= site_url('command') ?>">
+                            <i class="fa fa-cart-plus"></i>
+                            Commandes
+                        </a>
+                    </li>
+
                     <!--<li class="<?
                     /*= $pageTitle == 'Customers' ? 'active' : '' */ ?>">
                             <a href="<?
@@ -184,10 +198,10 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
-                    <li class="<?= $pageTitle == 'Administrateurs' ? 'active' : '' ?>">
+                    <li class="<?= $pageTitle == 'Utilisateurs' ? 'active' : '' ?>">
                         <a href="<?= site_url('administrators') ?>">
                             <i class="fa fa-user"></i>
-                            Administrateurs
+                            Utilisateurs
                         </a>
                     </li>
 
@@ -283,6 +297,20 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
+                    <li class="<?= $pageTitle == 'Fournisseurs' ? 'active' : '' ?>">
+                        <a href="<?= site_url('supplier') ?>">
+                            <i class="fa fa-user-md"></i>
+                            Fournisseurs
+                        </a>
+                    </li>
+
+                    <li class="<?= $pageTitle == 'Commandes' ? 'active' : '' ?>">
+                        <a href="<?= site_url('command') ?>">
+                            <i class="fa fa-cart-arrow-down"></i>
+                            Commandes
+                        </a>
+                    </li>
+
                     <!-- <li class="<?
                     /*= $pageTitle == 'Customers' ? 'active' : '' */ ?>">
                             <a href="<?
@@ -322,10 +350,10 @@ defined('BASEPATH') or exit('');
                         </a>
                     </li>
 
-                    <li class="<?= $pageTitle == 'Administrateurs' ? 'active' : '' ?>">
+                    <li class="<?= $pageTitle == 'Utilisateurs' ? 'active' : '' ?>">
                         <a href="<?= site_url('administrators') ?>">
                             <i class="fa fa-user"></i>
-                            Administrateurs
+                            Utilisateurs
                         </a>
                     </li>
 
@@ -356,7 +384,7 @@ defined('BASEPATH') or exit('');
 <footer class="container-fluid text-center hidden-print">
     <p>
         <i class="fa fa-copyright"></i>
-        Copyright <a href="https://novictech.com/" target='_blank' class="text-primary">Novic Tech sarl.</a> (2022)
+        Copyright <a href="https://novictech.com/" target='_blank' class="text-primary">Gracia Andjelani</a> (2022)
     </p>
 </footer>
 

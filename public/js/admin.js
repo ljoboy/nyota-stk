@@ -216,7 +216,7 @@ $(document).ready(function () {
             }
 
             if (!adminId) {
-                $("#fMsgEdit").text("Une erreur inattendue s'est produite lors de la modification des détails de l'administrateur");
+                $("#fMsgEdit").text("Une erreur inattendue s'est produite lors de la modification des détails de l'Utilisateur");
                 return;
             }
 
@@ -442,7 +442,7 @@ $("#editPassSubmit").click(function (e) {
     let passwordDup = $("#passwordChngDup").val();
 
     if (!adminId || !password || !passwordDup) {
-        !adminId ? changeInnerHTML('fPassEdit', "Une erreur inattendue s'est produite lors de la modification des détails de l'administrateur") : "";
+        !adminId ? changeInnerHTML('fPassEdit', "Une erreur inattendue s'est produite lors de la modification des détails de l'Utilisateur") : "";
         !password ? changeInnerHTML('passwordChngErr', 'Champ obligatoire') : "";
         !passwordDup ? changeInnerHTML('passwordChngDupErr', 'Champ obligatoire') : "";
         return;

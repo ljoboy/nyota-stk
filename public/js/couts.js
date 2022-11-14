@@ -149,7 +149,7 @@ $(document).ready(function(){
             }
 
             if(!coutId){
-                $("#fMsgEdit").text("Une erreur inattendue s'est produite lors de la modification des détails de l'administrateur");
+                $("#fMsgEdit").text("Une erreur inattendue s'est produite lors de la modification des détails de l'Utilisateur");
                 return;
             }
 

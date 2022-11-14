@@ -101,7 +101,7 @@ class Couts extends CI_Controller
             $inserted = $this->couts_model->add(set_value('montant'), set_value('motif'), set_value('author'), set_value('date_sortie'));
 
 
-            $json = $inserted ? ['status' => 1, 'msg' => "Coût enregistré avec succès"] : ['status' => 0, 'msg' => "Oops ! Une erreur inattendue. Veuillez contacter l'administrateur."];
+            $json = $inserted ? ['status' => 1, 'msg' => "Coût enregistré avec succès"] : ['status' => 0, 'msg' => "Oops ! Une erreur inattendue. Veuillez contacter l'Utilisateur."];
         } else {
             //return all error messages
             $json = $this->form_validation->error_array();//get an array of all errors
@@ -149,7 +149,7 @@ class Couts extends CI_Controller
             $updated = $this->couts_model->update($couts_id, set_value('montantEdit'), set_value('motifEdit'), set_value('authorEdit'), set_value('date_sortieEdit'));
 
 
-            $json = $updated ? ['status' => 1, 'msg' => "Infos mise à jour avec succès"] : ['status' => 0, 'msg' => "Oops ! Erreur inattendue. Contacter l'administrateur svp !"];
+            $json = $updated ? ['status' => 1, 'msg' => "Infos mise à jour avec succès"] : ['status' => 0, 'msg' => "Oops ! Erreur inattendue. Contacter l'Utilisateur svp !"];
         } else {
             //return all error messages
             $json = $this->form_validation->error_array();//get an array of all errors

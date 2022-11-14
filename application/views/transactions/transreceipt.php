@@ -7,11 +7,11 @@ defined('BASEPATH') or exit('');
         <div class="row">
             <div class="col-xs-12 text-center text-uppercase">
             <div style="margin-bottom:5px;"><img src="<?= base_url() ?>public/images/receipt_logo.png" alt="logo"
-                                                     class="img-responsive center-block" width="60px"></div>
-                <h1>ONE STOP SHOP</h1>
-                <b>ID-NAT PROV: XXX/XXX/XX/XXX/XXXX <br/> RCCM: XX-X-XXXX</b><br/>
-                <small>ab, Av. xyz Q/wpq C/klm</small>
-                <div>Tél . : +243 123 456 789 - +243 012 345 678</div>
+                                                     class="img-responsive center-block" width="120px"></div>
+                <h1>QUIN GRADI</h1>
+                <b>ID-NAT :  6-932-N51160E<br/> RCCM: 19-A-00427</b><br/>
+                <small>321, Av Kapenda C/Lubumbashi</small>
+                <div>Tél. : +243 812 339 563 - +243 979 000 050</div>
             </div>
         </div>
         <hr style='margin-top:5px; margin-bottom:0'>

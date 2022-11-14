@@ -7,7 +7,7 @@ date_default_timezone_set('Africa/Lubumbashi');
 | Base Site URL
 |--------------------------------------------------------------------------
 |
-| URL to your CodeIgniter root. Typically this will be your base URL,
+| URL to your CodeIgniter root. Typically, this will be your base URL,
 | WITH a trailing slash:
 |
 |	http://example.com/
@@ -152,7 +152,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = TRUE;
+$config['composer_autoload'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

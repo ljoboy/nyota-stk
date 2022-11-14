@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-sm-8 col-sm-offset-2 text">
                     <div style="font-size:100px">
                         <h1>
-                            <img src="<?= base_url() ?>public/images/logo_white.png" alt="client-logo" height="200px">
+                            <img src="<?= base_url() ?>public/images/quin-gradi-white.png" alt="client-logo" height="200px">
                         </h1>
                     </div>
                 </div>
@@ -102,7 +102,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <div class="row">
                 <div class="col-sm-12 text-center" style="color:white; margin-top: 30px;">
-                    Designed and Developed by <a href="https://novictech.com/" target='_blank' class="text-primary">Novic Tech sarl</a> (2022)
+                    Designed and Developed by <a href="https://novictech.com/" target='_blank' class="text-primary">Gracia Andjelani </a> (2022)
                 </div>
             </div>
         </div>
