@@ -51,7 +51,7 @@
                             </td>
                             <td>
                                 <?php foreach ($itemCategories as $itemCategorie): ?>
-                                    <span><?= ($get->id == $itemCategorie->id_item) ? $itemCategorie->nom : '' ?></span>
+                                    <?= ($get->id == $itemCategorie->id_item) ? "<span>{$itemCategorie->nom}</span>" : '' ?>
                                 <?php endforeach; ?>
                             </td>
                             <td class="<?= $get->quantity <= $get->min ? 'bg-danger' : ($get->quantity <= ($get->min * 2.5) ? 'bg-warning' : '') ?>">

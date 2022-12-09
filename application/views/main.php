@@ -113,12 +113,12 @@ defined('BASEPATH') or exit('');
                 </li>
 
 
-                <li class="<?= $pageTitle == 'Dettes' ? 'active' : '' ?>">
-                    <a href="<?= site_url('transactions/dettes') ?>">
-                        <i class="fa fa-anchor"></i>
-                        Voir dettes
-                    </a>
-                </li>
+<!--                <li class="--><?//= $pageTitle == 'Dettes' ? 'active' : '' ?><!--">-->
+<!--                    <a href="--><?//= site_url('transactions/dettes') ?><!--">-->
+<!--                        <i class="fa fa-anchor"></i>-->
+<!--                        Voir dettes-->
+<!--                    </a>-->
+<!--                </li>-->
 
                 <li class="<?= $pageTitle == 'Transactions' ? 'active' : '' ?>">
                     <a href="<?= site_url('transactions') ?>">
@@ -265,12 +265,12 @@ defined('BASEPATH') or exit('');
                 </li>
 
 
-                <li class="<?= $pageTitle == 'Dettes' ? 'active' : '' ?>">
-                    <a href="<?= site_url('transactions/dettes') ?>">
-                        <i class="fa fa-anchor"></i>
-                        Voir dettes
-                    </a>
-                </li>
+<!--                <li class="--><?//= $pageTitle == 'Dettes' ? 'active' : '' ?><!--">-->
+<!--                    <a href="--><?//= site_url('transactions/dettes') ?><!--">-->
+<!--                        <i class="fa fa-anchor"></i>-->
+<!--                        Voir dettes-->
+<!--                    </a>-->
+<!--                </li>-->
 
 
                 <li class="<?= $pageTitle == 'Transactions' ? 'active' : '' ?>">

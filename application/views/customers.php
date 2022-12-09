@@ -116,7 +116,7 @@ defined('BASEPATH') OR exit('');
                         <div class="row text-center">
                             <div class="pagination">Pagination</div>
                         </div>
-                        <!-- Pagination ends -->
+                        <!--  -->
                     </div>
                      <!-- Customer list end -->
                     

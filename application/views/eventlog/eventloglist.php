@@ -46,7 +46,7 @@
                         <div class="row pull-left">
                             <?= $links ?? "" ?>
                         </div>
-                        <!-- Pagination ends -->
+                        <!--  -->
                         <div class="pull-right">
                             <a href="<?= site_url('eventlog/excel') ?>" class="btn btn-primary">Exporter (Télécharger)</a>
                         </div>

@@ -86,12 +86,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <form id="loginForm" autocomplete="off">
                             <div class="form-group">
                                 <label class="sr-only" for="email">E-mail ou Phone</label>
-                                <input aria-autocomplete="none" type="text" autocomplete="username email" placeholder="Email"
+                                <input autocomplete="off" type="text" placeholder="Email"
                                        class="form-control checkField login" id="email">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="password">Mot de passe</label>
-                                <input aria-autocomplete="none" type="password" autocomplete="current-password" placeholder="Mot de passe"
+                                <input  autocomplete="off" type="password" placeholder="Mot de passe"
                                        class="form-control checkField" id="password">
                             </div>
                             <button type="submit" class="btn">Se connecter !</button>

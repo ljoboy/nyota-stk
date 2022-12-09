@@ -41,7 +41,7 @@ class Category extends CI_Controller
         $start = $pageNumber == 0 ? 0 : ($pageNumber - 1) * $limit;//start from 0 if pageNumber is 0, else start from the next iteration
 
         //call setPaginationConfig($totalRows, $urlToCall, $limit, $attributes) in genlib to configure pagination
-        $config = $this->genlib->setPaginationConfig($totalcategories, "couts/laad_", $limit, ['class' => 'lnp']);
+        $config = $this->genlib->setPaginationConfig($totalcategories, "category/laad_", $limit, ['class' => 'lnp']);
 
         $this->pagination->initialize($config);//initialize the library class
 

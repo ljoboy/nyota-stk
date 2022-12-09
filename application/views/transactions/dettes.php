@@ -41,20 +41,13 @@ if (isset($items) && !empty($items)) {
                         <label for="transListSortBy">Trier par</label>
                         <select id="transListSortBy" class="form-control">
                             <option value="transId-DESC"> date (dernier en premier)</option>
-                                                        
                             <option value="transId-ASC"> date (le plus ancien en premier)</option>
-                                                        
                             <option value="quantity-DESC"> Quantité (la plus élevée en premier)</option>
-                                                        
                             <option value="quantity-ASC"> Quantité (la plus petite en premier)</option>
-                                                        
                             <option value="totalPrice-DESC"> Prix total (le plus élevé en premier)</option>
-                                                        
                             <option value="totalPrice-ASC"> Prix total (plus bas en premier)</option>
-                                                        
                             <option value="totalMoneySpent-DESC"> Montant total dépensé (le plus élevé en premier)
                             </option>
-                                                        
                             <option value="totalMoneySpent-ASC"> Montant total dépensé (le plus bas en premier)</option>
                         </select>
                     </div>

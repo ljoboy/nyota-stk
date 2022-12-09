@@ -129,7 +129,7 @@ defined('BASEPATH') or exit('');
                         </div>
                     </div>
 
-                    <input type="hidden" id="categoryId" value="<?=$categoryId?>">
+                    <input type="hidden" id="categoryId" value="">
                 </form>
             </div>
             <div class="modal-footer">

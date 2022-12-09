@@ -71,4 +71,4 @@ defined('BASEPATH') or exit('');
 <div class="row text-center">
     <?php echo isset($links) ? $links : "" ?>
 </div>
-<!-- Pagination ends -->
+<!--  -->

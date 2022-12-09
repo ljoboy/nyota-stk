@@ -218,8 +218,8 @@ function changeClassName(elementId, newClassName) {
 
 /**
  * Change the innerHTML of elements
- * @param {type} elementId
- * @param {type} newValue
+ * @param {any} elementId
+ * @param {string} newValue
  * @returns {String}
  */
 function changeInnerHTML(elementId, newValue) {

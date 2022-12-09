@@ -55,7 +55,7 @@ defined('BASEPATH') or exit('');
 <div class="row pull-left">
     <?php echo isset($links) ? $links : "" ?>
 </div>
-<!-- Pagination ends -->
+<!--  -->
 <div class="pull-right">
     <a href="<?= site_url('couts/excel') ?>" class="btn btn-primary">Exporter (Télécharger)</a>
 </div>
