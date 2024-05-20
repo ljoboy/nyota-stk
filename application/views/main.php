@@ -305,7 +305,7 @@ defined('BASEPATH') or exit('');
                     </li>
 
                     <li class="<?= $pageTitle == 'Commandes' ? 'active' : '' ?>">
-                        <a href="<?= site_url('command') ?>">
+                        <a href="<?= site_url('commande') ?>">
                             <i class="fa fa-cart-arrow-down"></i>
                             Commandes
                         </a>

@@ -3,46 +3,20 @@ defined('BASEPATH') or exit('');
 
 class BackupModel extends CI_Model
 {
-    public function __construct()
+    public function toDb($filename)
     {
-        parent::__construct();
-    }
-
-    public function create($filename, $fileUrl)
-    {
-        $data = ['file_name' => $filename, 'file_url' => $fileUrl];
-
-        $this->db->insert('backups', $data);
-        if ($this->db->affected_rows() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function getNotOnline()
-    {
-        $this->db->where('online', 0);
-        $run_q = $this->db->get('backups');
-
-        if ($run_q->num_rows() > 0) {
-            return $run_q->result();
-        } else {
-            return false;
-        }
-    }
-
-    public function updateOnlineStatus($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->set('online', 1);
-
-        $this->db->update('backups');
-
-        if (!$this->db->error()) {
-            return TRUE;
-        } else {
-            return FALSE;
+        $lines = file($filename);
+        $temp_line = "";
+        foreach ($lines as $line)
+        {
+            if (substr($line, 0, 2) == '--' || $line == '' || substr($line, 0, 1) == '#')
+                continue;
+            $temp_line .= $line;
+            if (substr(trim($line), -1, 1) == ';')
+            {
+                $this->db->query($temp_line);
+                $temp_line = '';
+            }
         }
     }
 }
