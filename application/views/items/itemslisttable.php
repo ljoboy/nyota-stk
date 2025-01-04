@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or exit('') ?>
 
 <div class='col-sm-4'>
-    <?= isset($range) && !empty($range) ? $range : ""; ?>
+    <?= !empty($range) ? $range : ""; ?>
 </div>
 <div class='col-sm-2' style="margin-bottom: 5px;">
     <button type="button" class="btn btn-warning" data-toggle="collapse"
@@ -37,10 +37,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($critic_items as $get): ?>
+                    <?php $kn = 1; foreach ($critic_items as $get): ?>
                         <tr>
-                            <input type="hidden" value="<?= $get->id ?>" class="curItemId">
-                            <th class="itemSN"><?= $sn ?>.</th>
+                            <input type="hidden" value="<?= $get->id ?>" class="curItemId"/>
+                            <th class="itemSN"><?= $kn ?>.</th>
                             <td><span id="itemName-<?= $get->id ?>"><?= $get->name ?></span></td>
                             <td><span id="itemCode-<?= $get->id ?>"><?= $get->code ?></td>
                             <td>
@@ -66,14 +66,15 @@
                             <td>
                                 USD<?= number_format($this->genmod->gettablecol('transactions', 'SUM(totalPrice)', 'itemCode', $get->code), 2) ?>
                             </td>
-                            <td><a class="pointer updateStock" id="stock-<?= $get->id ?>">Modifier la quantité</a></td>
-                            <td class="text-center text-primary">
+                            <td class="text-center"><a class="pointer updateStock" id="stock-<?= $get->id ?>"><i
+                                            class="fa fa-paint-brush"></i></a></td>
+                            <td class="text-center">
                                 <span class="editItem" id="edit-<?= $get->id ?>"><i
                                             class="fa fa-pencil pointer"></i> </span>
                             </td>
                             <td class="text-center"><i class="fa fa-trash text-danger delItem pointer"></i></td>
                         </tr>
-                        <?php $sn++; ?>
+                        <?php $kn++; ?>
                     <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -91,7 +92,8 @@
     <div class="panel panel-primary">
         <!-- Default panel contents -->
         <div class="panel-heading">Articles</div>
-        <?php if ($allItems): ?>
+        <?php
+        if ($allItems): ?>
             <div class="table table-responsive">
                 <table class="table table-bordered table-hover" id="item-table" style="background-color: #f5f5f5">
                     <thead>
@@ -113,7 +115,7 @@
                     </thead>
                     <tbody>
                     <?php foreach ($allItems as $get): ?>
-                        <tr  class="<?= $get->quantity <= $get->min ? 'danger' : ($get->quantity <= ($get->min * 2.5) ? 'warning' : '') ?>">
+                        <tr class="<?= $get->quantity <= $get->min ? 'danger' : ($get->quantity <= ($get->min * 2.5) ? 'warning' : '') ?>">
                             <input type="hidden" value="<?= $get->id ?>" class="curItemId">
                             <th class="itemSN"><?= $sn ?>.</th>
                             <td><span id="itemName-<?= $get->id ?>"><?= $get->name ?></span></td>
@@ -141,8 +143,9 @@
                             <td>
                                 USD<?= number_format($this->genmod->gettablecol('transactions', 'SUM(totalPrice)', 'itemCode', $get->code), 2) ?>
                             </td>
-                            <td><a class="pointer updateStock" id="stock-<?= $get->id ?>">Modifier la quantité</a></td>
-                            <td class="text-center text-primary">
+                            <td class="text-center"><span class="pointer updateStock" id="stock-<?= $get->id ?>"><i
+                                            class="fa fa-paint-brush"></i></span></td>
+                            <td class="text-center">
                                 <span class="editItem" id="edit-<?= $get->id ?>"><i
                                             class="fa fa-pencil pointer"></i> </span>
                             </td>
@@ -166,7 +169,7 @@
 <!---Pagination div-->
 <div class="col-sm-12 text-center">
     <ul class="pagination">
-        <?= isset($links) ? $links : "" ?>
+        <?= $links ?? "" ?>
     </ul>
 </div>
 <div class="pull-right">

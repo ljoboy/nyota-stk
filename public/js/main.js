@@ -508,9 +508,8 @@ function totalEarnedToday() {
 
 /**
  *
- * @param {type} value
- * @param {type} errorElementId
- * @returns {undefined}
+ * @param {String|Number} value
+ * @param {String} errorElementId
  */
 function checkField(value, errorElementId) {
     if (value) {
