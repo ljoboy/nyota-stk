@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('');
 ?>
 
-<?php echo isset($range) && !empty($range) ? "Afficher " . $range : "" ?>
+<?php echo !empty($range) ? "Afficher " . $range : "" ?>
 <div class="panel panel-primary">
     <div class="panel-heading">LISTE DES CATEGORIES</div>
     <?php if ($allCategories): ?>
@@ -43,9 +43,9 @@ defined('BASEPATH') or exit('');
 </div>
 <!-- Pagination -->
 <div class="row pull-left">
-    <?php echo isset($links) ? $links : "" ?>
+    <?php echo $links ?? "" ?>
 </div>
  
 <div class="pull-right">
-    <a href="<?= site_url('categories/excel') ?>" class="btn btn-primary">Exporter (Télécharger)</a>
+    <a href="<?= site_url('category/excel') ?>" class="btn btn-primary">Exporter (Télécharger)</a>
 </div>

@@ -41,7 +41,7 @@ defined('BASEPATH') or exit('');
 </div>
 <!-- Pagination -->
 <div class="row pull-left">
-    <?php echo isset($links) ? $links : "" ?>
+    <?php echo $links ?? "" ?>
 </div>
  
 <div class="pull-right">

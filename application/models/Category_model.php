@@ -124,10 +124,10 @@ class Category_model extends CI_Model
      * @param string $orderBy
      * @param string $orderFormat
      * @param int $start
-     * @param null $limit
-     * @return false
+     * @param int|null $limit
+     * @return array []
      */
-    public function getAll($orderBy = "created_on", $orderFormat = "ASC", $start = 0, $limit = null)
+    public function getAll(string $orderBy = "created_on", string $orderFormat = "ASC", int $start = 0, int $limit = null): array
     {
         $this->db->select('*');
         $this->db->limit($limit, $start);
@@ -138,7 +138,7 @@ class Category_model extends CI_Model
         if ($run_q->num_rows() > 0) {
             return $run_q->result();
         } else {
-            return false;
+            return [];
         }
     }
 

@@ -51,7 +51,7 @@ class Category extends CI_Controller
         $data['links'] = $this->pagination->create_links();//page links
         $data['sn'] = $start + 1;
 
-        $json['categoriesTable'] = $this->load->view('categories/categorieslist', $data, TRUE);//get view with populated couts table
+        $json['categoriesTable'] = $this->load->view('categories/categorieslist', $data, TRUE);
 
         $this->output->set_content_type('application/json')->set_output(json_encode($json));
     }
