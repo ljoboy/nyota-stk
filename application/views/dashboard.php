@@ -151,7 +151,7 @@ defined('BASEPATH') or exit('');
                         <?php foreach ($highestEarners as $get): ?>
                             <tr>
                                 <td><?= $get->name ?></td>
-                                <td>USD <?= number_format($get->totEarned, 2) ?></td>
+                                <td>USD<?= number_format($get->totEarned, 2) ?></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
@@ -177,7 +177,7 @@ defined('BASEPATH') or exit('');
                         <?php foreach ($lowestEarners as $get): ?>
                             <tr>
                                 <td><?= $get->name ?></td>
-                                <td>USD <?= number_format($get->totEarned, 2) ?></td>
+                                <td>USD<?= number_format($get->totEarned, 2) ?></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
@@ -219,7 +219,7 @@ defined('BASEPATH') or exit('');
                                     </td>
                                     <td><?= $get->qty_sold ?></td>
                                     <td><?= $get->tot_trans ?></td>
-                                    <td>USD <?= number_format($get->tot_earned, 2) ?></td>
+                                    <td>USD<?= number_format($get->tot_earned, 2) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -278,7 +278,7 @@ defined('BASEPATH') or exit('');
                                     <td><?= $get->day ?></td>
                                     <td><?= $get->qty_sold ?></td>
                                     <td><?= $get->tot_trans ?></td>
-                                    <td>USD <?= number_format($get->tot_earned, 2) ?></td>
+                                    <td>USD<?= number_format($get->tot_earned, 2) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -352,7 +352,7 @@ defined('BASEPATH') or exit('');
                                     <td><?= $get->month ?></td>
                                     <td><?= $get->qty_sold ?></td>
                                     <td><?= $get->tot_trans ?></td>
-                                    <td>USD <?= number_format($get->tot_earned, 2) ?></td>
+                                    <td>USD<?= number_format($get->tot_earned, 2) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -386,7 +386,7 @@ defined('BASEPATH') or exit('');
                                     <td><?= $get->year ?></td>
                                     <td><?= $get->qty_sold ?></td>
                                     <td><?= $get->tot_trans ?></td>
-                                    <td>USD <?= number_format($get->tot_earned, 2) ?></td>
+                                    <td>USD<?= number_format($get->tot_earned, 2) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

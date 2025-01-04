@@ -32,13 +32,13 @@ if(is_cli()){
 }
 
 else if(stristr($host, "localhost") !== FALSE || (stristr($host, "192.168.") !== FALSE)|| (stristr($host, "127.0.0.") !== FALSE)){
-    $config['base_url'] =  $protocol.$host."/stk/";
+    $config['base_url'] =  $protocol.$host."/";
 }
 
 else{
     $allowed = [];
 
-    $config['base_url'] = in_array($host, $allowed) ? $protocol.$host."/stk/" : $protocol.$_SERVER['HTTP_HOST']."/";
+    $config['base_url'] = in_array($host, $allowed) ? $protocol.$host."/" : $protocol.$_SERVER['HTTP_HOST']."/";
 }
 
 /*

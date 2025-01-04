@@ -113,12 +113,12 @@ defined('BASEPATH') or exit('');
                 </li>
 
 
-<!--                <li class="--><?//= $pageTitle == 'Dettes' ? 'active' : '' ?><!--">-->
-<!--                    <a href="--><?//= site_url('transactions/dettes') ?><!--">-->
-<!--                        <i class="fa fa-anchor"></i>-->
-<!--                        Voir dettes-->
-<!--                    </a>-->
-<!--                </li>-->
+                <li class="<?= $pageTitle == 'Dettes' ? 'active' : '' ?>">
+                    <a href="<?= site_url('transactions/dettes') ?>">
+                        <i class="fa fa-anchor"></i>
+                        Voir dettes
+                    </a>
+                </li>
 
                 <li class="<?= $pageTitle == 'Transactions' ? 'active' : '' ?>">
                     <a href="<?= site_url('transactions') ?>">
@@ -219,7 +219,7 @@ defined('BASEPATH') or exit('');
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a>
-                        Total gagné aujourd'hui : <b>USD <span id="totalEarnedToday"></span></b>
+                        Total gagné aujourd'hui : <b>USD<span id="totalEarnedToday"></span></b>
                     </a>
                 </li>
                 <li class="dropdown">
@@ -265,18 +265,18 @@ defined('BASEPATH') or exit('');
                 </li>
 
 
-<!--                <li class="--><?//= $pageTitle == 'Dettes' ? 'active' : '' ?><!--">-->
-<!--                    <a href="--><?//= site_url('transactions/dettes') ?><!--">-->
-<!--                        <i class="fa fa-anchor"></i>-->
-<!--                        Voir dettes-->
-<!--                    </a>-->
-<!--                </li>-->
-
-
                 <li class="<?= $pageTitle == 'Transactions' ? 'active' : '' ?>">
                     <a href="<?= site_url('transactions') ?>">
                         <i class="fa fa-exchange"></i>
                         Transactions
+                    </a>
+                </li>
+
+
+                <li class="<?= $pageTitle == 'Dettes' ? 'active' : '' ?>">
+                    <a href="<?= site_url('transactions/dettes') ?>">
+                        <i class="fa fa-anchor"></i>
+                        Voir dettes
                     </a>
                 </li>
 
@@ -384,7 +384,7 @@ defined('BASEPATH') or exit('');
 <footer class="container-fluid text-center hidden-print">
     <p>
         <i class="fa fa-copyright"></i>
-        Copyright <a href="https://novictech.com/" target='_blank' class="text-primary">Gracia Andjelani</a> (2022)
+        Copyright <a href="<?= OWNER_URL ?>" target='_blank' class="text-primary"><?= OWNER ?></a> (<?= date('Y') ?>)
     </p>
 </footer>
 

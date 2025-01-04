@@ -26,7 +26,7 @@
                         20kg of locally made ofada rice
                     </span>
                 </td>
-                <td>USD 3,500</td>
+                <td>USD3,500</td>
                 <td>187</td>
                 <td>
                     <a class="pointer" onclick="">Transaction history</a>
@@ -43,7 +43,7 @@
                         20kg of locally made ofada rice
                     </span>
                 </td>
-                <td>USD 3,500</td>
+                <td>USD3,500</td>
                 <td>187</td>
                 <td>
                     <a class="pointer" onclick="">Transaction history</a>

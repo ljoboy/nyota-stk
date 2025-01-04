@@ -876,7 +876,7 @@ function calchadue() {
     let amountTendered = parseFloat($("#amountTendered").val());
 
     if (amountTendered && (amountTendered < cumAmount)) {
-        $("#amountTenderedErr").html("Le montant ne peut être inférieur à USD " + cumAmount);
+        $("#amountTenderedErr").html("Le montant ne peut être inférieur à USD" + cumAmount);
 
         //remove change due if any
         $("#changeDue").html("");
@@ -1068,7 +1068,7 @@ function calculmonnaiedue() {
     let montantApayer = parseFloat($("#montantApayer").html());
 
     /*if (montantPercu && (montantPercu < montantApayer)) {
-        // $("#montantPercuErr").html("Le montant ne peut être inférieur à USD " + montantApayer);
+        // $("#montantPercuErr").html("Le montant ne peut être inférieur à USD" + montantApayer);
         //remove change due if any
         $("#monnaieDue").html("");
     } else */

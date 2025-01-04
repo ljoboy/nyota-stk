@@ -8,10 +8,10 @@ defined('BASEPATH') or exit('');
             <div class="col-xs-12 text-center text-uppercase">
             <div style="margin-bottom:5px;"><img src="<?= base_url() ?>public/images/receipt_logo.png" alt="logo"
                                                      class="img-responsive center-block" width="120px"></div>
-                <h1>QUIN GRADI</h1>
-                <b>ID-NAT :  6-932-N51160E<br/> RCCM: 19-A-00427</b><br/>
-                <small>321, Av Kapenda C/Lubumbashi</small>
-                <div>Tél. : +243 812 339 563 - +243 979 000 050</div>
+                <h1><?= BTK_NAME ?></h1>
+                <b>ID-NAT :  <?= ID_NAT ?><br/> RCCM: <?= RCCM ?></b><br/>
+                <small><?= BTK_ADDRESS ?></small>
+                <div><?= BTK_CONTACT ?></div>
             </div>
         </div>
         <hr style='margin-top:5px; margin-bottom:0'>
@@ -40,14 +40,14 @@ defined('BASEPATH') or exit('');
         <div class="row" style="margin-top:2px">
             <div class="col-sm-12">
                 <label>Facture N<sup>o</sup> :</label>
-                <span><?= isset($ref) ? $ref : "" ?></span>
+                <span><?= $ref ?? "" ?></span>
             </div>
         </div>
 
         <div class="row" style='font-weight:bold'>
             <div class="col-xs-4">Article</div>
             <div class="col-xs-4">Qté x Prix</div>
-            <div class="col-xs-4">Tot(USD )</div>
+            <div class="col-xs-4">Tot(USD)</div>
         </div>
         <hr style='margin-top:2px; margin-bottom:0'>
         <?php $init_total = 0; ?>
@@ -62,24 +62,24 @@ defined('BASEPATH') or exit('');
         <hr style='margin-top:2px; margin-bottom:0'>
         <div class="row">
             <div class="col-xs-12 text-right">
-                <b>Total : USD <?= isset($init_total) ? number_format($init_total, 2) : 0 ?></b>
+                <b>Total : USD<?= isset($init_total) ? number_format($init_total, 2) : 0 ?></b>
             </div>
         </div>
         <hr style='margin-top:2px; margin-bottom:0'>
         <div class="row">
             <div class="col-xs-12 text-right">
                 <b>Remise(<?= $discountPercentage ?>%) :
-                    USD <?= isset($discountAmount) ? number_format($discountAmount, 2) : 0 ?></b>
+                    USD<?= isset($discountAmount) ? number_format($discountAmount, 2) : 0 ?></b>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 text-right">
-                <b>TVA(<?= $vatPercentage ?>%) : USD <?= isset($vatAmount) ? number_format($vatAmount, 2) : "" ?></b>
+                <b>TVA(<?= $vatPercentage ?>%) : USD<?= isset($vatAmount) ? number_format($vatAmount, 2) : "" ?></b>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 text-right">
-                <b>TOTAL Général : USD <?= isset($cumAmount) ? number_format($cumAmount, 2) : "" ?></b>
+                <b>TOTAL Général : USD<?= isset($cumAmount) ? number_format($cumAmount, 2) : "" ?></b>
             </div>
         </div>
         <hr style='margin-top:5px; margin-bottom:0px'>
@@ -91,24 +91,24 @@ defined('BASEPATH') or exit('');
         <?php if ($_mop === 'Cash'): ?>
             <div class="row">
                 <div class="col-xs-12">
-                    <b>Montant percu : USD <?= isset($amountTendered) ? number_format($amountTendered, 2) : "" ?></b>
+                    <b>Montant percu : USD<?= isset($amountTendered) ? number_format($amountTendered, 2) : "" ?></b>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <b>Différence : USD <?= isset($changeDue) ? number_format($changeDue, 2) : "" ?></b>
+                    <b>Différence : USD<?= isset($changeDue) ? number_format($changeDue, 2) : "" ?></b>
                 </div>
             </div>
         <?php else : ?>
             <div class="row">
                 <div class="col-xs-12">
-                    <b>Total à payer  : USD <?= isset($cumAmount) ? number_format($cumAmount, 2) : "0.00" ?></b>
+                    <b>Total à payer  : USD<?= isset($cumAmount) ? number_format($cumAmount, 2) : "0.00" ?></b>
                 </div>
                 <div class="col-xs-12">
-                    <b>Montant payé   : USD <?= isset($cash) ? number_format($cash, 2) : "0.00" ?></b>
+                    <b>Montant payé   : USD<?= isset($cash) ? number_format($cash, 2) : "0.00" ?></b>
                 </div>
                 <div class="col-xs-12">
-                    <b>Reste à payer  : USD <?= isset($pos) ? number_format($pos, 2) : "0.00" ?></b>
+                    <b>Reste à payer  : USD<?= isset($pos) ? number_format($pos, 2) : "0.00" ?></b>
                 </div>
             </div>
         <?php endif; ?>

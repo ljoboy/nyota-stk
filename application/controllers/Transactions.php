@@ -131,7 +131,7 @@ class Transactions extends CI_Controller
 
             //add into eventlog
             //function header: addevent($event, $eventRowIdOrRef, $eventDesc, $eventTable, $staffId) in 'genmod'
-            $eventDesc = count($arrOfItemsDetails) . " articles totalisant USD " . number_format($cumAmount, 2) . " avec le numéro de référence {$returnedData['transRef']} a été acheté";
+            $eventDesc = count($arrOfItemsDetails) . " articles totalisant USD" . number_format($cumAmount, 2) . " avec le numéro de référence {$returnedData['transRef']} a été acheté";
 
             $this->genmod->addevent("Nouvelle transaction", $returnedData['transRef'], $eventDesc, 'transactions', $this->session->admin_id);
         } else {//return error msg

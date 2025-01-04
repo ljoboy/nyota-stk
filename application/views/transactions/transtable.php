@@ -30,10 +30,10 @@
                                                    title="Click to view receipt"><?= $get->ref ?></a></td>
                         <td><?= $get->quantity ?></td>
                         <td class="hidden" id="total-<?= $sn ?>"><?= $get->pos ?></td>
-                        <td>USD <?= number_format($get->totalMoneySpent, 2) ?></td>
+                        <td>USD<?= number_format($get->totalMoneySpent, 2) ?></td>
                         <td>
-                            USD <?= (($get->cash !== null) && ($get->modeOfPayment !== 'Cash')) ? number_format($get->cash, 2) : number_format($get->amountTendered, 2) ?></td>
-                        <td>USD <?= number_format($get->changeDue, 2) ?></td>
+                            USD<?= (($get->cash !== null) && ($get->modeOfPayment !== 'Cash')) ? number_format($get->cash, 2) : number_format($get->amountTendered, 2) ?></td>
+                        <td>USD<?= number_format($get->changeDue, 2) ?></td>
                         <td><?= $get->modeOfPayment ?></td>
                         <td><?= $get->staffName ?></td>
                         <td><?= $get->cust_name ?> - <?= $get->cust_phone ?> - <?= $get->cust_email ?></td>

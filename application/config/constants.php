@@ -83,3 +83,19 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+defined('APP_NAME') OR define('APP_NAME', 'STK Management');
+defined('APP_VERSION') OR define('APP_VERSION', '1.0.0');
+
+defined('OWNER') OR define('OWNER', 'ColorZone CD');
+defined('OWNER_URL') OR define('OWNER_URL', 'https://www.colorzonecd.com');
+
+defined('BTK_NAME') OR define('BTK_NAME', 'Leyla Fashion');
+defined('BTK_ADDRESS') OR define('BTK_ADDRESS', 'Av. Du 24 Novembre, Kinshasa, KINSHASA MALL 3e Niveau en face de l\'ISC');
+defined('BTK_CONTACT') OR define('BTK_CONTACT', '');
+defined('RCCM') OR define('RCCM', '');
+defined('ID_NAT') OR define('ID_NAT', '');
+
+//defined('DEVISE') OR define('DEVISE', 'USD');
+
+

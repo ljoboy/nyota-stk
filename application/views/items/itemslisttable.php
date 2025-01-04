@@ -10,7 +10,7 @@
 </div>
 <!-- TODO::CHANGER (WORTH) -->
 <div class='col-sm-6 text-right'><b>Valeur total articles / Prix:</b>
-    USD <?= $cum_total ? number_format($cum_total, 2) : '0.00' ?></div>
+    USD<?= $cum_total ? number_format($cum_total, 2) : '0.00' ?></div>
 
 <div class='col-xs-12 collapse' id="critic_items">
     <div class="panel panel-primary">
@@ -57,14 +57,14 @@
                             <td class="<?= $get->quantity <= $get->min ? 'bg-danger' : ($get->quantity <= ($get->min * 2.5) ? 'bg-warning' : '') ?>">
                                 <span id="itemQuantity-<?= $get->id ?>"><?= $get->quantity ?></span>
                             </td>
-                            <td>USD <span id="itemPrice-<?= $get->id ?>"><?= number_format($get->unitPrice, 2) ?></span>
+                            <td>USD<span id="itemPrice-<?= $get->id ?>"><?= number_format($get->unitPrice, 2) ?></span>
                             </td>
                             <th>
                                 <span><?= $get->min ?></span>
                             </th>
                             <td><?= $this->genmod->gettablecol('transactions', 'SUM(quantity)', 'itemCode', $get->code) ?></td>
                             <td>
-                                USD <?= number_format($this->genmod->gettablecol('transactions', 'SUM(totalPrice)', 'itemCode', $get->code), 2) ?>
+                                USD<?= number_format($this->genmod->gettablecol('transactions', 'SUM(totalPrice)', 'itemCode', $get->code), 2) ?>
                             </td>
                             <td><a class="pointer updateStock" id="stock-<?= $get->id ?>">Modifier la quantité</a></td>
                             <td class="text-center text-primary">
@@ -132,14 +132,14 @@
                             <td class="">
                                 <span id="itemQuantity-<?= $get->id ?>"><?= $get->quantity ?></span>
                             </td>
-                            <td>USD <span id="itemPrice-<?= $get->id ?>"><?= number_format($get->unitPrice, 2) ?></span>
+                            <td>USD<span id="itemPrice-<?= $get->id ?>"><?= number_format($get->unitPrice, 2) ?></span>
                             </td>
                             <th>
                                 <span id="itemStockMin-<?= $get->id ?>"><?= $get->min ?></span>
                             </th>
                             <td><?= $this->genmod->gettablecol('transactions', 'SUM(quantity)', 'itemCode', $get->code) ?></td>
                             <td>
-                                USD <?= number_format($this->genmod->gettablecol('transactions', 'SUM(totalPrice)', 'itemCode', $get->code), 2) ?>
+                                USD<?= number_format($this->genmod->gettablecol('transactions', 'SUM(totalPrice)', 'itemCode', $get->code), 2) ?>
                             </td>
                             <td><a class="pointer updateStock" id="stock-<?= $get->id ?>">Modifier la quantité</a></td>
                             <td class="text-center text-primary">

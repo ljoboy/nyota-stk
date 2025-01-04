@@ -110,8 +110,8 @@ defined('BASEPATH') OR exit('');
 
                         <div class="row">
                             <div class="col-sm-12 form-group-sm">
-                                <label for="itemPrice">(USD ) Prix unitaire</label>
-                                <input type="text" id="itemPrice" name="itemPrice" placeholder="(USD ) Prix unitaire" class="form-control"
+                                <label for="itemPrice">(USD) Prix unitaire</label>
+                                <input type="text" id="itemPrice" name="itemPrice" placeholder="(USD) Prix unitaire" class="form-control"
                                     onchange="checkField(this.value, 'itemPriceErr')">
                                 <span class="help-block errMsg" id="itemPriceErr"></span>
                             </div>

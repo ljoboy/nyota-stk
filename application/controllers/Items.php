@@ -165,7 +165,7 @@ class Items extends CI_Controller
 
             $itemName = set_value('itemName');
             $itemQty = set_value('itemQuantity');
-            $itemPrice = "USD " . number_format(set_value('itemPrice'), 2);
+            $itemPrice = "USD" . number_format(set_value('itemPrice'), 2);
 //            $stockMin = set_value('stockMin');
 
             //insert into eventlog
