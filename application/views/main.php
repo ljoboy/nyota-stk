@@ -384,7 +384,7 @@ defined('BASEPATH') or exit('');
 <footer class="container-fluid text-center hidden-print">
     <p>
         <i class="fa fa-copyright"></i>
-        Copyright <a href="<?= OWNER_URL ?>" target='_blank' class="text-primary"><?= OWNER ?></a> (<?= date('Y') ?>)
+        Designed and Developed by <a href="<?= OWNER_URL ?>" target='_blank' class="text-primary"><?= OWNER ?></a> | &copy; 2024
     </p>
 </footer>
 

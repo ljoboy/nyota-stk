@@ -98,4 +98,3 @@ defined('ID_NAT') OR define('ID_NAT', '');
 
 //defined('DEVISE') OR define('DEVISE', 'USD');
 
-
