@@ -110,8 +110,8 @@ defined('BASEPATH') or exit('');
                             <span class="help-block errMsg" id="mobile1Err"></span>
                         </div>
                         <div class="form-group-sm col-sm-6">
-                            <label for='mobile2' class="control-label">Autres Niuméro</label>
-                            <input type="tel" id='mobile2' class="form-control" placeholder="Autres Niuméro (optionel)">
+                            <label for='mobile2' class="control-label">Autres Numéros</label>
+                            <input type="tel" id='mobile2' class="form-control" placeholder="Autres Numéros (optionel)">
                             <span class="help-block errMsg" id="mobile2Err"></span>
                         </div>
                     </div>
