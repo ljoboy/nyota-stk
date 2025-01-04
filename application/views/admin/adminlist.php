@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('');
 
 <?php echo isset($range) && !empty($range) ? "Afficher " . $range : "" ?>
 <div class="panel panel-primary">
-    <div class="panel-heading">COMPTES UtilisateurS</div>
+    <div class="panel-heading">COMPTES Utilisateurs</div>
     <?php if ($allAdministrators): ?>
         <div class="table table-responsive">
             <table class="table table-striped table-bordered">
