@@ -103,7 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <div class="row">
                 <div class="col-sm-12 text-center" style="color:white; margin-top: 30px;">
-                    Designed and Developed by <a href="<?= OWNER_URL ?>" target='_blank' class="text-primary"><?= OWNER ?></a> | &copy; 2024
+                    Designed and Developed by <a href="<?= OWNER_URL ?>" target='_blank' class="text-primary"><?= OWNER ?></a> | <i class="fa fa-copyright"></i> 2024
                 </div>
             </div>
         </div>

@@ -579,13 +579,13 @@ function checkLogin() {
 
 /**
  *
- * @param {type} email
- * @param {type} password
- * @param {type} callback function to callback after execution
+ * @param {String} email
+ * @param {String} password
+ * @param {CallableFunction} callback function to callback after execution
  * @returns {undefined}
  */
 function handleLogin(email, password, callback) {
-    let jsonToReturn = "";
+    let jsonToReturn = {};
 
     $.ajax(appRoot + 'access/login', {
         method: "POST",
@@ -614,7 +614,7 @@ function handleLogin(email, password, callback) {
 
 /**
  * Check if browser is connected to the internet (if not on localhost) when an ajax req failed
- * @param {bool} changeFlashContent whether to display a new flash message or change the content if one is displayed
+ * @param {Boolean} changeFlashContent whether to display a new flash message or change the content if one is displayed
  * @returns {undefined}
  */
 function checkBrowserOnline(changeFlashContent) {

@@ -383,8 +383,7 @@ defined('BASEPATH') or exit('');
 
 <footer class="container-fluid text-center hidden-print">
     <p>
-        <i class="fa fa-copyright"></i>
-        Designed and Developed by <a href="<?= OWNER_URL ?>" target='_blank' class="text-primary"><?= OWNER ?></a> | &copy; 2024
+        Designed and Developed by <a href="<?= OWNER_URL ?>" target='_blank' class="text-primary"><?= OWNER ?></a> | <i class="fa fa-copyright"></i> 2024
     </p>
 </footer>
 
