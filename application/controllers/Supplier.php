@@ -144,7 +144,7 @@ class Supplier extends CI_Controller
         if ($supplier_id){
             $done = $this->db->where('id', $supplier_id)->delete('suppliers');
             if ($done){
-                $this->supplierModel->deleteItemSuppliers($supplier_id);
+                $this->supplierModel->deleteItemSupplier($supplier_id);
             }
         }
 

@@ -87,14 +87,14 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 defined('APP_NAME') OR define('APP_NAME', 'STK Management');
 defined('APP_VERSION') OR define('APP_VERSION', '1.0.0');
 
-defined('OWNER') OR define('OWNER', 'ColorZone CD');
-defined('OWNER_URL') OR define('OWNER_URL', 'https://www.colorzonecd.com');
+defined('OWNER') OR define('OWNER', 'JoTech Services');
+defined('OWNER_URL') OR define('OWNER_URL', 'https://github.com/ljoboy');
 
-defined('BTK_NAME') OR define('BTK_NAME', 'Leyla Fashion');
-defined('BTK_ADDRESS') OR define('BTK_ADDRESS', 'Av. Du 24 Novembre, Kinshasa, KINSHASA MALL 3e Niveau en face de l\'ISC');
-defined('BTK_CONTACT') OR define('BTK_CONTACT', '');
-defined('RCCM') OR define('RCCM', '');
-defined('ID_NAT') OR define('ID_NAT', '');
+defined('BTK_NAME') OR define('BTK_NAME', 'IN Africa');
+defined('BTK_ADDRESS') OR define('BTK_ADDRESS', 'Météo 2, Munua, L\'shi, RDC');
+defined('BTK_CONTACT') OR define('BTK_CONTACT', '+243 973 112 293');
+defined('RCCM') OR define('RCCM', 'RCCM/Lshi/23-A-00138');
+defined('ID_NAT') OR define('ID_NAT', '05-G4701N052788Y');
 
 //defined('DEVISE') OR define('DEVISE', 'USD');
 
