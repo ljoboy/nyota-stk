@@ -104,7 +104,7 @@ class Transactions extends CI_Controller
         $pos = $this->input->post('pos', TRUE);//pos Amount
         $cumAmount = $this->input->post('_ca', TRUE);//cumulative amount
         $vatPercentage = $this->input->post('vat', TRUE);//vat percentage
-        $discount_percentage = $this->input->post('discount', TRUE);//discount percentage
+        $discount_percentage = $this->input->post('discount', TRUE) ?? 0;//discount percentage
         $cust_name = $this->input->post('cn', TRUE);
         $cust_phone = $this->input->post('cp', TRUE);
         $cust_email = $this->input->post('ce', TRUE);
