@@ -57,14 +57,6 @@ if (isset($items) && !empty($items)) {
                                                         class="fa fa-plus"></i> Ajouter un élément
                                             </button>
                                         </div>
-
-                                        <br class="visible-xs">
-
-                                        <div class="col-sm-2 form-group-sm">
-                                            <input type="text" id="barcodeText" class="form-control"
-                                                   placeholder="code de l'article" autofocus>
-                                            <span class="help-block errMsg" id="itemCodeNotFoundMsg"></span>
-                                        </div>
                                     </div>
                                     <!-- End of text to click to add another item to transaction-->
                                     <br>
@@ -91,8 +83,7 @@ if (isset($items) && !empty($items)) {
                                         <div class="col-sm-3 form-group-sm">
                                             <label for="modeOfPayment">Moyen de paiement</label>
                                             <select class="form-control checkField" id="modeOfPayment">
-                                                <option value="">---</option>
-                                                <option value="Cash">Cash</option>
+                                                <option value="Cash" selected>Cash</option>
                                                 <option value="POS">Crédit</option>
                                                 <option value="Cash and POS">Payez une partie</option>
                                             </select>
@@ -159,21 +150,15 @@ if (isset($items) && !empty($items)) {
 
                             <br>
                             <div class="row">
-                                <div class="col-sm-2 form-group-sm">
-                                    <button class="btn btn-primary btn-sm" id='useScanner'>Utiliser un scanner de code à
-                                        barres
-                                    </button>
-                                </div>
-                                <br class="visible-xs">
-                                <div class="col-sm-6"></div>
+                                <div class="col-sm-4"></div>
                                 <br class="visible-xs">
                                 <div class="col-sm-4 form-group-sm">
-                                    <button type="button" class="btn btn-primary btn-sm" id="confirmSaleOrder">
+                                    <button type="button" class="btn btn-primary btn-md" id="confirmSaleOrder">
                                         Confirmer
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-sm" id="cancelSaleOrder">Effacer
+                                    <button type="button" class="btn btn-danger btn-md" id="cancelSaleOrder">Effacer
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-sm" id="hideTransForm">Fermer
+                                    <button type="button" class="btn btn-warning btn-md" id="hideTransForm">Fermer
                                     </button>
                                 </div>
                             </div>
@@ -243,12 +228,12 @@ if (isset($items) && !empty($items)) {
 
 <div class="row hidden" id="divToClone">
     <div class="col-sm-4 form-group-sm">
-        <label>Article</label>
-        <select class="form-control selectedItemDefault" onchange="selectedItem(this)"></select>
+        <label for="article">Article</label>
+        <select class="form-control selectedItemDefault" onchange="selectedItem(this)" id="article"></select>
     </div>
 
     <div class="col-sm-2 form-group-sm itemAvailQtyDiv">
-        <label>Quantité disponible</label>
+        <label>Qté disponible</label>
         <span class="form-control itemAvailQty">0</span>
     </div>
 
@@ -258,8 +243,8 @@ if (isset($items) && !empty($items)) {
     </div>
 
     <div class="col-sm-1 form-group-sm itemTransQtyDiv">
-        <label>Quantité</label>
-        <input type="number" min="0" class="form-control itemTransQty" value="0">
+        <label for="quantite">Quantité</label>
+        <input id="quantite" type="number" min="0" class="form-control itemTransQty" value="0">
         <span class="help-block itemTransQtyErr errMsg"></span>
     </div>
 
