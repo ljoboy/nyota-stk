@@ -244,7 +244,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         return new Promise((resolve, reject) => {
-            $("#modeOfPayment").val("");
+            // $("#modeOfPayment").val("");
 
             resolve();
         }).then(() => {
@@ -796,11 +796,12 @@ function ceipacp() {
 
         //display the cumulative amount
         $("#cumAmount").html(cumulativePrice);
+        $("#amountTendered").val(cumulativePrice);
 
         //update change due just in case amount tendered field is filled
         calchadue();
-    }).catch(function () {
-        console.log("Err");
+    }).catch(function (err) {
+        console.log(err.message);
     });
 }
 
