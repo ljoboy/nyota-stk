@@ -15,7 +15,7 @@
 <div class='col-xs-12 collapse' id="critic_items">
     <div class="panel panel-primary">
         <!-- Default panel contents -->
-        <div class="panel-heading">Articles Critiques</div>
+        <div class="panel-heading">Rupture en stock</div>
         <?php if ($critic_items): ?>
             <div class="table table-responsive">
                 <table class="table table-bordered table-striped" style="background-color: #f5f5f5">
@@ -37,7 +37,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $kn = 1; foreach ($critic_items as $get): ?>
+                    <?php $kn = 1;
+                    foreach ($critic_items as $get): ?>
                         <tr>
                             <input type="hidden" value="<?= $get->id ?>" class="curItemId"/>
                             <th class="itemSN"><?= $kn ?>.</th>
@@ -91,7 +92,7 @@
 <div class='col-xs-12'>
     <div class="panel panel-primary">
         <!-- Default panel contents -->
-        <div class="panel-heading">Articles</div>
+        <div class="panel-heading">Stock</div>
         <?php
         if ($allItems): ?>
             <div class="table table-responsive">
@@ -173,5 +174,8 @@
     </ul>
 </div>
 <div class="pull-right">
-    <a href="<?= site_url('items/excel') ?>" class="btn btn-primary">Exporter (Télécharger)</a>
+    <a href="<?= site_url('items/export_csv') ?>" class="btn btn-success">Exporter</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">
+        Importer
+    </button>
 </div>

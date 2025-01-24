@@ -553,4 +553,81 @@ class Items extends CI_Controller
         xlsEOF();
         exit();
     }
+
+    /**
+     * Export CSV file with items data
+     */
+    public function export_csv()
+    {
+        // Charger les données depuis la base de données
+        $data = $this->item->getAllArray();
+
+        // Définir le nom du fichier CSV
+        $filename = 'export_stock_' . time() . '.csv';
+
+        // En-têtes pour forcer le téléchargement
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
+        header('Pragma: no-cache');
+
+        // Ouvrir la sortie
+        $output = fopen('php://output', 'w');
+
+        // Écrire les en-têtes (colonnes)
+        if (!empty($data)) {
+            fputcsv($output, array_keys($data[0]));
+        }
+
+        // Écrire les lignes
+        foreach ($data as $row) {
+            fputcsv($output, $row);
+        }
+
+        fclose($output);
+        exit;
+    }
+
+    public function import_csv()
+    {
+        try {
+            if (!empty($_FILES['csvFile']['tmp_name'])) {
+                $file = fopen($_FILES['csvFile']['tmp_name'], 'r');
+
+                // Lire le contenu du fichier pour vérifier le BOM
+                $fileContent = fread($file, 3); // Lire les 3 premiers octets (taille du BOM UTF-8)
+                rewind($file); // Rewind le pointeur du fichier pour le traiter à partir du début
+
+                // Si les 3 premiers octets sont un BOM UTF-8 (EF BB BF), les supprimer
+                if ($fileContent === "\xEF\xBB\xBF") {
+                    // Sauter les 3 premiers octets
+                    fseek($file, 3);
+                }
+
+                // Lire les en-têtes
+                $headers = fgetcsv($file);
+                // Lire les données
+                $data = [];
+                while (($row = fgetcsv($file)) !== false) {
+                    if ($row[0]) {
+                        $data[] = array_combine($headers, $row);
+                    }
+                }
+                fclose($file);
+                // Insertion des données dans la base de données
+                $this->item->insertAll($data);
+
+                return $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(['status' => 'success', 'message' => 'Importation réussie !']));
+            } else {
+                return $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(['status' => 'error', 'message' => 'Aucun fichier sélectionné.']));
+            }
+        } catch (Exception $e) {
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => 'error', 'message' => 'Erreur : ' . $e->getMessage()]));
+        }
+    }
 }

@@ -318,4 +318,96 @@ defined('BASEPATH') or exit('');
     </div>
 </div>
 <!--end of modal-->
+
+<!-- Modal -->
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="importModalLabel">Importer la liste d'article</h4>
+            </div>
+            <div class="modal-body">
+                <small class="text small text-warning"><i class="fa fa-warning small"></i> Rassurez-vous d'avoir <a href="<?= site_url('items/export_csv') ?>">téléchargé</a> le fichier CSV
+                et de l'avoir bien rempli avant de l'importer. <b>le code doit-être unique et chaque article doit avoir un code. <i>min</i> correspond à la quantité minimale acceptable en stock
+                    (cfr. Rupture en stock)</b></small>
+                <div id="messageBox" class="alert d-none" role="alert"></div>
+                <form id="csvImportForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="csvFile">Choisir un fichier CSV :</label>
+                        <input type="file" name="csvFile" id="csvFile" class="form-control" accept="text/csv" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span id="loader" style="display: none;">
+                    <img src="https://i.gifer.com/ZZ5H.gif" alt="Chargement..." width="30">
+                    Chargement...
+                </span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" id="importBtn" class="btn btn-primary">Importer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#importBtn').on('click', function (e) {
+            e.preventDefault();
+
+            // Masquer les messages précédents et afficher le loader
+            $('#messageBox').addClass('d-none').removeClass('alert-success alert-danger').html('');
+            $('#loader').show();
+
+            // Récupérer le fichier sélectionné
+            const formData = new FormData($('#csvImportForm')[0]);
+
+            // Envoyer la requête AJAX
+            $.ajax({
+                url: '<?= base_url("items/import_csv") ?>', // URL du contrôleur
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    // Masquer le loader
+                    $('#loader').hide();
+
+                    // Vérifier la réponse et afficher un message approprié
+                    if (response.status === 'success') {
+                        $('#messageBox')
+                            .removeClass('d-none alert-danger')
+                            .addClass('alert-success')
+                            .html(response.message);
+
+                        // Rafraîchir la page après 2 secondes
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        $('#messageBox')
+                            .removeClass('d-none alert-success')
+                            .addClass('alert-danger')
+                            .html(response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Masquer le loader
+                    $('#loader').hide();
+
+                    // Afficher un message d'erreur
+                    $('#messageBox')
+                        .removeClass('d-none alert-success')
+                        .addClass('alert-danger')
+                        .html('Une erreur est survenue : ' + error);
+                }
+            });
+        });
+    });
+</script>
+
 <script src="<?= base_url() ?>public/js/items.js"></script>

@@ -28,6 +28,21 @@ class Item extends CI_Model
         }
     }
 
+    public function getAllArray($orderBy = 'id', $orderFormat = 'ASC', $start = 0, $limit = null)
+    {
+        $this->db->select('code, name, unitPrice, quantity, min');
+        $this->db->limit($limit, $start);
+        $this->db->order_by($orderBy, $orderFormat);
+
+        $run_q = $this->db->get('items');
+
+        if ($run_q->num_rows() > 0) {
+            return $run_q->result_array();
+        } else {
+            return FALSE;
+        }
+    }
+
     /*
     ********************************************************************************************************************************
     ********************************************************************************************************************************
@@ -64,6 +79,28 @@ class Item extends CI_Model
             return $this->db->insert_id();
         } else {
             return FALSE;
+        }
+    }
+
+    /**
+     * @param array $items
+     * @return void
+     */
+    public function insertAll(array $items)
+    {
+        // Sauvegarder ou mettre à jour dans la base de données
+        foreach ($items as $row) {
+            // Supposons que "item_id" est une clé unique pour chaque produit
+            $existingItem = $this->db->get_where('items', ['code' => $row['code']])->row();
+            if ($existingItem) {
+                // Si l'élément existe déjà, mettre à jour
+                $this->db->where('code', $row['code']);
+                $this->db->update('items', $row);
+            } else {
+                $row['dateAdded'] = "NOW()";
+                // Sinon, insérer un nouvel enregistrement
+                $this->db->insert('items', $row);
+            }
         }
     }
 

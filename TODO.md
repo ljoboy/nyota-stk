@@ -6,4 +6,4 @@ Voici ce qu'il faut ajouter pour l'application :
 - [x] Moyen de paiement CASH par défaut
 - [x] Transactions en factures
 - [x] Articles en Stock
-- [ ] Importer les Articles d'un CSV
+- [x] Importer les Articles d'un CSV
