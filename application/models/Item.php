@@ -97,7 +97,7 @@ class Item extends CI_Model
                 $this->db->where('code', $row['code']);
                 $this->db->update('items', $row);
             } else {
-                $row['dateAdded'] = "NOW()";
+                $row['dateAdded'] = date('Y-m-d H:i:s');
                 // Sinon, insérer un nouvel enregistrement
                 $this->db->insert('items', $row);
             }
