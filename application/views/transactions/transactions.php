@@ -23,7 +23,7 @@ if (isset($items) && !empty($items)) {
             <div class="row">
                 <div class="col-sm-3">
                     <span class="pointer text-primary">
-                        <button class='btn btn-primary btn-sm' id='showTransForm'><i class="fa fa-plus"></i> Nouvelle Transaction </button>
+                        <button class='btn btn-primary btn-sm' id='showTransForm'><i class="fa fa-plus"></i> Nouvelle Facture </button>
                     </span>
                 </div>
                 <div class="col-sm-3">

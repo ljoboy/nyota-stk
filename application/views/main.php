@@ -123,7 +123,7 @@ defined('BASEPATH') or exit('');
                 <li class="<?= $pageTitle == 'Transactions' ? 'active' : '' ?>">
                     <a href="<?= site_url('transactions') ?>">
                         <i class="fa fa-exchange"></i>
-                        Transactions
+                        Factures
                     </a>
                 </li>
 
@@ -268,7 +268,7 @@ defined('BASEPATH') or exit('');
                 <li class="<?= $pageTitle == 'Transactions' ? 'active' : '' ?>">
                     <a href="<?= site_url('transactions') ?>">
                         <i class="fa fa-exchange"></i>
-                        Transactions
+                        Factures
                     </a>
                 </li>
 
@@ -286,7 +286,7 @@ defined('BASEPATH') or exit('');
                     <li class="<?= $pageTitle == 'Articles' ? 'active' : '' ?>">
                         <a href="<?= site_url('items') ?>">
                             <i class="fa fa-shopping-cart"></i>
-                            Articles
+                            Stock
                         </a>
                     </li>
 

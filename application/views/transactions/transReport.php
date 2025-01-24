@@ -6,7 +6,7 @@ $total_earned = 0;
 <!DOCTYPE HTML>
 <html lang="fr">
     <head>
-        <title>Rapport de Transaction</title>
+        <title>Rapport des factures</title>
 		
         <!-- Favicon -->
         <link rel="shortcut icon" href="<?=base_url()?>public/images/icon.ico">
@@ -87,7 +87,7 @@ $total_earned = 0;
                         </div>
                         <!-- table div end--->
                         <?php else: ?>
-                            <ul><li>Pas des transactions pendant cette période</li></ul>
+                            <ul><li>Pas des factures pendant cette période</li></ul>
                         <?php endif; ?>
                     </div>
                 </div>

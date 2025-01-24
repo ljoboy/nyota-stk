@@ -3,7 +3,7 @@
 <?= isset($range) && !empty($range) ? $range : ""; ?>
 <div class="panel panel-primary">
     <!-- Default panel contents -->
-    <div class="panel-heading">TRANSACTIONS</div>
+    <div class="panel-heading">FACTURES</div>
     <?php if ($allTransactions): ?>
         <div class="table table-responsive">
             <table class="table table-bordered table-striped">
