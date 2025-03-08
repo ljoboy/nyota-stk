@@ -88,11 +88,11 @@ defined('APP_NAME') OR define('APP_NAME', 'STK Management');
 defined('APP_VERSION') OR define('APP_VERSION', '1.0.0');
 
 defined('OWNER') OR define('OWNER', 'ColorZone CD');
-defined('OWNER_URL') OR define('OWNER_URL', 'https://www.colorzonecd.com');
+defined('OWNER_URL') OR define('OWNER_URL', 'https://www.colorzonecd.com/');
 
 defined('BTK_NAME') OR define('BTK_NAME', 'Leyla Fashion');
-defined('BTK_ADDRESS') OR define('BTK_ADDRESS', 'Av. Du 24 Novembre, Kinshasa, KINSHASA MALL 3e Niveau en face de l\'ISC');
-defined('BTK_CONTACT') OR define('BTK_CONTACT', '');
+defined('BTK_ADDRESS') OR define('BTK_ADDRESS', 'Kinshasa Mall, 3ème Niveau, Kinshasa Gombe');
+defined('BTK_CONTACT') OR define('BTK_CONTACT', '+243 832 618 078');
 defined('RCCM') OR define('RCCM', '');
 defined('ID_NAT') OR define('ID_NAT', '');
 
